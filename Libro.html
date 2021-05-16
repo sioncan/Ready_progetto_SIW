@@ -5,47 +5,97 @@
 <script src="principali.js"></script>
 <meta charset="UTF-8">
 <title>Libro</title>
+<!-- 3 librerie per le icone social -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header>
-	<div class="navbar">
-		<a href="#">Home</a>
-		<a href="#">Libri</a>
-		<a href="#">Autori</a>
-		<a href="#">Case Editrici</a>
-		<a href="#">Register / Login</a>
-	</div>
-</header>
+	<header id="home">
+			<div class="navbar">
+				<a href="#">Home</a> <a href="#">READY</a><a href="#">Register / Login</a>
+			</div>
+	</header>
+	<header>
+			<div class="navbar">
+				<a href="#">Libri</a> <a href="#">Autori</a> <a href="#">Case
+					editrici</a>
+			</div>
+	</header>
 
-<div class="row">
-	<div class="side">
-		<!-- Qua va lo slideshow delle copertine -->
-		<img src="img.jpg" alt="Copertina1" style="width:100%">
-		<!-- Questo bottone dovrà portare alla pagina di gestione della recensione -->
-    	<button class="btn recensisci">Recensisci</button>
+	<div class="row">
+		<div class="side">
+			<!-- Qua va lo slideshow delle copertine -->
+			<img src="./imm.png" alt="Copertina1"
+				style="width: 100%">
+			<!-- Questo bottone dovrà portare alla pagina di gestione della recensione -->
+			<button class="btn recensisci">Recensisci</button>
+		</div>
+		<div class="spazioDettagli">
+			<!-- Inserire classi o id -->
+			<h1>Titolo</h1>
+			<h2>Autore</h2>
+			<p>
+				La gloria di colui che tutto move / pe l'universo penetra e
+				risplende / da una parte piu' e meno altrove / nel ciel che piu' di
+				sua luce prende / fui io e vidi cose che ridire / ne' sa ne' puo'
+				chi di lassu' discende / <span id="dots">...</span><span id="more">
+					poiche' appressando se' a suo disiare / nostro intelletto si
+					profonda tanto / che dietro la memoria non puo' ire.</span>
+			</p>
+			<button onclick="myFunction()" id="myBtn">Read more</button>
+			<h3>Casa Editrice</h3>
+		</div>
 	</div>
-	<div class="spazioDettagli">
-	<!-- Inserire classi o id -->
-		<h1>Titolo</h1>
-		<h2>Autore</h2>
-		<p>La gloria di colui che tutto move / pe l'universo penetra e risplende / da una parte piu' e meno altrove / nel ciel che piu' di sua luce prende / fui io e vidi cose che ridire / ne' sa ne' puo' chi di lassu' discende /
-		<span id="dots">...</span><span id="more">
-		poiche' appressando se' a suo disiare / nostro intelletto si profonda tanto / che dietro la memoria non puo' ire.</span></p>
-		<button onclick="myFunction()" id="myBtn">Read more</button>
-		<h3>Casa Editrice</h3>
+	<div class="spazioRecensioni">
+		<!-- Qua vanno inseriti i filtri -->
+		<button class="btn recensisci">Recensisci</button>
+		<!-- Qua vanno inserire tutte le box delle recensioni -->
+		<p>Bla bla</p>
 	</div>
-</div>
-<div class="spazioRecensioni">
-	<!-- Qua vanno inseriti i filtri -->
-	<button class="btn recensisci">Recensisci</button>
-	<!-- Qua vanno inserire tutte le box delle recensioni -->
-	<p>Bla bla</p>
-</div>
 
-<div class="footer">
-	<h2>Footer</h2>
-</div>
+	<footer>
+		<div id="flex-container-footer">
+			<div>
+				<h1>Ready</h1>
+				<div class="links">
+					<a href="#">FAQ</a>
+				</div>
+				<div class="links">
+					<a href="#">Contattaci</a>
+				</div>
+				<div class="links">
+					<a href="#">Privacy</a>
+				</div>
+				<div class="links">
+					<a href="#">Termini e condizioni</a>
+				</div>
+			</div>
+			<div>
+				<h1>About us</h1>
+				<div class="links">
+					<a href="#">L'azienda</a>
+				</div>
+				<div class="links">
+					<a href="#">Il team</a>
+				</div>
+				<div class="links">
+					<a href="#">Lavora con noi</a>
+				</div>
+			</div>
+			<div class="social">
+				<h1>Social</h1>
+				<a href="#"><i class="icon ion-social-facebook"></i></a> <a href="#"><i
+					class="icon ion-social-twitter"></i></a> <a href="#"><i
+					class="icon ion-social-instagram"></i></a>
+			</div>
+		</div>
+		<div>
+			<p class="copyright">Ready © 2021</p>
+		</div>
+	</footer>
 
 </body>
 </html>
-  

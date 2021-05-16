@@ -1,90 +1,117 @@
 @charset "UTF-8";
 
 /* Stile dell'header */
-header {
-  padding: 80px;
-  text-align: center;
-  background: #87CEEB;
-  color: white; /* colore del testo */
+header#home {
+	padding: 0px;
+	margin: 0px;
+	background-color: #3B5998;
+}
+
+/* Barra di Home e Login/Register */
+header#home .navbar {
+	background-color: #3B5998;
+	margin: 0px 300px;
+}
+
+header#home .navbar a {
+	color: white;
+	font-size: 2em;
+	height: 50px;
+	padding: 5px 100px;
 }
 
 /* Stile della barra di navigazione */
+header {
+	padding: 1px;
+	background-color: #D3D3D3; /*#87CEEB;*/
+}
+
 .navbar {
 	overflow: hidden;
-	background-color: #3B5998;
+	background-color: #D3D3D3;
+	margin: 0px 300px;
 }
 
 /* Stile dei link nella barra di navigazione */
 .navbar a {
-  float: left; /* Tutti i link sono side-by-side */
-  color: white; /* Colore del testo */
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none; /* Rimuove l'underline */
+	font-size: 4em;
+	float: left; /* Tutti i link sono side-by-side */
+	color: black; /* Colore del testo */
+	font-family: 'Brush Script MT', cursive;
+	text-align: center;
+	padding: 10px 90px;
+	text-decoration: none; /* Rimuove l'underline */
 }
 
 /* Cambia lo stile dei link quando ci si passa con il cursore */
 .navbar a:hover {
-  background-color: #E0FFFF;
-  color: black;
+	background-color: #E0FFFF;
+	color: black;
 }
 
 /* Quando lo screen è largo meno di 400px, i link di navigazione non sono piu' side-by-side,
 ma si mettono uno sopra l'altro, rimanendo tutti visibili */
 @media screen and (max-width: 400px) {
-  .navbar a {
-    float: none;
-    width: 100%;
-  }
+	.navbar a {
+		float: none;
+		width: 100%;
+	}
 }
+
+/* Stile del body */
 
 /* Il box-sizing universale */
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* Stile del contenitore delle colonne */
-.row { 
-  display: flex;
-  flex-wrap: wrap;
+.row {
+	display: flex;
+	justify-content : space-evenly;
+	flex-wrap: wrap;
+}
+
+.row:after{
+	clear : both;
 }
 
 /* Le due colonne side e main sono una diversa dall'altra, ma stanno vicine */
 
 /* Stile della colonna di sinistra (side) */
 .side {
-  flex: 30%;
-  background-color: #f1f1f1;
-  padding: 20px;
+	width: 30%;
+	background-color: #f1f1f1;
+	padding: 20px;
 }
 
 /* Stile della colonna di destra (spazioDettagli) */
-.spazioDettagli { 
-  flex: 70%;
-  background-color: white;
-  padding: 20px;
+.spazioDettagli {
+	width: 70%;
+	background-color: white;
+	padding: 20px;
 }
 
 /* Stile dello spazio per le recensioni */
-.spazioRecensioni { 
-  flex: 90%;
-  background-color: white;
-  padding: 20px;
+.spazioRecensioni {
+	flex: 90%;
+	background-color: white;
+	padding: 20px;
 }
 
 /* Stile dello spazio per l'elenco dei libri per ogni autore */
-.spazioLibri { 
-  flex: 90%;
-  background-color: white;
-  padding: 20px;
+.spazioLibri {
+	flex: 90%;
+	background-color: white;
+	padding: 20px;
 }
 
 /* Quando lo screen è largo meno di 700px, le due colonne non sono piu' side-by-side,
 ma si mettono una sopra l'altra, rimanendo tutte visibili */
 @media screen and (max-width: 700px) {
-  .row { 
-    flex-direction: column;
-  }
+	.row {
+		flex-direction: column;
+	}
 }
 
 /* Stile di tutti i bottoni */
@@ -126,42 +153,82 @@ ma si mettono una sopra l'altra, rimanendo tutte visibili */
 
 /* Facebook */
 .fa-facebook {
-  background: #3B5998;
-  color: white;
+	background: #3B5998;
+	color: white;
 }
 /* Twitter */
 .fa-twitter {
-  background: #55ACEE;
-  color: white;
+	background: #55ACEE;
+	color: white;
 }
 /* Instagram */
 .fa-instagram {
-  background: #ea4c89;
-  color: white;
+	background: #ea4c89;
+	color: white;
 }
 
 h1 {
-  font-size: 40px;
+	font-size: 40px;
 }
 
 h2 {
-  font-size: 20px;
+	font-size: 20px;
 }
 
 h3 {
-  font-size: 15px;
+	font-size: 15px;
 }
 
-p{
-  font-size: 15px;
+p {
+	font-size: 15px;
 }
 
 /* Per i read more */
-#more {display: none;}
+#more {
+	display: none;
+}
 
 /* Stile del footer */
-.footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd;
+footer {
+	padding: 20px;
+	text-align: center;
+	background: #202020;
+}
+
+/* Contenitore per Ready e Social */
+#flex-container-footer {
+	display: flex;
+	justify-content: space-around;
+}
+
+/* titoli Ready e Social */
+footer h1 {
+	color: white;
+	font-size: 2em;
+}
+
+/* link sotto Ready */
+.links a {
+	color: grey;
+}
+
+/* Scritta in fondo del copyright */
+.copyright {
+	color: grey;
+	margin: 50px;
+}
+
+/* Le 3 icone dei social */
+.social>a {
+	font-size: 20px;
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
+	margin: 8px;
+	color: #fff;
+	opacity: 0.75;
 }
