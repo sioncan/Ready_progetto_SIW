@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="principaliIframe.css">
+<script src="principali.js"></script>
+<meta charset="UTF-8">
+<title>Libro</title>
+</head>
+<body>
+<header id="home">
+			<div class="navbar">
+				<a href="#"><img src="Ready.png" alt="Ready" style="width:10%"></a>
+				<a href="#">Register / Login</a>
+			</div>
+	</header>
+	<header>
+			<div class="navbar">
+				<a href="#">Libri</a> <a href="#">Autori</a> <a href="#">Case
+					editrici</a>
+			</div>
+	</header>
+
+<div class="row">
+	<div class="side">
+		<!-- Qua va lo slideshow delle copertine -->
+		<img src="img.jpg" alt="Copertina1" style="width:100%">
+		<!-- Questo bottone dovrà portare alla pagina di gestione della recensione -->
+    	<button class="btn recensisci">Recensisci</button>
+	</div>
+	<div class="spazioDettagli">
+	<!-- Inserire classi o id -->
+		<h1>Titolo</h1>
+		<h2>Autore</h2>
+		<p>La gloria di colui che tutto move / pe l'universo penetra e risplende / da una parte piu' e meno altrove / nel ciel che piu' di sua luce prende / fui io e vidi cose che ridire / ne' sa ne' puo' chi di lassu' discende /
+		<span id="dots">...</span><span id="more">
+		poiche' appressando se' a suo disiare / nostro intelletto si profonda tanto / che dietro la memoria non puo' ire.</span></p>
+		<button onclick="myFunction()" id="myBtn">Read more</button>
+		<h3>Casa Editrice</h3>
+	</div>
+</div>
+<div class="spazioRecensioni">
+	<!-- Qua vanno inseriti i filtri -->
+	<button class="btn recensisci">Recensisci</button>
+	<!-- Qua vanno inserire tutte le box delle recensioni -->
+	<p>Bla bla</p>
+</div>
+
+
+<footer>
+	
+		<iframe src="include_footer.html"  style="border:none;"></iframe>
+
+</footer>
+
+</body>
+</html>
