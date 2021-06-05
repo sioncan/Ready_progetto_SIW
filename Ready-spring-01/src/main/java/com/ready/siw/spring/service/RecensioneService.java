@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ready.siw.spring.model.Recensione;
 import com.ready.siw.spring.repository.RecensioneRepository;
 
+
 @Service
 public class RecensioneService {
 	
@@ -31,6 +32,11 @@ public class RecensioneService {
 	public List<Recensione> recensionePerTitolo(String titolo) {
 		return this.recensioneRepository.findByTitolo(titolo);
 	}
+	
+	@Transactional
+	public List<Recensione> recensionePerTesto(String testo) {
+		return this.recensioneRepository.findByTitolo(testo);
+	}
 
 	@Transactional
 	public List<Recensione> tutti() {
@@ -45,6 +51,13 @@ public class RecensioneService {
 		else 
 			return null;
 	}
-
-
+	
+	@Transactional
+	public boolean alreadyExists(Recensione recensione) {
+		List<Recensione> studenti = this.recensioneRepository.findByTesto(recensione.getTesto());
+		if (studenti.size() > 0)
+			return true;
+		else 
+			return false;
+	}
 }

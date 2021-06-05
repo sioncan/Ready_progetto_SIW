@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -20,4 +23,16 @@ public class Libro {
 	private String titolo;
 	private String sinossi;
 	private LocalDate dataPubblicazione;
+	
+	@ManyToOne
+	private CasaEditrice casaEditrice;
+	
+	@OneToMany (mappedBy="libro")
+	private List<Recensione> recensioni;
+	
+	@ManyToMany (mappedBy="libri")
+	private List<Lettore> lettori;
+	
+	@ManyToMany (mappedBy="libri")
+	private List<Autore> autori;
 }

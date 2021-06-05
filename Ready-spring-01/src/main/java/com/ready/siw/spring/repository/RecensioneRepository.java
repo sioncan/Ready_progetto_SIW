@@ -11,5 +11,7 @@ public interface RecensioneRepository extends CrudRepository<Recensione, Long>{
 	public List<Recensione> findByVoto(int voto);
 	
 	public List<Recensione> findByTitolo(String titolo);
+	
+	public List<Recensione> findByTesto(String testo);
 
 }
