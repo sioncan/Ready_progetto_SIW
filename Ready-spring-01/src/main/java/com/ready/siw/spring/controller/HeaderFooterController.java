@@ -10,26 +10,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ready.siw.spring.service.AutoreService;
+import com.ready.siw.spring.service.LibroService;
+
 
 @Controller
 public class HeaderFooterController {
-	/* tasti dell'header = Home, Login, Register, Libri, Autori, Case editrici */
+	/* tasti dell'header = Libri, Autori, Case editrici */
+
+	@Autowired
+	private LibroService libroService;
 	
-	/* tasto Libri - va alla pagina dell'elenco dei libri */
-    @RequestMapping(value="/paginaElencoLibri")
-    public String goToPageLibri() {
-        return "index.html";
-    }
-	
-	/* tasto Autori - va alla pagina dell'elenco degli autori */
-    @RequestMapping(value = "/paginaElencoAutori")
-    public String goToPageAutori() {
-    		return "elencoAutori.html";
-    }
-    
+	@Autowired
+	private AutoreService autoreService;
+
+	/* tasto Libri - va alla pagina dell'elenco dei libri prendendoli dal DB */
+	@RequestMapping(value="/ricercaLibri", method = RequestMethod.GET)
+	public String goToPageRicercaLibri(Model model) {
+		model.addAttribute("libri", this.libroService.tutti());
+		return "index.html";
+	}
+
+	/* tasto Autori - va alla pagina dell'elenco degli autori prendendoli dal DB */
+	@RequestMapping(value = "/ricercaAutori", method = RequestMethod.GET)
+	public String goToPageRicercaAutori(Model model) {
+		model.addAttribute("autori", this.autoreService.tutti());
+		return "ricercaAutori.html";
+	}
+
 	/* tasto Case editrici - va alla pagina dell'elenco delle case editrici */
-    @RequestMapping(value="/paginaElencoCaseEditrici")
-    public String goToPageCasaEditrici() {
-        return "elencoCaseEditrici.html";
-    }
+	@RequestMapping(value="/ricercaCaseEditrici")
+	public String goToPageRicercaCaseEditrici() {
+		return "ricercaCaseEditrici.html";
+	}
+
+	/* tasti del footer = Pannello Amministratore */
+
+	/* tasto Case editrici - va alla pagina dell'elenco delle case editrici */
+	@RequestMapping(value="/pannelloAmministratore")
+	public String goToPagePannelloAmministratore() {
+		return "/admin/pannello.html";
+	}
 }

@@ -2,24 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div th:insert="fragments/headerFooter.html :: head('ElencoLibri')"></div>
-<link href="/css/LibroStyle.css" rel="stylesheet">
+<link href="/css/ricercaLibriStyle.css" rel="stylesheet">
 </head>
-
 <body>
 
 	<header th:replace="fragments/headerFooter.html :: header"></header>
 
-	<div>
-		<a href="apriLibro">Libro1</a>
-	</div>
-	<div>
-		<a href="apriLibro">Libro2</a>
-	</div>
-	<div>
-		<a href="apriLibro">Libro3</a>
+
+	<div class="row">
+
+		<div class="side">
+			<form>
+				<!-- Barra di ricerca -->
+				<h2>Ricerca per titolo o ISBN:</h2>
+				<input type="search" placeholder="Inserisci un titolo, un ISBN">
+				<h2>Ricerca per autore:</h2>
+				<input type="search" placeholder="Inserisci un autore">
+				<h2>Ricerca per casa editrice:</h2>
+				<input type="search" placeholder="Inserisci una casa editrice">
+				<!-- Checkboxes di generi -->
+				<h2>Generi:</h2>
+				<ul class="checkbox">
+					<li><input type="checkbox" id="fantasy" name="genere">
+						<label for="fantasy">Fantasy</label></li>
+					<li><input type="checkbox" id="giallo" name="genere">
+						<label for="giallo">Giallo</label></li>
+					<li><input type="checkbox" id="rosa" name="genere"> <label
+						for="rosa">Rosa</label></li>
+					<li><input type="checkbox" id="horror" name="genere">
+						<label for="horror">Horror</label></li>
+					<li><input type="checkbox" id="saggio" name="genere">
+						<label for="saggio">Saggio</label></li>
+				</ul>
+
+			</form>
+		</div>
+
+
+		<!-- Bottone di ordinamento -->
+		<div class="dropdown">
+			<button class="dropdown-ordina">Ordina per</button>
+			<div class="dropdown-content">
+				<a href="#">Pertinenza</a> <a href="#">Titolo</a> <a href="#">Voto</a>
+				<a href="#">Popolarità</a>
+			</div>
+		</div>
+		<li th:each="libro : ${libri}">
+
+			<div>
+				<!-- Inserire classi o id -->
+				<h1>
+					<div class="titoloLibro" th:text="${libro.titolo}">Titolo
+						libro</div>
+				</h1>
+				<h1>
+					<div class="isbnLibro" th:text="${libro.isbn}">ISBN libro</div>
+				</h1>
+				<h2>
+					<div class="dataPubblicazioneLibro"
+						th:text="${libro.dataPubblicazione}">Data Pubblicazione
+						libro</div>
+				</h2>
+				<h2>
+					<tr th:each="autore : ${libro.autori}">
+						<td><span th:text="${autore.nome}"> Nome autore </span></td>
+						<td><span th:text="${autore.cognome}"> Cognome Autore </span></td>
+					</tr>
+				</h2>
+				<p>
+				<div class="sinossiLibro" th:text="${libro.sinossi}">Sinossi
+					libro</div>
+				</p>
+			</div>
+		</li>
+
+
 	</div>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
 
 </body>
 </html>
