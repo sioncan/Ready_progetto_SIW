@@ -1,6 +1,5 @@
 package com.ready.siw.spring.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -23,9 +20,9 @@ public class Autore {
 	private Long id;
 	private String nome;
 	private String cognome;
-	private String dataNascita;
+	private LocalDate dataNascita;
 	private String luogoNascita;
-	private String dataMorte;
+	private LocalDate dataMorte;
 	private String luogoMorte;
 	
 	@ManyToMany

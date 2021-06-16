@@ -24,11 +24,6 @@ public class AutoreService {
 	}
 	
 	@Transactional
-	public void elimina(String nome, String cognome) {
-		this.autoreRepository.deleteByNomeAndCognome(nome, cognome);
-	}
-	
-	@Transactional
 	public List<Autore> autorePerNome(String nome) {
 		return this.autoreRepository.findByNome(nome);
 	}

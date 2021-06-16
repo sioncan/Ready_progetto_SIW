@@ -27,9 +27,9 @@ public class RecensioneController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// Apre la pagina per inserire la recensione creando un nuovo oggetto Recensione
-	@RequestMapping(value="/paginaInserisciRecensione", method = RequestMethod.GET)
-	public String goToPageInserisciRecensione(Model model) {
-		logger.debug("paginaInserisciRecensione");
+	@RequestMapping(value="/addRecensione", method = RequestMethod.GET)
+	public String addRecensione(Model model) {
+		logger.debug("addRecensionea");
 		model.addAttribute("recensione", new Recensione());
 		return "inserisciRecensione.html";
 	}

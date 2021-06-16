@@ -14,5 +14,4 @@ public interface AutoreRepository extends CrudRepository<Autore, Long>{
 
 	public List<Autore> findByNomeAndCognome(String nome, String cognome);
 
-	public void deleteByNomeAndCognome(String nome, String cognome);
 }

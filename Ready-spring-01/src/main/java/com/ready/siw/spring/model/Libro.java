@@ -18,10 +18,11 @@ import lombok.Data;
 public class Libro {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String isbn;
 	private String titolo;
 	private String sinossi;
-	private String dataPubblicazione;
+	private LocalDate dataPubblicazione;
 	
 	@ManyToOne
 	private CasaEditrice casaEditrice;
