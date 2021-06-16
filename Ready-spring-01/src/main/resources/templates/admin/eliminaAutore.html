@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('EliminaAutore')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Elimina Autore</h1>
+	</div>
+	<form th:action="eliminaAutore" method="POST">
+		<div>
+			<div>
+				<span>Nome:</span> <span><input name="nome" type="text"
+					required /></span>
+			</div>
+			<div>
+				<span>Cognome:</span> <span><input name="cognome" type="text"
+					required /></span>
+			</div>
+			<div>
+				<span><button type="submit">Elimina</button></span>
+			</div>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

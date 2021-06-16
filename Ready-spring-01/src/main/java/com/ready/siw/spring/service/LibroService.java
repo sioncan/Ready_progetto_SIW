@@ -25,6 +25,11 @@ public class LibroService {
 	}
 	
 	@Transactional
+	public void elimina(String isbn) {
+		this.libroRepository.deleteById(isbn);
+	}
+	
+	@Transactional
 	public List<Libro> libroPerTitolo(String titolo) {
 		return this.libroRepository.findByTitolo(titolo);
 	}

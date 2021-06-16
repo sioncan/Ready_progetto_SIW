@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('ElencoAutori')"></div>
+<link href="/css/ricercaAutoriStyle.css" rel="stylesheet">
+</head>
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+
+	<div class="row">
+
+		<div class="side">
+			<form>
+				<!-- Barra di ricerca -->
+				<h2>Ricerca:</h2>
+				<input type="search" placeholder="Inserisci un autore">
+				<!-- Checkboxes di generi -->
+				<h2>Generi:</h2>
+				<ul class="checkbox">
+					<li><input type="checkbox" id="fantasy" name="genere">
+						<label for="fantasy">Fantasy</label></li>
+					<li><input type="checkbox" id="giallo" name="genere">
+						<label for="giallo">Giallo</label></li>
+					<li><input type="checkbox" id="rosa" name="genere"> <label
+						for="rosa">Rosa</label></li>
+					<li><input type="checkbox" id="horror" name="genere">
+						<label for="horror">Horror</label></li>
+					<li><input type="checkbox" id="saggio" name="genere">
+						<label for="saggio">Saggio</label></li>
+				</ul>
+				<!-- Checkboxes di nazionalità -->
+				<h2>Nazionalità:</h2>
+				<ul class="checkbox">
+					<li><input type="checkbox" id="anticaGrecia"
+						name="nazionalita"> <label for="anticaGrecia">Antica
+							Grecia</label></li>
+					<li><input type="checkbox" id="germania" name="nazionalita">
+						<label for="germania">Germania</label></li>
+					<li><input type="checkbox" id="inghilterra" name="nazionalita">
+						<label for="inghilterra">Inghilterra</label></li>
+					<li><input type="checkbox" id="italia" name="nazionalita">
+						<label for="italia">Italia</label></li>
+				</ul>
+				<!-- Checkboxes di secolo -->
+				<h2>Secolo:</h2>
+				<ul class="checkbox">
+					<li><input type="checkbox" id="undicesimo" name="secolo">
+						<label for="undicesimo">XI</label></li>
+					<li><input type="checkbox" id="dodicesimo" name="secolo">
+						<label for="dodicesimo">XII</label></li>
+					<li><input type="checkbox" id="tredicesimo" name="secolo">
+						<label for="tredicesimo">XIII</label></li>
+					<li><input type="checkbox" id="ventesimo" name="secolo">
+						<label for="ventesimo">XX</label></li>
+				</ul>
+
+			</form>
+		</div>
+
+		<!-- Bottone di ordinamento -->
+		<div class="dropdown">
+			<button class="dropdown-ordina">Ordina per</button>
+			<div class="dropdown-content">
+				<a href="#">Pertinenza</a> <a href="#">Cognome</a>
+			</div>
+		</div>
+		<li th:each="autore : ${autori}">
+
+			<div>
+				<!-- Inserire classi o id -->
+				<h1>
+					<div class="nomeAutore" th:text="${autore.nome}">Nome autore</div>
+				</h1>
+				<h1>
+					<div class="cognomeAutore" th:text="${autore.cognome}">Cognome
+						autore</div>
+				</h1>
+				<h2>
+					<div class="dataNascita" th:text="${autore.dataNascita}">Data
+						Nascita autore</div>
+				</h2>
+				<h2>
+					<div class="luogoNascita" th:text="${autore.luogoNascita}">Luogo
+						Nascita Autore</div>
+				</h2>
+				<h2>
+					<div class="dataMorte" th:text="${autore.dataMorte}">Data
+						Morte autore</div>
+				</h2>
+				<h2>
+					<div class="luogoMorte" th:text="${autore.luogoMorte}">Luogo
+						Morte Autore</div>
+				</h2>
+				<h2>
+					<tr th:each="libro : ${autore.libri}">
+						<td><span th:text="${libro.titolo}"> Titolo Libro </span></td>
+						</span></td>
+					</tr>
+				</h2>
+			</div>
+		</li>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+
+</body>
+</html>
