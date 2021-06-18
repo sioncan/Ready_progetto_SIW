@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Libro')"></div>
+<link href="/css/LibroStyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div class="row">
+		<div class="side">
+			<!-- Qua va lo slideshow delle copertine -->
+			<img src="./imm.png" alt="Copertina1" style="width: 100%">
+			<!-- Questo bottone dovra' portare alla pagina di gestione della recensione -->
+			<button class="btn recensisci">Recensisci</button>
+			<div class="stelleRecensione">
+				<span class="fa fa-star checked"></span> <span
+					class="fa fa-star checked"></span> <span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span> <span class="fa fa-star"></span>
+			</div>
+		</div>
+		<div class="spazioDettagli">
+			<!-- Inserire classi o id -->
+			<h1>Titolo</h1>
+			<div class="stelleRecensione">
+				<span class="fa fa-star checked"></span> <span
+					class="fa fa-star checked"></span> <span class="fa fa-star checked"></span>
+				<span class="fa fa-star"></span> <span class="fa fa-star"></span>
+			</div>
+			<h2>Autore</h2>
+			<p>
+				La gloria di colui che tutto move / pe l'universo penetra e
+				risplende / da una parte piu' e meno altrove / nel ciel che piu' di
+				sua luce prende / fui io e vidi cose che ridire / ne' sa ne' puo'
+				chi di lassu' discende / <span id="dots">...</span><span id="more">
+					poiche' appressando se' a suo disiare / nostro intelletto si
+					profonda tanto / che dietro la memoria non puo' ire.</span>
+			</p>
+			<button onclick="myFunction()" id="myBtn">Read more</button>
+			<h3>Casa Editrice</h3>
+		</div>
+	</div>
+
+	<div class="spazioRecensioni">
+		<!-- Qua vanno inseriti i filtri -->
+		<div>
+			<a href="addRecensione">Inserisci recensione</a>
+		</div>
+
+		<!-- Qua vanno inserire tutte le box delle recensioni -->
+		<div>
+			<ul>
+				<li th:each="recensione : ${recensioni}">
+					<div class="flex-container-singolaRecensione">
+						<div class="flex-container-immagineENomeUtente">
+							<img class="immagineUtenteRecensione" src="./imm.png"> <span
+								class="autoreRecensione"> Mario Rossi </span>
+						</div>
+						<div class="flex-container-stelleETitoloRecensione">
+							<span class="stelleRecensione"> <th:block
+									th:each="i: ${#numbers.sequence(1, recensione.voto )}">
+									<span class="fa fa-star checked"></span>
+								</th:block> <th:block th:if="${recensione.voto < 5}"
+									th:each="i: ${#numbers.sequence(1, 5 - recensione.voto )}">
+									<span class="fa fa-star"></span>
+								</th:block>
+
+
+							</span> <span class="titoloRecensione" th:text="${recensione.titolo}">
+								Titolo recensione</span>
+						</div>
+						<div class="testoRecensione" th:text="${recensione.testo}">
+							Testo recensione</div>
+
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

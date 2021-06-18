@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('EliminaLibro')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Elimina Libro</h1>
+	</div>
+	<form th:action="eliminaLibro" method="POST">
+		<div>
+			<div>
+				<span>ISBN:</span> <span><input name="isbn" type="text"
+					required /></span>
+			</div>
+			<div>
+				<span><button type="submit">Elimina</button></span>
+			</div>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

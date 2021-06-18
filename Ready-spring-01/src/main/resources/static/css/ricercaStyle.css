@@ -1,0 +1,99 @@
+/* DA QUI IN POI PER IL LATO PAGINA CON ALL'INTERNO LE BARRE DI RICERCA */
+
+/* Il box-sizing universale */
+* {
+	box-sizing: border-box;
+}
+
+/* Stile del contenitore delle colonne */
+.row {
+	display: flex;
+	justify-content : space-evenly;
+	flex-wrap: wrap;
+}
+
+.row:after{
+	clear : both;
+}
+
+/* Le due colonne side e main sono una diversa dall'altra, ma stanno vicine */
+
+/* Stile della colonna di sinistra (side) */
+.side {
+	width: 30%;
+	background-color: #f1f1f1;
+	padding: 20px;
+}
+
+/* Stile della colonna di destra (spazioRisultati) */
+.spazioRisultati {
+	width: 65%;
+	background-color: white;
+	padding: 20px;
+}
+
+/* DA QUI IN POI PER LE BARRE E I CHECKBOX RICERCA */
+
+.side input[type=search] {
+    float: left;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+.side input[type=checkbox] {
+    margin: .4rem;
+    font-size: 17px;
+}
+
+/* DA QUI IN POI PER ORDINAMENTO */
+
+/* Il container <div> che serve a posizionare il bottone di ordinamento */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Stile del bottone di ordinamento */
+.dropdown-ordina {
+    background-color: #000066;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* Cambia il colore del bottone di ordinamento quando ci passi sopra col cursore */
+.dropdown:hover .dropdown-ordina {
+  background-color: #3300FF;
+}
+
+/* Il contenuto del dropdown di ordinamento (nascosto di default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #F2F1F8;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Link dentro il dropdown di ordinamento */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Cambia il colore del tipo di ordinamento quando ci passi col cursore */
+.dropdown-content a:hover {
+    background-color: white
+}
+
+/* Mostra il dropdown quando ci passi sopra col cursore */
+.dropdown:hover .dropdown-content {
+  display: block;
+ }

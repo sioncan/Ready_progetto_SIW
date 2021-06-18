@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:insert="fragments/headerFooter.html :: head('Autore')"></div>
+	<link href="/css/AutoreStyle.css" rel="stylesheet">
+</head>
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div class="row">
+		<div class="side">
+			<!-- Qua va lo slideshow delle foto dell'autore -->
+			<img src="img.jpg" alt="Foto1" style="width: 100%">
+		</div>
+		<div class="spazioDettagli">
+			<h1>Nome Cognome</h1>
+			<h2>Data di nascita: oggi</h2>
+			<h2>Luogo di nascita: qui</h2>
+			<h2>Data di morte: domani</h2>
+			<h2>Luogo di morte: li'</h2>
+			<h2>Generi: tutti</h2>
+			<p>
+				Livia Coppola nacque in un lontano 1996 da una famiglia molto povera
+				in una notte buia e tempestosa. <span id="dots">...</span><span
+					id="more"> Fin da subito dimostro' straordinari talenti e
+					una brillante intelligenza, oltre che spiccate doti di modestia e
+					umilta'.</span>
+			</p>
+			<button onclick="myFunction()" id="myBtn">Read more</button>
+		</div>
+	</div>
+	<div class="spazioLibri">
+		<!-- Qua vanno inseriti i filtri -->
+		<!-- Qua vanno inserire tutte le box dei libri -->
+		<p>Bla bla</p>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>
