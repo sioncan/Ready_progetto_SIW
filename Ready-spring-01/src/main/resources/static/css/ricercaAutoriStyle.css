@@ -1,19 +1,12 @@
-.spazioRisultati h1 {
+.spazioRisultati h1 .nomeAutore {
 	font-size: 20px;
+	font-style: italic;
 }
 
 .spazioRisultati h2 {
-	font-size: 20px;
+	font-size: 15px;
 }
 
-.spazioRisultati h3 {
-	font-size: 20px;
-}
-
-.spazioRisultati h4 {
-	font-size: 20px;
-}
-
-.spazioRisultati p {
-	font-size: 20px;
+.spazioRisultati p .titoliLibri {
+	font-size: 15px;
 }

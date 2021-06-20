@@ -24,8 +24,8 @@ public class AutoreService {
 	}
 	
 	@Transactional
-	public void elimina(String nome, String cognome) {
-		this.autoreRepository.deleteByNomeAndCognome(nome, cognome);
+	public void elimina(String nome) {
+		this.autoreRepository.deleteByNome(nome);
 	}
 	
 	@Transactional
@@ -34,13 +34,8 @@ public class AutoreService {
 	}
 	
 	@Transactional
-	public List<Autore> autorePerCognome(String cognome) {
-		return this.autoreRepository.findByCognome(cognome);
-	}
-	
-	@Transactional
-	public List<Autore> autorePerNomeECognome(String nome, String cognome) {
-		return this.autoreRepository.findByNomeAndCognome(nome, cognome);
+	public List<Autore> autorePerNazionalita(String nazionalita) {
+		return this.autoreRepository.findByNazionalita(nazionalita);
 	}
 
 	@Transactional

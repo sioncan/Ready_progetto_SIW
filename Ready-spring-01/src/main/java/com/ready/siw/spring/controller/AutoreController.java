@@ -39,7 +39,7 @@ public class AutoreController {
 	@RequestMapping(value = "/eliminaAutore", method = RequestMethod.POST)
 	public String deleteAutore(@ModelAttribute("autore") Autore autore, 
 			Model model, BindingResult bindingResult) {
-			this.autoreService.elimina(autore.getNome(), autore.getCognome());
+			this.autoreService.elimina(autore.getNomeCognome());
 			return "/admin/pannello.html";
 	}
 

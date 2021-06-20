@@ -16,7 +16,7 @@
 	clear : both;
 }
 
-/* Le due colonne side e main sono una diversa dall'altra, ma stanno vicine */
+/* Le due colonne side e spazioRisultati sono una diversa dall'altra, ma stanno vicine */
 
 /* Stile della colonna di sinistra (side) */
 .side {
@@ -48,12 +48,18 @@
     font-size: 17px;
 }
 
+/* Toglie la pallina di fronte agli elementi dell'elenco */
+.side ul{
+	list-style: none;
+}
+
 /* DA QUI IN POI PER ORDINAMENTO */
 
 /* Il container <div> che serve a posizionare il bottone di ordinamento */
 .dropdown {
     position: relative;
     display: inline-block;
+    padding: 20px;
 }
 
 /* Stile del bottone di ordinamento */

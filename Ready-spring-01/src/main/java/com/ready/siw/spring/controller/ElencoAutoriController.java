@@ -44,8 +44,8 @@ public class ElencoAutoriController {
 	}
 	
 	// Ricerca l'Autore dal DB per Nome e cognome
-	@GetMapping({"/cercaAutorePerNomeECognome","/cercaAutorePerNomeECognome{nome,cognome}"})
-	public String findByNomeAndCognome(@Param("nome") String nome, @Param("nome") String cognome, Model model) {
+	/*@GetMapping({"/cercaAutorePerNome","/cercaAutorePerNomeECognome{nome,cognome}"})
+	public String findByNomeAndCognome(@Param("nome") String nome, @Param("cognome") String cognome, Model model) {
 		if(nome.isEmpty() || cognome.isEmpty()) {
 			return "ricercaAutori";
 		}
@@ -54,6 +54,20 @@ public class ElencoAutoriController {
 			model.addAttribute("autori", autori);
 			model.addAttribute("nome", nome);
 			model.addAttribute("cognome", cognome);
+			return "ricercaAutori";
+		}
+	}*/
+	
+	// Ricerca l'Autore dal DB per Nazionalita
+	@GetMapping({"/cercaAutorePerNazionalita","/cercaAutorePerNazionalita{nazionalita}"})
+	public String findByNAzionalita(@Param("nazionalita") String nazionalita, Model model) {
+		if(nazionalita.isEmpty()) {
+			return "ricercaAutori";
+		}
+		else {
+			List<Autore> autori = this.autoreService.autorePerNazionalita(nazionalita);
+			model.addAttribute("autori", autori);
+			model.addAttribute("nazionalita", nazionalita);
 			return "ricercaAutori";
 		}
 	}

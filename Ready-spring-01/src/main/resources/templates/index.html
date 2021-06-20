@@ -14,33 +14,33 @@
 
 		<div class="side">
 				<!-- Barra di ricerca -->
-				<form th:action="@{/cercaLibroPerTitolo}" th:object="${libro}" method="get">
+				<form th:action="@{/cercaLibroPerTitoloOIsbn}" th:object="${libro}" method="get">
 				<h2>Ricerca per titolo o ISBN:</h2>
-				<input type="search" name="titolo" id="titolo" th:value="${titolo}" placeholder="Inserisci un titolo, un ISBN">
+				<input type="search" name="titoloOisbn" id="titoloOisbn" th:value="${titoloOisbn}" placeholder="Inserisci un titolo, un ISBN">
 				</form>
 				<form th:action="@{/cercaLibroPerAutore}" th:object="${libro}" method="get">
-				<h2>Ricerca per autore:</h2>
+				<h2><br><br>Ricerca per autore:</h2>
 				<input type="search" name="autore" id="autore" th:value="${autore}" placeholder="Inserisci un autore">
 				</form>
 				<form>
-				<h2>Ricerca per casa editrice:</h2>
+				<h2><br><br>Ricerca per casa editrice:</h2>
 				<input type="search" placeholder="Inserisci una casa editrice">
 				</form>
 				
 				<!-- Checkboxes di generi -->
-				<form th:action="@{/ricercaLibroPerGenere}" th:object="${libro}" method="get">
-				<h2>Generi:</h2>
+				<form th:action="@{/cercaLibroPerGenere}" th:object="${libro}" method="get">
+				<h2><br><br>Generi:</h2>
 				<ul class="checkbox">
-					<li><input type="checkbox" id="fantasy" name="genere" th:value="${genere}">
-						<label for="fantasy">Fantasy</label></li>
-					<li><input type="checkbox" id="giallo" name="genere" th:value="${genere}">
-						<label for="giallo">Giallo</label></li>
-					<li><input type="checkbox" id="rosa" name="genere" th:value="${genere}"> <label
-						for="rosa">Rosa</label></li>
-					<li><input type="checkbox" id="horror" name="genere" th:value="${genere}">
-						<label for="horror">Horror</label></li>
-					<li><input type="checkbox" id="saggio" name="genere" th:value="${genere}">
-						<label for="saggio">Saggio</label></li>
+					<li><input type="radio" id="fantasy" name="genere" th:value="Fantasy">
+						<label th:for="fantasy">Fantasy</label></li>
+					<li><input type="radio" id="giallo" name="genere" th:value="Giallo">
+						<label th:for="giallo">Giallo</label></li>
+					<li><input type="radio" id="rosa" name="genere" th:value="Rosa">
+						<label th:for="rosa">Rosa</label></li>
+					<li><input type="radio" id="horror" name="genere" th:value="Horror">
+						<label th:for="horror">Horror</label></li>
+					<li><input type="radio" id="saggio" name="genere" th:value="Saggio">
+						<label th:for="saggio">Saggio</label></li>
 				</ul>
 				<button type="submit">Submit</button>
 
@@ -53,7 +53,9 @@
 		<div class="dropdown">
 			<button class="dropdown-ordina">Ordina per</button>
 			<div class="dropdown-content">
-				<a href="#">Pertinenza</a> <a href="#">Titolo</a> <a href="#">Voto</a>
+				<a href="#">Pertinenza</a>
+				<a href="#">Titolo</a>
+				<a href="#">Voto</a>
 				<a href="#">Popolarità</a>
 			</div>
 		</div>
@@ -64,23 +66,25 @@
 					<div class="titoloLibro" th:text="${libro.titolo}">Titolo
 						libro</div>
 				</h1>
-				<h1>
-					<div class="isbnLibro" th:text="${libro.isbn}">ISBN libro</div>
-				</h1>
+				<h2>
+					<div class="autoriLibro">
+					<tr th:each="autore : ${libro.autori}">
+						<td><span th:text="${autore.nome}"> Nome Autore </span></td>
+						<!--<td><span th:text="${autore.cognome}"> Cognome Autore </span></td>-->
+					</tr>
+					</div>
+				</h2>
 				<h2>
 					<div class="dataPubblicazioneLibro"
 						th:text="${libro.dataPubblicazione}">Data Pubblicazione
 						libro</div>
 				</h2>
-				<h2>
-					<tr th:each="autore : ${libro.autori}">
-						<td><span th:text="${autore.nome}"> Nome Autore </span></td>
-						<td><span th:text="${autore.cognome}"> Cognome Autore </span></td>
-					</tr>
-				</h2>
 				<p>
-				<div class="sinossiLibro" th:text="${libro.sinossi}">Sinossi
+					<div class="sinossiLibro" th:text="${libro.sinossi}">Sinossi
 					libro</div>
+				</p>
+				<p>
+					<div class="isbnLibro" th:text="${libro.isbn}">ISBN libro</div>
 				</p>
 			</div>
 		</li>

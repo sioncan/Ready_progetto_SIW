@@ -21,12 +21,12 @@ public class Autore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String nome;
-	private String cognome;
+	private String nomeCognome;
 	private String dataNascita;
 	private String luogoNascita;
 	private String dataMorte;
 	private String luogoMorte;
+	private String nazionalita;
 	
 	@ManyToMany
 	private List<Libro> libri;
@@ -39,20 +39,12 @@ public class Autore {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeCognome() {
+		return nomeCognome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public void setNomeCognome(String nome) {
+		this.nomeCognome = nome;
 	}
 
 	public String getDataNascita() {
@@ -85,6 +77,14 @@ public class Autore {
 
 	public void setLuogoMorte(String luogoMorte) {
 		this.luogoMorte = luogoMorte;
+	}
+	
+	public String getNazionalita() {
+		return nazionalita;
+	}
+
+	public void setNazionalita(String nazionalita) {
+		this.nazionalita = nazionalita;
 	}
 
 	public List<Libro> getLibri() {

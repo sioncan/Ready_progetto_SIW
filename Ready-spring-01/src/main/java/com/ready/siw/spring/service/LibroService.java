@@ -30,19 +30,29 @@ public class LibroService {
 		this.libroRepository.deleteById(isbn);
 	}
 	
-	@Transactional
+	/*@Transactional
 	public List<Libro> libroPerTitolo(String titolo) {
 		return this.libroRepository.findByTitolo(titolo);
+	}*/
+	
+	@Transactional
+	public List<Libro> libroPerTitoloOIsbn(String titoloOisbn) {
+		return this.libroRepository.findByTitoloOrIsbn(titoloOisbn);
 	}
 	
 	@Transactional
 	public List<Libro> libroPerGenere(String genere) {
-		return this.libroRepository.findByTitolo(genere);
+		return this.libroRepository.findByGenere(genere);
 	}
 	
 	@Transactional
 	public List<Libro> libroPerDataPubblicazione(LocalDate dataPubblicazione) {
 		return this.libroRepository.findByDataPubblicazione(dataPubblicazione);
+	}
+	
+	@Transactional
+	public List<Libro> libroPerAutore(String autore) {
+		return this.libroRepository.findByAutore(autore);
 	}
 
 	@Transactional
@@ -61,7 +71,7 @@ public class LibroService {
 
 	@Transactional
 	public boolean alreadyExists(Libro libro) {
-		List<Libro> libri = this.libroRepository.findByTitolo(libro.getTitolo());
+		List<Libro> libri = this.libroRepository.findByTitoloOrIsbn(libro.getTitolo());
 		if (libri.size() > 0)
 			return true;
 		else 

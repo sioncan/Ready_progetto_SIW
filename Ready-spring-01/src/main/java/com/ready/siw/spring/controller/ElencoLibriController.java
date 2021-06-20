@@ -31,7 +31,7 @@ public class ElencoLibriController {
     }
 
 	// Ricerca il Libro dal DB per Titolo
-	@GetMapping({"/cercaLibroPerTitolo","/cercaLibroPerTitolo{titolo}"})
+	/*@GetMapping({"/cercaLibroPerTitolo","/cercaLibroPerTitolo{titolo}"})
 	public String findByTitolo(@Param("titolo") String titolo, Model model) {
 		if(titolo.isEmpty()) {
 			return "index";
@@ -40,6 +40,19 @@ public class ElencoLibriController {
 			List<Libro> libri = this.libroService.libroPerTitolo(titolo);
 			model.addAttribute("libri", libri);
 			model.addAttribute("titolo", titolo);
+			return "index";
+		}
+	}*/
+    
+    @GetMapping({"/cercaLibroPerTitoloOIsbn","/cercaLibroPerTitoloOIsbn{titoloOisbn}"})
+	public String findByTitoloOrIsbn(@Param("titoloOisbn") String titoloOisbn, Model model) {
+		if(titoloOisbn.isEmpty()) {
+			return "index";
+		}
+		else {
+			List<Libro> libri = this.libroService.libroPerTitoloOIsbn(titoloOisbn);
+			model.addAttribute("libri", libri);
+			model.addAttribute("titoloOisbn", titoloOisbn);
 			return "index";
 		}
 	}
@@ -51,9 +64,23 @@ public class ElencoLibriController {
 			return "index";
 		}
 		else {
-			List<Libro> libri = this.libroService.libroPerTitolo(genere);
+			List<Libro> libri = this.libroService.libroPerGenere(genere);
 			model.addAttribute("libri", libri);
 			model.addAttribute("genere", genere);
+			return "index";
+		}
+	}
+	
+	// Ricerca il Libro dal DB per Genere
+	@GetMapping({"/cercaLibroPerAutore","/cercaLibroPerAutore{autore}"})
+	public String findByAutore(@Param("autore") String autore, Model model) {
+		if(autore.isEmpty()) {
+			return "index";
+		}
+		else {
+			List<Libro> libri = this.libroService.libroPerAutore(autore);
+			model.addAttribute("libri", libri);
+			model.addAttribute("autore", autore);
 			return "index";
 		}
 	}
