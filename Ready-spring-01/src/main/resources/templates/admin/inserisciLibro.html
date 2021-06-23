@@ -12,7 +12,7 @@
 	<div>
 		<h1>Inserisci Libro</h1>
 	</div>
-	<form th:action="inserisciLibro" method="POST" th:object="${libro}">
+	<form th:action="@{/inserisciLibro}" method="POST" th:object="${libro}">
 		<div>
 			<div>
 				<span>ISBN:</span> <span><input name="isbn" type="text"
@@ -31,9 +31,11 @@
 					name="dataPubblicazione" type="date"
 					th:field="*{dataPubblicazione}" /></span>
 			</div>
-			<div>
-				<span><button type="submit">Inserisci</button></span>
-			</div>
+			<span>Genere:</span> <span><input name="genere" type="text"
+				th:field="*{genere}" /></span>
+		</div>
+		<div>
+			<span><button type="submit">Inserisci</button></span>
 		</div>
 	</form>
 

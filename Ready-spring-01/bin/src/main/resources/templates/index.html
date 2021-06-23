@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Libro')"></div>
+<link rel="stylesheet" href="ricercaLibriStyle.css">
+<link rel="stylesheet" href="ricercaStyle.css">
+<script src="principali.js"></script>
+<meta charset="UTF-8">
+<title>Libri</title>
+</head>
+<body>
+
+<header th:replace="fragments/headerFooter.html :: header"></header>
+
+<div class="row">
+
+	<div class="side">
+		<form>
+			<!-- Barra di ricerca -->
+			<h2>Ricerca per titolo o ISBN:</h2>
+			<input type="search" placeholder="Inserisci un titolo, un ISBN">
+			<h2>Ricerca per autore:</h2>
+			<input type="search" placeholder="Inserisci un autore">
+			<h2>Ricerca per casa editrice:</h2>
+			<input type="search" placeholder="Inserisci una casa editrice">
+			<!-- Checkboxes di generi -->
+			<h2>Generi:</h2>
+			<ul class="checkbox">
+			 	<li>
+			 		<input type="checkbox" id="fantasy" name="genere"> <label for="fantasy">Fantasy</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="giallo" name="genere"> <label for="giallo">Giallo</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="rosa" name="genere"> <label for="rosa">Rosa</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="horror" name="genere"> <label for="horror">Horror</label>
+			 	</li>
+				<li>
+					<input type="checkbox" id="saggio" name="genere"> <label for="saggio">Saggio</label>
+				</li>
+			 </ul>
+			 
+		</form>
+	</div>
+	
+	<div class="spazioDettagli">
+	<!-- Bottone di ordinamento -->
+	<div class="dropdown">
+		<button class="dropdown-ordina">Ordina per</button>
+			<div class="dropdown-content">
+				<a href="#">Pertinenza</a>
+				<a href="#">Titolo</a>
+				<a href="#">Voto</a>
+				<a href="#">Popolarità</a>
+  			</div>
+  	</div>
+	<!-- Inserire classi o id -->
+		<h1>Titolo</h1>
+		<h2>Autore</h2>
+		<p>La gloria di colui che tutto move / pe l'universo penetra e risplende / da una parte piu' e meno altrove / nel ciel che piu' di sua luce prende / fui io e vidi cose che ridire / ne' sa ne' puo' chi di lassu' discende /
+		<span id="dots">...</span><span id="more">
+		poiche' appressando se' a suo disiare / nostro intelletto si profonda tanto / che dietro la memoria non puo' ire.</span></p>
+		<button onclick="myFunction()" id="myBtn">Read more</button>
+		<h3>Casa Editrice</h3>
+	</div>
+	
+</div>
+
+<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

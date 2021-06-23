@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="principali.css">
+<div th:insert="fragments/headerFooter.html :: head('Libro')"></div>
+<link rel="stylesheet" href="ricercaAutoriStyle.css">
+<link rel="stylesheet" href="ricercaStyle.css">
 <script src="principali.js"></script>
 <meta charset="UTF-8">
-<title>Case Editrici</title>
+<title>Autori</title>
 </head>
 <body>
-<header id="home">
-	<div class="navbar">
-		<a href="#" class="logo"><img src="blus.png" alt="Ready" height="50" width="50"></a>
-		<a href="#">Register / Login</a>
-	</div>
-</header>
-<header id="sotto">
-	<div class="navbar">
-		<a href="#">Libri</a>
-		<a href="#">Autori</a>
-		<a href="#">Case editrici</a>
-	</div>
-</header>
+
+<header th:replace="fragments/headerFooter.html :: header"></header>
 
 <div class="row">
 
@@ -27,7 +18,26 @@
 		<form>
 			<!-- Barra di ricerca -->
 			<h2>Ricerca:</h2>
-			<input type="search" placeholder="Inserisci una casa editrice">
+			<input type="search" placeholder="Inserisci un autore">
+			<!-- Checkboxes di generi -->
+			<h2>Generi:</h2>
+			<ul class="checkbox">
+			 	<li>
+			 		<input type="checkbox" id="fantasy" name="genere"> <label for="fantasy">Fantasy</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="giallo" name="genere"> <label for="giallo">Giallo</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="rosa" name="genere"> <label for="rosa">Rosa</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="horror" name="genere"> <label for="horror">Horror</label>
+			 	</li>
+				<li>
+					<input type="checkbox" id="saggio" name="genere"> <label for="saggio">Saggio</label>
+				</li>
+			 </ul>
 			<!-- Checkboxes di nazionalità -->
 			<h2>Nazionalità:</h2>
 			<ul class="checkbox">
@@ -44,6 +54,22 @@
 			 		<input type="checkbox" id="italia" name="nazionalita"> <label for="italia">Italia</label>
 			 	</li>
 			 </ul>
+			 <!-- Checkboxes di secolo -->
+			 <h2>Secolo:</h2>
+			<ul class="checkbox">
+			 	<li>
+			 		<input type="checkbox" id="undicesimo" name="secolo"> <label for="undicesimo">XI</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="dodicesimo" name="secolo"> <label for="dodicesimo">XII</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="tredicesimo" name="secolo"> <label for="tredicesimo">XIII</label>
+			 	</li>
+			 	<li>
+			 		<input type="checkbox" id="ventesimo" name="secolo"> <label for="ventesimo">XX</label>
+			 	</li>
+			 </ul>
 			 
 		</form>
 	</div>
@@ -54,7 +80,7 @@
 		<button class="dropdown-ordina">Ordina per</button>
 			<div class="dropdown-content">
 				<a href="#">Pertinenza</a>
-				<a href="#">Nome</a>
+				<a href="#">Cognome</a>
   			</div>
   	</div>
 	<!-- Inserire classi o id -->
@@ -68,6 +94,8 @@
 	</div>
 	
 </div>
+
+<footer th:replace="fragments/headerFooter.html :: footer"></footer>
 
 </body>
 </html>

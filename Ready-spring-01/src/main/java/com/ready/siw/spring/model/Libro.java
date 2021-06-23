@@ -21,6 +21,7 @@ public class Libro {
 	private String isbn;
 	private String titolo;
 	private String sinossi;
+	private String genere;
 	private String dataPubblicazione;
 	
 	@ManyToOne
@@ -34,4 +35,76 @@ public class Libro {
 	
 	@ManyToMany (mappedBy="libri")
 	private List<Autore> autori;
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
+
+	public String getSinossi() {
+		return sinossi;
+	}
+
+	public void setSinossi(String sinossi) {
+		this.sinossi = sinossi;
+	}
+
+	public String getGenere() {
+		return genere;
+	}
+
+	public void setGenere(String genere) {
+		this.genere = genere;
+	}
+
+	public String getDataPubblicazione() {
+		return dataPubblicazione;
+	}
+
+	public void setDataPubblicazione(String dataPubblicazione) {
+		this.dataPubblicazione = dataPubblicazione;
+	}
+
+	public CasaEditrice getCasaEditrice() {
+		return casaEditrice;
+	}
+
+	public void setCasaEditrice(CasaEditrice casaEditrice) {
+		this.casaEditrice = casaEditrice;
+	}
+
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
+
+	public List<Lettore> getLettori() {
+		return lettori;
+	}
+
+	public void setLettori(List<Lettore> lettori) {
+		this.lettori = lettori;
+	}
+
+	public List<Autore> getAutori() {
+		return autori;
+	}
+
+	public void setAutori(List<Autore> autori) {
+		this.autori = autori;
+	}
 }

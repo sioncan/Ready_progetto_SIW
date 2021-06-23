@@ -13,12 +13,13 @@
 			<!-- Qua va lo slideshow delle foto dell'autore -->
 			<img src="img.jpg" alt="Foto1" style="width: 100%">
 		</div>
-		<div class="spazioDettagli">
-			<h1>Nome Cognome</h1>
-			<h2>Data di nascita: oggi</h2>
-			<h2>Luogo di nascita: qui</h2>
-			<h2>Data di morte: domani</h2>
-			<h2>Luogo di morte: li'</h2>
+		<div class="spazioDettagli" th:object="${autore}">
+			<h1 th:text="*{nome}">Nome Cognome</h1>
+			<h1 th:text="*{cognome}">Nome Cognome</h1>
+			<h2 th:text="*{dataNascita}">Data di nascita: oggi</h2>
+			<h2 th:text="*{luogoNascita}">Luogo di nascita: qui</h2>
+			<h2 th:text="*{dataMorte}">Data di morte: domani</h2>
+			<h2 th:text="*{luogoMorte}">Luogo di morte: li'</h2>
 			<h2>Generi: tutti</h2>
 			<p>
 				Livia Coppola nacque in un lontano 1996 da una famiglia molto povera

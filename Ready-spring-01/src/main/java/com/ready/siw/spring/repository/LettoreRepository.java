@@ -8,6 +8,8 @@ import com.ready.siw.spring.model.Lettore;
 
 public interface LettoreRepository extends CrudRepository<Lettore, Long>{
 	
+	public Lettore findByUsername(String username);
+	
 	public List<Lettore> findByEmail(String email);
 	
 	public List<Lettore> findByNome(String nome);

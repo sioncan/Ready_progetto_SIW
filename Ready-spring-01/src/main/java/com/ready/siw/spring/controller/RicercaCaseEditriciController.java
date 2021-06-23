@@ -12,12 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class ElencoCaseEditriciController {
+public class RicercaCaseEditriciController {
 	
-	/* apre la pagina della Casa editrice selezionato dall'elenco*/
-    @RequestMapping(value = "/apriCasaEditrice")
-    public String goToCasaEditrice() {
-    		return "casaEditrice.html";
-    }
 
 }

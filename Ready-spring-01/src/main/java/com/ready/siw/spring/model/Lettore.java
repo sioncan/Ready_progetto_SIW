@@ -19,6 +19,7 @@ public class Lettore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private String username;
 	private String email;
 	private String nome;
 	private String cognome;
@@ -30,5 +31,69 @@ public class Lettore {
 	
 	@ManyToMany
 	private List<Libro> libri;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public LocalDate getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(LocalDate dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	public String getLuogoNascita() {
+		return luogoNascita;
+	}
+
+	public void setLuogoNascita(String luogoNascita) {
+		this.luogoNascita = luogoNascita;
+	}
+
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
+
+	public List<Libro> getLibri() {
+		return libri;
+	}
+
+	public void setLibri(List<Libro> libri) {
+		this.libri = libri;
+	}
 
 }

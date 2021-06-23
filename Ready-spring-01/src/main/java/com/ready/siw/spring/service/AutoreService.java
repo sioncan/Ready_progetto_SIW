@@ -24,8 +24,8 @@ public class AutoreService {
 	}
 	
 	@Transactional
-	public void elimina(String nome, String cognome) {
-		this.autoreRepository.deleteByNomeAndCognome(nome, cognome);
+	public void elimina(Long id) {
+		this.autoreRepository.deleteById(id);
 	}
 	
 	@Transactional

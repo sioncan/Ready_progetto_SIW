@@ -13,7 +13,7 @@
 		<div class="side">
 			<!-- Qua va lo slideshow delle copertine -->
 			<img src="./imm.png" alt="Copertina1" style="width: 100%">
-			<!-- Questo bottone dovrà portare alla pagina di gestione della recensione -->
+			<!-- Questo bottone dovrÃ  portare alla pagina di gestione della recensione -->
 			<button class="btn recensisci">Recensisci</button>
 			<div class="stelleRecensione">
 				<span class="fa fa-star checked"></span> <span
@@ -21,42 +21,39 @@
 				<span class="fa fa-star"></span> <span class="fa fa-star"></span>
 			</div>
 		</div>
-		<div class="spazioDettagli">
+		<div class="spazioDettagli" th:object="${libro}">
 			<!-- Inserire classi o id -->
-			<h1>Titolo</h1>
+			<h1 th:text="*{titolo}">Titolo</h1>
+			<h1 th:text="*{isbn}">ISBN</h1>
 			<div class="stelleRecensione">
 				<span class="fa fa-star checked"></span> <span
 					class="fa fa-star checked"></span> <span class="fa fa-star checked"></span>
 				<span class="fa fa-star"></span> <span class="fa fa-star"></span>
 			</div>
 			<h2>Autore</h2>
-			<p>
-				La gloria di colui che tutto move / pe l'universo penetra e
-				risplende / da una parte piu' e meno altrove / nel ciel che piu' di
-				sua luce prende / fui io e vidi cose che ridire / ne' sa ne' puo'
-				chi di lassu' discende / <span id="dots">...</span><span id="more">
-					poiche' appressando se' a suo disiare / nostro intelletto si
-					profonda tanto / che dietro la memoria non puo' ire.</span>
+			<h2 th:text="*{genere}">Genere</h2>
+			<p th:text="*{sinossi}"> Sinossi
 			</p>
 			<button onclick="myFunction()" id="myBtn">Read more</button>
 			<h3>Casa Editrice</h3>
+			<h3 th:text="*{dataPubblicazione}">Data Pubblicazione</h3>
 		</div>
 	</div>
 
 	<div class="spazioRecensioni">
 		<!-- Qua vanno inseriti i filtri -->
-		<div>
-			<a href="paginaInserisciRecensione">Inserisci recensione</a>
+		<div th:object="${libro}">
+			<a th:href="@{'/paginaInserisciRecensione' + '/' + ${libro.isbn}}">Inserisci recensione</a>
 		</div>
 
 		<!-- Qua vanno inserire tutte le box delle recensioni -->
-		<div>
+		<div th:object="${libro}">
 			<ul>
-				<li th:each="recensione : ${recensioni}">
+				<li th:each="recensione : ${libro.recensioni}">
 					<div class="flex-container-singolaRecensione">
 						<div class="flex-container-immagineENomeUtente">
 							<img class="immagineUtenteRecensione" src="./imm.png"> <span
-								class="autoreRecensione"> Mario Rossi </span>
+								class="autoreRecensione" th:text="${recensione.recensore.username}"> Mario Rossi </span>
 						</div>
 						<div class="flex-container-stelleETitoloRecensione">
 							<span class="stelleRecensione"> <th:block

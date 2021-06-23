@@ -3,6 +3,7 @@
 <head>
 <div th:insert="fragments/headerFooter.html :: head('ElencoAutori')"></div>
 <link href="/css/ricercaAutoriStyle.css" rel="stylesheet">
+<link href="/css/ricercaStyle.css" rel="stylesheet">
 </head>
 <body>
 
@@ -12,10 +13,15 @@
 	<div class="row">
 
 		<div class="side">
-			<form>
-				<!-- Barra di ricerca -->
+			<!-- Barra di ricerca -->
+			<form th:action="@{/cercaAutorePerNome}" th:objects="${autore}"
+				method="get">
 				<h2>Ricerca:</h2>
-				<input type="search" placeholder="Inserisci un autore">
+				<input type="search" name="nome" id="nome" th:value="${nome}"
+					placeholder="Inserisci un autore">
+			</form>
+
+			<form>
 				<!-- Checkboxes di generi -->
 				<h2>Generi:</h2>
 				<ul class="checkbox">
@@ -30,8 +36,8 @@
 					<li><input type="checkbox" id="saggio" name="genere">
 						<label for="saggio">Saggio</label></li>
 				</ul>
-				<!-- Checkboxes di nazionalit‡ -->
-				<h2>Nazionalit‡:</h2>
+				<!-- Checkboxes di nazionalit√† -->
+				<h2>Nazionalit√†:</h2>
 				<ul class="checkbox">
 					<li><input type="checkbox" id="anticaGrecia"
 						name="nazionalita"> <label for="anticaGrecia">Antica
@@ -59,48 +65,53 @@
 			</form>
 		</div>
 
-		<!-- Bottone di ordinamento -->
-		<div class="dropdown">
-			<button class="dropdown-ordina">Ordina per</button>
-			<div class="dropdown-content">
-				<a href="#">Pertinenza</a> <a href="#">Cognome</a>
+		<div class="spazioRisultati">
+			<!-- Bottone di ordinamento -->
+			<div class="dropdown">
+				<button class="dropdown-ordina">Ordina per</button>
+				<div class="dropdown-content">
+					<a href="#">Pertinenza</a> <a href="#">Cognome</a>
+				</div>
 			</div>
-		</div>
-		<li th:each="autore : ${autori}">
+			<ul>
+				<li th:each="autore : ${autori}">
 
-			<div>
-				<!-- Inserire classi o id -->
-				<h1>
-					<div class="nomeAutore" th:text="${autore.nome}">Nome autore</div>
-				</h1>
-				<h1>
-					<div class="cognomeAutore" th:text="${autore.cognome}">Cognome
-						autore</div>
-				</h1>
-				<h2>
-					<div class="dataNascita" th:text="${autore.dataNascita}">Data
-						Nascita autore</div>
-				</h2>
-				<h2>
-					<div class="luogoNascita" th:text="${autore.luogoNascita}">Luogo
-						Nascita Autore</div>
-				</h2>
-				<h2>
-					<div class="dataMorte" th:text="${autore.dataMorte}">Data
-						Morte autore</div>
-				</h2>
-				<h2>
-					<div class="luogoMorte" th:text="${autore.luogoMorte}">Luogo
-						Morte Autore</div>
-				</h2>
-				<h2>
-					<tr th:each="libro : ${autore.libri}">
-						<td><span th:text="${libro.titolo}"> Titolo Libro </span></td>
-						</span></td>
-					</tr>
-				</h2>
-			</div>
-		</li>
+					<div>
+						<h1>
+							<div class="nomeAutore"> 
+							<a th:href="@{'/paginaAutore' + '/' + ${autore.id}}" th:text="${autore.nome}">Nome autore</a></div>
+						</h1>
+						<h1>
+							<div class="cognomeAutore" th:text="${autore.cognome}">Cognome
+								autore</div>
+						</h1>
+						<h2>
+							<div class="dataNascita" th:text="${autore.dataNascita}">Data
+								Nascita autore</div>
+						</h2>
+						<h2>
+							<div class="luogoNascita" th:text="${autore.luogoNascita}">Luogo
+								Nascita Autore</div>
+						</h2>
+						<h2>
+							<div class="dataMorte" th:text="${autore.dataMorte}">Data
+								Morte autore</div>
+						</h2>
+						<h2>
+							<div class="luogoMorte" th:text="${autore.luogoMorte}">Luogo
+								Morte Autore</div>
+						</h2>
+						<h2>
+							<tr th:each="libro : ${autore.libri}">
+								<td><span th:text="${libro.titolo}"> Titolo Libro </span></td>
+								</span>
+								</td>
+							</tr>
+						</h2>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"></footer>

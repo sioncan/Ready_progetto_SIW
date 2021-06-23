@@ -2,17 +2,21 @@ package com.ready.siw.spring.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.ready.siw.spring.model.Autore;
 
-public interface AutoreRepository extends CrudRepository<Autore, Long>{
+public interface AutoreRepository extends JpaRepository<Autore, Long>{
 	
-	public List<Autore> findByNome(String nome);
+	@Query(value="SELECT * FROM Autore a WHERE a.nome LIKE %:nome%", nativeQuery=true)
+	public List<Autore> findByNome(@Param("nome") String nome);
 	
 	public List<Autore> findByCognome(String cognome);
 
+	//@Query(value="SELECT * FROM Autore a WHERE a.nome LIKE %:nome% AND a.cognome LIKE %.cognome%", nativeQuery=true)
 	public List<Autore> findByNomeAndCognome(String nome, String cognome);
 
-	public void deleteByNomeAndCognome(String nome, String cognome);
 }

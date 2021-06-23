@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ready.siw.spring.model.Autore;
 import com.ready.siw.spring.model.Libro;
 import com.ready.siw.spring.repository.LibroRepository;
 
@@ -35,6 +36,11 @@ public class LibroService {
 	}
 	
 	@Transactional
+	public List<Libro> libroPerGenere(String genere) {
+		return this.libroRepository.findByTitolo(genere);
+	}
+	
+	@Transactional
 	public List<Libro> libroPerDataPubblicazione(LocalDate dataPubblicazione) {
 		return this.libroRepository.findByDataPubblicazione(dataPubblicazione);
 	}
@@ -51,6 +57,15 @@ public class LibroService {
 			return optional.get();
 		else 
 			return null;
+	}
+
+	@Transactional
+	public boolean alreadyExists(Libro libro) {
+		List<Libro> libri = this.libroRepository.findByTitolo(libro.getTitolo());
+		if (libri.size() > 0)
+			return true;
+		else 
+			return false;
 	}
 	
 }

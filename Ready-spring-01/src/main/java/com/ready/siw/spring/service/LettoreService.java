@@ -25,6 +25,11 @@ public class LettoreService {
 	}
 	
 	@Transactional
+	public Lettore lettorePerUsername(String username) {
+		return this.lettoreRepository.findByUsername(username);
+	}
+	
+	@Transactional
 	public List<Lettore> lettorePerNome(String nome) {
 		return this.lettoreRepository.findByNome(nome);
 	}
