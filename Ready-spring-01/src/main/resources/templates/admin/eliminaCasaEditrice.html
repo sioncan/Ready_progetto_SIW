@@ -1,30 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div
-	th:insert="fragments/headerFooter.html :: head('EliminaCasaEditrice')"></div>
+<div th:insert="fragments/headerFooter.html :: head('ScegliCasaEditriceDaEliminare')"></div>
 </head>
 
 <body>
 
-	<header th:replace="fragments/headerFooter.html :: header"></header>
+	<header th:replace="fragments/headerFooter.html :: header"> </header>
+	SCEGLI LA CASA EDITRICE DA ELIMINARE:
+	<li th:each="casaEditrice : ${caseEditrici}">
+		<a th:href="@{'/eliminaCasaEditrice' + '/' + ${casaEditrice.id}}" th:text="${casaEditrice.nome}">Nome della CasaEditrice</a>
+	</li>
 
-	<div>
-		<h1>Elimina Casa Editrice</h1>
-	</div>
-	<form th:action="eliminaCasaEditrice" method="POST">
-		<div>
-			<div>
-				<span>Nome:</span> <span><input name="nome" type="text"
-					required /></span>
-			</div>
-			<div>
-				<span><button type="submit">Inserisci</button></span>
-			</div>
-		</div>
-	</form>
-
-	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+	<footer th:replace="fragments/headerFooter.html :: footer"> </footer>
 
 </body>
 </html>

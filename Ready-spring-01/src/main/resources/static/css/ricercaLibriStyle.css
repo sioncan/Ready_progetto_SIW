@@ -1,19 +1,20 @@
-.spazioRisultati h1 {
+.spazioRisultati h1 .titoloLibro {
+	font-size: 20px;
+	font-style: italic;
+}
+
+.spazioRisultati h2 .dataPubblicazioneLibro {
+	font-size: 15px;
+}
+
+.spazioRisultati h2 .autoriLibro{
 	font-size: 20px;
 }
 
-.spazioRisultati h2 {
+.spazioRisultati p .sinossiLibro {
 	font-size: 20px;
 }
 
-.spazioRisultati h3 {
-	font-size: 20px;
-}
-
-.spazioRisultati h4 {
-	font-size: 20px;
-}
-
-.spazioRisultati p {
+.spazioRisultati p .isbnLibro{
 	font-size: 20px;
 }

@@ -11,13 +11,9 @@ import com.ready.siw.spring.model.Autore;
 
 public interface AutoreRepository extends JpaRepository<Autore, Long>{
 	
-	@Query(value="SELECT * FROM Autore a WHERE a.nome LIKE %:nome%", nativeQuery=true)
-	public List<Autore> findByNome(@Param("nome") String nome);
+	@Query(value="SELECT * FROM Autore a WHERE a.nomeCognome LIKE %:nomeCognome%", nativeQuery=true)
+	public List<Autore> findByNomeOrCognome(@Param("nomeCognome") String nomeCognome);
 	
-	public List<Autore> findByCognome(String cognome);
-
-	//@Query(value="SELECT * FROM Autore a WHERE a.nome LIKE %:nome% AND a.cognome LIKE %.cognome%", nativeQuery=true)
-	public List<Autore> findByNomeAndCognome(String nome, String cognome);
-
-	public void deleteByNomeAndCognome(String nome, String cognome);
+	@Query(value="SELECT * FROM Autore a WHERE a.nazionalita LIKE %:nazionalita%", nativeQuery=true)
+	public List<Autore> findByNazionalita(@Param("nazionalita") String nazionalita);
 }

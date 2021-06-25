@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:insert="fragments/headerFooter.html :: head('ScegliLibroDaEliminare')"></div>
+<div th:insert="fragments/headerFooter.html :: head('ScegliLibroDaModificare')"></div>
 </head>
 
 <body>
 
 	<header th:replace="fragments/headerFooter.html :: header"></header>
-	SCEGLI IL LIBRO DA ELIMINARE:
+	SCEGLI IL LIBRO DA MODIFICARE:
 	<li th:each="libro : ${libri}">
-		<a th:href="@{'/eliminaLibro' + '/' + ${libro.isbn}}" th:text="${libro.titolo}">Titolo del libro</a>
+		<a href="formModificaLibro.html" th:href="@{'/formModificaLibro' + '/' + ${libro.isbn}}" th:text="${libro.titolo}">Titolo del libro</a>
 	</li>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"></footer>

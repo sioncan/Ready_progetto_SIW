@@ -1,15 +1,14 @@
 package com.ready.siw.spring.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -20,9 +19,12 @@ public class Libro {
 	@Id
 	private String isbn;
 	private String titolo;
+	@Column(length = 500)
 	private String sinossi;
 	private String genere;
 	private String dataPubblicazione;
+	@Column(length = 64)
+	private String copertina;
 	
 	@ManyToOne
 	private CasaEditrice casaEditrice;
@@ -74,6 +76,21 @@ public class Libro {
 
 	public void setDataPubblicazione(String dataPubblicazione) {
 		this.dataPubblicazione = dataPubblicazione;
+	}
+	
+	@Transient
+    public String getPhotosImagePath() {
+        if (copertina == null || isbn == null) return null;
+         
+        return "/copertina/" + isbn + "/" + this.copertina;
+    }
+	
+	public String getCopertina() {
+		return copertina;
+	}
+
+	public void setCopertina(String copertina) {
+		this.copertina = copertina;
 	}
 
 	public CasaEditrice getCasaEditrice() {

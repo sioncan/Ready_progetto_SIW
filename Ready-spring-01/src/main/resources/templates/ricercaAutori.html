@@ -16,12 +16,12 @@
 				<!-- Barra di ricerca -->
 				<form th:action="@{/cercaAutorePerNome}" th:objects="${autore}" method="get">
 				<h2>Ricerca:</h2>
-				<input type="search" name="nome" id="nome" th:value="${nome}" placeholder="Inserisci un autore">
+				<input type="search" name="nomeCognome" id="nomeCognome" th:value="${nomeCognome}" placeholder="Inserisci un autore">
 				</form>
 				
 				<form>
 				<!-- Checkboxes di generi -->
-				<h2>Generi:</h2>
+				<h2><br><br>Generi:</h2>
 				<ul class="checkbox">
 					<li><input type="checkbox" id="fantasy" name="genere">
 						<label for="fantasy">Fantasy</label></li>
@@ -34,21 +34,25 @@
 					<li><input type="checkbox" id="saggio" name="genere">
 						<label for="saggio">Saggio</label></li>
 				</ul>
+				</form>
 				<!-- Checkboxes di nazionalità -->
+				<form th:action="@{/cercaAutorePerNazionalita}" th:object="${autore}" method="get">
 				<h2>Nazionalità:</h2>
 				<ul class="checkbox">
-					<li><input type="checkbox" id="anticaGrecia"
-						name="nazionalita"> <label for="anticaGrecia">Antica
-							Grecia</label></li>
-					<li><input type="checkbox" id="germania" name="nazionalita">
-						<label for="germania">Germania</label></li>
-					<li><input type="checkbox" id="inghilterra" name="nazionalita">
-						<label for="inghilterra">Inghilterra</label></li>
-					<li><input type="checkbox" id="italia" name="nazionalita">
-						<label for="italia">Italia</label></li>
+					<li><input type="radio" id="Grecia" name="nazionalita" th:value="Greco">
+						<label th:for="grecia">Grecia</label></li>
+					<li><input type="radio" id="germania" name="nazionalita" th:value="Tedesco">
+						<label th:for="germania">Germania</label></li>
+					<li><input type="radio" id="inghilterra" name="nazionalita" th:value="Inglese">
+						<label th:for="inghilterra">Inghilterra</label></li>
+					<li><input type="radio" id="italia" name="nazionalita" th:value="Italiano">
+						<label th:for="italia">Italia</label></li>
 				</ul>
+				<button type="submit">Submit</button>
+				</form>
+				</form>
 				<!-- Checkboxes di secolo -->
-				<h2>Secolo:</h2>
+				<h2><br>Secolo:</h2>
 				<ul class="checkbox">
 					<li><input type="checkbox" id="undicesimo" name="secolo">
 						<label for="undicesimo">XI</label></li>
@@ -68,7 +72,11 @@
 		<div class="dropdown">
 			<button class="dropdown-ordina">Ordina per</button>
 			<div class="dropdown-content">
-				<a href="#">Pertinenza</a> <a href="#">Cognome</a>
+				<a href="#">Pertinenza</a>
+				<a href="#">Nome</a>
+				<!--
+				<div class="ordina" th:each="autore : ${#lists.sort(autori,autore.getNome())}">Nome</div>
+				-->
 			</div>
 		</div>
 		<ul>
@@ -76,34 +84,31 @@
 
 			<div>
 				<h1>
-					<div class="nomeAutore" th:text="${autore.nome}">Nome autore</div>
+					<div class="nomeAutore">
+					<a href="autore.html"
+						th:href="@{'/autore' + '/' + ${autore.id}}"
+						th:text="${autore.nomeCognome}">Nome autore</a></div>
 				</h1>
-				<h1>
-					<div class="cognomeAutore" th:text="${autore.cognome}">Cognome
-						autore</div>
-				</h1>
 				<h2>
-					<div class="dataNascita" th:text="${autore.dataNascita}">Data
-						Nascita autore</div>
+					<span class="dataNascita" th:text="${autore.dataNascita}">Data
+						Nascita autore</span>
+					<span>,</span>
+					<span class="luogoNascita" th:text="${autore.luogoNascita}">Luogo
+						Nascita Autore</span>
 				</h2>
 				<h2>
-					<div class="luogoNascita" th:text="${autore.luogoNascita}">Luogo
-						Nascita Autore</div>
+					<span class="dataMorte" th:text="${autore.dataMorte}">Data
+						Morte autore</span>
+					<span>,</span>
+					<span class="luogoMorte" th:text="${autore.luogoMorte}">Luogo
+						Morte Autore</span>
 				</h2>
-				<h2>
-					<div class="dataMorte" th:text="${autore.dataMorte}">Data
-						Morte autore</div>
-				</h2>
-				<h2>
-					<div class="luogoMorte" th:text="${autore.luogoMorte}">Luogo
-						Morte Autore</div>
-				</h2>
-				<h2>
+				<p>
 					<tr th:each="libro : ${autore.libri}">
-						<td><span th:text="${libro.titolo}"> Titolo Libro </span></td>
+						<td><span class="titoliLibri" th:text="${libro.titolo}"> Titolo Libro </span><br></td>
 						</span></td>
 					</tr>
-				</h2>
+				</p>
 			</div>
 		</li>
 		</ul>

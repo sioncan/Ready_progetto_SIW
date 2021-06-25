@@ -1,13 +1,11 @@
 package com.ready.siw.spring.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.ready.siw.spring.model.Lettore;
@@ -22,6 +20,11 @@ public class LettoreService {
 	@Transactional
 	public Lettore inserisci(Lettore lettore) {
 		return this.lettoreRepository.save(lettore);
+	}
+	
+	@Transactional
+	public Lettore lettorePerUsername(String username) {
+		return this.lettoreRepository.findByUsername(username);
 	}
 	
 	@Transactional

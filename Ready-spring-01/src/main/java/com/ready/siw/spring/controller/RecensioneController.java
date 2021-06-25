@@ -10,48 +10,58 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ready.siw.spring.controller.validator.RecensioneValidator;
+import com.ready.siw.spring.model.Lettore;
+import com.ready.siw.spring.model.Libro;
 import com.ready.siw.spring.model.Recensione;
+import com.ready.siw.spring.service.LettoreService;
+import com.ready.siw.spring.service.LibroService;
 import com.ready.siw.spring.service.RecensioneService;
 
 @Controller
 public class RecensioneController {
+	
+	@Autowired
+	private LettoreService lettoreService;
 
 	@Autowired
 	private RecensioneService recensioneService;
+	
+	@Autowired
+	private LibroService libroService;
 
 	@Autowired
 	private RecensioneValidator recensioneValidator;
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	// Apre la pagina per inserire la recensione creando un nuovo oggetto Recensione
-	@RequestMapping(value="/paginaInserisciRecensione", method = RequestMethod.GET)
-	public String goToPageInserisciRecensione(Model model) {
-		logger.debug("paginaInserisciRecensione");
+	@RequestMapping(value="/paginaInserisciRecensione/{isbn}", method = RequestMethod.GET)
+	public String goToPageInserisciRecensione(@PathVariable("isbn") String isbn, Model model) {
 		model.addAttribute("recensione", new Recensione());
+		model.addAttribute("libro", libroService.libroPerIsbn(isbn));
 		return "inserisciRecensione.html";
 	}
 
 	// Inserisce la recensione nel DB e ritorna alla pagina del libro mostrando tutte le recensioni
-	@RequestMapping(value = "/inserisciRecensione", method = RequestMethod.POST)
-	public String newRecensione(@ModelAttribute("recensione") Recensione recensione, 
+	@RequestMapping(value = "/inserisciRecensione/{isbn}/{username}", method = RequestMethod.POST)
+	public String newRecensione(@PathVariable(value="username") String username, @PathVariable("isbn") String isbn, @ModelAttribute("recensione") Recensione recensione, 
 			Model model, BindingResult bindingResult) {
 		this.recensioneValidator.validate(recensione, bindingResult);
 		if (!bindingResult.hasErrors()) {
+			model.addAttribute("libro", libroService.libroPerIsbn(isbn));
+			Lettore lett = this.lettoreService.lettorePerUsername(username);
+			Libro l = this.libroService.libroPerIsbn(isbn);
+			lett.getRecensioni().add(recensione);
+			l.getRecensioni().add(recensione);
+			recensione.setRecensore(lett);
+			recensione.setLibro(l);
+			this.lettoreService.inserisci(lett);
+			this.libroService.inserisci(l);
 			this.recensioneService.inserisci(recensione);
-			model.addAttribute("recensioni", this.recensioneService.tutti());
-			return "libro.html";
+			return "redirect:/libro/{isbn}";
 		}
 		return "inserisciRecensione.html";
 	}
 
-	// Apre la pagine del libro mostrando tutte le recensioni
-	@RequestMapping(value = "apriLibro", method = RequestMethod.GET)
-	public String caricaRecensioniLibro(Model model) {
-		model.addAttribute("recensioni", this.recensioneService.tutti());
-		return "libro.html";
-	}
-	
 }
