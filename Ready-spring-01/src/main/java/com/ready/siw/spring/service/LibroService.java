@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ready.siw.spring.model.Autore;
 import com.ready.siw.spring.model.Libro;
 import com.ready.siw.spring.repository.LibroRepository;
 
@@ -30,10 +29,10 @@ public class LibroService {
 		this.libroRepository.deleteById(isbn);
 	}
 	
-	/*@Transactional
+	@Transactional
 	public List<Libro> libroPerTitolo(String titolo) {
 		return this.libroRepository.findByTitolo(titolo);
-	}*/
+	}
 	
 	@Transactional
 	public List<Libro> libroPerTitoloOIsbn(String titoloOisbn) {

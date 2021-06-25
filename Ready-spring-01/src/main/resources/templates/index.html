@@ -63,14 +63,15 @@
 		<li th:each="libro : ${libri}">
 			<div>
 				<h1>
-					<div class="titoloLibro" th:text="${libro.titolo}">Titolo
-						libro</div>
+					<div class="titoloLibro">
+					<a href="libro.html"
+					th:href="@{'/libro' + '/' + ${libro.isbn}}"
+					th:text="${libro.titolo}">Titolo libro</a></div>
 				</h1>
 				<h2>
 					<div class="autoriLibro">
 					<tr th:each="autore : ${libro.autori}">
-						<td><span th:text="${autore.nome}"> Nome Autore </span></td>
-						<!--<td><span th:text="${autore.cognome}"> Cognome Autore </span></td>-->
+						<td><span th:text="${autore.nomeCognome}"> Nome e Cognome Autore </span></td>
 					</tr>
 					</div>
 				</h2>

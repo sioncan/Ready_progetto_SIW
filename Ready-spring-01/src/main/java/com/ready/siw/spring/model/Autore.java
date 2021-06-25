@@ -1,16 +1,13 @@
 package com.ready.siw.spring.model;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -27,6 +24,8 @@ public class Autore {
 	private String dataMorte;
 	private String luogoMorte;
 	private String nazionalita;
+	@Column(length = 10000)
+	private String biografia;
 	
 	@ManyToMany
 	private List<Libro> libri;
@@ -85,6 +84,14 @@ public class Autore {
 
 	public void setNazionalita(String nazionalita) {
 		this.nazionalita = nazionalita;
+	}
+	
+	public String getBiografia() {
+		return biografia;
+	}
+
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
 	}
 
 	public List<Libro> getLibri() {

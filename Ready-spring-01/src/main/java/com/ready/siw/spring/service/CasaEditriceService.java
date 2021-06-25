@@ -23,6 +23,11 @@ public class CasaEditriceService {
 	}
 	
 	@Transactional
+	public void elimina(Long id) {
+		this.casaEditriceRepository.deleteById(id);
+	}
+	
+	@Transactional
 	public List<CasaEditrice> casaEditricePerNome(String nome) {
 		return this.casaEditriceRepository.findByNome(nome);
 	}

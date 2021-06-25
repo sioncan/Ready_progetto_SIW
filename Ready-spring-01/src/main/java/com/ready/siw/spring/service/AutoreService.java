@@ -24,13 +24,13 @@ public class AutoreService {
 	}
 	
 	@Transactional
-	public void elimina(String nome) {
-		this.autoreRepository.deleteByNome(nome);
+	public void elimina(Long id) {
+		this.autoreRepository.deleteById(id);
 	}
 	
 	@Transactional
-	public List<Autore> autorePerNome(String nome) {
-		return this.autoreRepository.findByNome(nome);
+	public List<Autore> autorePerNomeOCognome(String nomeCognome) {
+		return this.autoreRepository.findByNomeOrCognome(nomeCognome);
 	}
 	
 	@Transactional

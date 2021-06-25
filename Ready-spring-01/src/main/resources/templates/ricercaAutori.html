@@ -16,7 +16,7 @@
 				<!-- Barra di ricerca -->
 				<form th:action="@{/cercaAutorePerNome}" th:objects="${autore}" method="get">
 				<h2>Ricerca:</h2>
-				<input type="search" name="nome" id="nome" th:value="${nome}" placeholder="Inserisci un autore">
+				<input type="search" name="nomeCognome" id="nomeCognome" th:value="${nomeCognome}" placeholder="Inserisci un autore">
 				</form>
 				
 				<form>
@@ -84,7 +84,10 @@
 
 			<div>
 				<h1>
-					<div class="nomeAutore" th:text="${autore.nome}">Nome autore</div>
+					<div class="nomeAutore">
+					<a href="autore.html"
+						th:href="@{'/autore' + '/' + ${autore.id}}"
+						th:text="${autore.nomeCognome}">Nome autore</a></div>
 				</h1>
 				<h2>
 					<span class="dataNascita" th:text="${autore.dataNascita}">Data

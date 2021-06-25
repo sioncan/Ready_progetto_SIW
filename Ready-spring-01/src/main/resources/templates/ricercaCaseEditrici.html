@@ -1,85 +1,87 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:insert="fragments/headerFooter.html :: head('ElencoCaseEditrici')"></div>
+<div
+	th:insert="fragments/headerFooter.html :: head('ElencoCaseEditrici')"></div>
 <link href="/css/ricercaCaseEditriciStyle.css" rel="stylesheet">
 <link href="/css/ricercaStyle.css" rel="stylesheet">
-<script src="principali.js"></script>
-<meta charset="UTF-8">
 </head>
 <body>
 
-<header th:replace="fragments/headerFooter.html :: header"></header>
+	<header th:replace="fragments/headerFooter.html :: header"></header>
 
-<div class="row">
+	<div class="row">
 
-	<div class="side">
-		<form>
-			<!-- Barra di ricerca -->
-			<h2>Ricerca:</h2>
-			<input type="search" placeholder="Inserisci una casa editrice">
-			<!-- Checkboxes di nazionalità -->
-			<h2><br><br>Nazionalità:</h2>
-			<ul class="checkbox">
-			 	<li>
-			 		<input type="checkbox" id="anticaGrecia" name="nazionalita"> <label for="anticaGrecia">Antica Grecia</label>
-			 	</li>
-			 	<li>
-			 		<input type="checkbox" id="germania" name="nazionalita"> <label for="germania">Germania</label>
-			 	</li>
-			 	<li>
-			 		<input type="checkbox" id="inghilterra" name="nazionalita"> <label for="inghilterra">Inghilterra</label>
-			 	</li>
-			 	<li>
-			 		<input type="checkbox" id="italia" name="nazionalita"> <label for="italia">Italia</label>
-			 	</li>
-			 </ul>
-			 
-		</form>
-	</div>
-	
-	<div class="spazioRisultati">
-	<!-- Bottone di ordinamento -->
-	<div class="dropdown">
-		<button class="dropdown-ordina">Ordina per</button>
-			<div class="dropdown-content">
-				<a href="#">Pertinenza</a>
-				<a href="#">Nome</a>
-  			</div>
-<ul>
-		<li th:each="casaEditrice : ${caseEditrici}">
+		<div class="side">
+			<form>
+				<!-- Barra di ricerca -->
+				<h2>Ricerca:</h2>
+				<input type="search" placeholder="Inserisci una casa editrice">
+				<!-- Checkboxes di nazionalit� -->
+				<h2>Nazionalita:</h2>
+				<ul class="checkbox">
+					<li><input type="checkbox" id="anticaGrecia"
+						name="nazionalita"> <label for="anticaGrecia">Antica
+							Grecia</label></li>
+					<li><input type="checkbox" id="germania" name="nazionalita">
+						<label for="germania">Germania</label></li>
+					<li><input type="checkbox" id="inghilterra" name="nazionalita">
+						<label for="inghilterra">Inghilterra</label></li>
+					<li><input type="checkbox" id="italia" name="nazionalita">
+						<label for="italia">Italia</label></li>
+				</ul>
 
-			<div>
-				<h1>
-					<div class="nomeCasaEditrice" th:text="${casaEditrice.nome}">Nome casa editrice</div>
-				</h1>
-				<!--<h1>
-					<div class="nazionalitaCasaEditrice" th:text="${casaEditrice.nazionalita}">Nazionalita'
-						casa editrice</div>
-				</h1>-->
-				<h2>
-					<div class="sedeCasaEditrice" th:text="${casaEditrice.sede}">Sede casa editrice</div>
-				</h2>
-				<!--<h2>
-					<div class="websiteCasaEditrice" th:text="${casaEditrice.website}">Website casa editrice</div>
-				</h2>-->
-				<h2>
-					<div class="dataFondazioneCasaEditrice" th:text="${casaEditrice.dataFondazione}">Data Fondazione
-					casa editrice</div>
-				</h2>
-				<!--<h2>
-					<tr th:each="libro : ${casaEditrice.libri}">
-						<td><span th:text="${casaEditrice.titolo}"> Titolo Libro </span></td>
-						</span></td>
-					</tr>
-				</h2>-->
+			</form>
+		</div>
+
+		<div class="spazioRisultati">
+			<!-- Bottone di ordinamento -->
+			<div class="dropdown">
+				<button class="dropdown-ordina">Ordina per</button>
+				<div class="dropdown-content">
+					<a href="#">Pertinenza</a> <a href="#">Nome</a>
+				</div>
 			</div>
-		</li>
-		</ul>
-	
-</div>
+			<ul>
+				<li th:each="casaEditrice : ${caseEditrici}">
 
-<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+					<div>
+						<h1>
+							<div class="nomeCasaEditrice">
+							<a th:href="@{'/paginaCasaEditrice' + '/' + ${casaEditrice.id}}" th:text="${casaEditrice.nome}">Nome casa editrice</a></div>
+						</h1>
+						<h1>
+							<div class="nazionalitaCasaEditrice"
+								th:text="${casaEditrice.nazionalita}">Nazionalita' casa
+								editrice</div>
+						</h1>
+						<h2>
+							<div class="sedeCasaEditrice" th:text="${casaEditrice.sede}">Sede
+								casa editrice</div>
+						</h2>
+						<h2>
+							<div class="websiteCasaEditrice"
+								th:text="${casaEditrice.website}">Website casa editrice</div>
+						</h2>
+						<h2>
+							<div class="dataFondazioneCasaEditrice"
+								th:text="${casaEditrice.dataFondazione}">Data Fondazione
+								casa editrice</div>
+						</h2>
+						<h2>
+							<tr th:each="libro : ${casaEditrice.libri}">
+								<td><span th:text="${libro.titolo}"> Titolo
+										Libro </span></td>
+								</span>
+								</td>
+							</tr>
+						</h2>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
 
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
 </body>
 </html>
