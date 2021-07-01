@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div
-	th:insert="fragments/headerFooter.html :: head('CollegaLibroAutore')"></div>
+	th:insert="fragments/headerFooter.html :: head('Collega Libro CasaEditrice')"></div>
 </head>
 
 <body>
@@ -10,18 +10,17 @@
 	<header th:replace="fragments/headerFooter.html :: header"></header>
 
 	<div>
-		<h1>Inserisci Autore e Libro da collegare</h1>
+		<h1>Seleziona Libro e Casa Editrice da collegare</h1>
 	</div>
 	<form th:action="collegaLibroCasaEditrice" method="POST">
 		<div>
-			<div>
-				<span>ID CasaEditrice:</span> <span><input name="idCasaEditrice"
-					type="text" th:name="id" required /></span>
-			</div>
-			<div>
-				<span>ISBN Libro:</span> <span><input name="isbnLibro"
-					type="text" th:name="isbn" required /></span>
-			</div>
+			Seleziona il Libro: <select name="isbn">
+				<option th:each="libro : ${libri}" th:text="${libro.titolo}"
+					th:value="${libro.isbn}"></option>
+			</select> Seleziona la CasaEditrice: <select name="id">
+				<option th:each="casaEditrice : ${caseEditrici}" th:text="${casaEditrice.nome}"
+					th:value="${casaEditrice.id}"></option>
+			</select>
 			<div>
 				<span><button type="submit">Collega</button></span>
 			</div>

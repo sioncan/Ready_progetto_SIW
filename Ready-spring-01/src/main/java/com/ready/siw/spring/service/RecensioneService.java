@@ -24,6 +24,11 @@ public class RecensioneService {
 	}
 	
 	@Transactional
+	public void elimina(Long id) {
+		this.recensioneRepository.deleteById(id);
+	}
+	
+	@Transactional
 	public List<Recensione> recensionePerVoto(int voto) {
 		return this.recensioneRepository.findByVoto(voto);
 	}

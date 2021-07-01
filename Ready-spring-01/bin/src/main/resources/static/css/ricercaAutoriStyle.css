@@ -1,3 +1,12 @@
-@charset "UTF-8";
+.spazioRisultati h1 .nomeAutore {
+	font-size: 20px;
+	font-style: italic;
+}
 
-/* RICORDA DI METTERLO NEI FILE */
+.spazioRisultati h2 {
+	font-size: 15px;
+}
+
+.spazioRisultati p .titoliLibri {
+	font-size: 15px;
+}

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<div th:insert="fragments/headerFooter.html :: head('Autore')"></div>
-	<link href="/css/AutoreStyle.css" rel="stylesheet">
+<div
+	th:insert="fragments/headerFooter.html :: head(title=${autore.nomeCognome})"></div>
+<link href="/css/autoreStyle.css" rel="stylesheet">
 </head>
 <body>
 
@@ -11,16 +12,36 @@
 	<div class="row">
 		<div class="side">
 			<!-- Qua va lo slideshow delle foto dell'autore -->
-			<img src="img.jpg" alt="Foto1" style="width: 100%">
+			<img th:src="@{${autore.immagineImagePath}}" alt="Immagine dell'autore"/>
 		</div>
-		<div class="spazioDettagli" th:object="${autore}">
-			<h1 th:text="*{nome}">Nome Cognome</h1>
-			<h1 th:text="*{cognome}">Nome Cognome</h1>
-			<h2 th:text="*{dataNascita}">Data di nascita: oggi</h2>
-			<h2 th:text="*{luogoNascita}">Luogo di nascita: qui</h2>
-			<h2 th:text="*{dataMorte}">Data di morte: domani</h2>
-			<h2 th:text="*{luogoMorte}">Luogo di morte: li'</h2>
-			<h2>Generi: tutti</h2>
+		<div class="spazioDettagli">
+
+			<h1>
+				<span th:text="*{autore.nomeCognome}">Nome e Cognome</span>
+			</h1>
+			<h2>
+				<span th:text="*{autore.dataNascita}">Data di Nascita</span> <span>,</span>
+				<span th:text="*{autore.luogoNascita}">Luogo di Nascita</span>
+			</h2>
+			<h2>
+				<span th:text="*{autore.dataMorte}">Data di Morte</span> <span>,</span>
+				<span th:text="*{autore.luogoMorte}">Luogo di Morte</span>
+			</h2>
+			<h2>
+				<div th:if="${autore.generi != null}">
+					<h1>Generi:</h1>
+					<ul>
+						<li th:each="genere : ${autore.generi}" th:text="${genere}">Genere</li>
+					</ul>
+				</div>
+			</h2>
+			<p>
+				<span th:text="*{autore.biografia}">Biografia</span>
+			</p>
+
+
+
+			<!--<h1>Nome Cognome</h1>
 			<p>
 				Livia Coppola nacque in un lontano 1996 da una famiglia molto povera
 				in una notte buia e tempestosa. <span id="dots">...</span><span
@@ -28,13 +49,29 @@
 					una brillante intelligenza, oltre che spiccate doti di modestia e
 					umilta'.</span>
 			</p>
-			<button onclick="myFunction()" id="myBtn">Read more</button>
+			<button onclick="myFunction()" id="myBtn">Read more</button>-->
 		</div>
 	</div>
 	<div class="spazioLibri">
 		<!-- Qua vanno inseriti i filtri -->
-		<!-- Qua vanno inserire tutte le box dei libri -->
-		<p>Bla bla</p>
+		<h2>
+			I libri di <span th:text="*{autore.nomeCognome}">Nome e
+				Cognome</span> presenti in Ready
+		</h2>
+		<ul>
+			<li th:each="libro : ${autore.libri}">
+				<div>
+					<h3>
+						<div class="titoloLibro">
+							<span><a href="libro.html"
+								th:href="@{'/libro' + '/' + ${libro.isbn}}"
+								th:text="${libro?.titolo}">Titolo libro</a></span> <span>-</span> <span
+								th:text="${libro?.dataPubblicazione}">Data Pubblicazione
+								libro</span>
+					</h3>
+				</div>
+			</li>
+		</ul>
 	</div>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"></footer>

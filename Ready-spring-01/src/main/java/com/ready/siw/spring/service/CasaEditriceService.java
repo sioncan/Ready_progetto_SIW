@@ -28,7 +28,7 @@ public class CasaEditriceService {
 	}
 	
 	@Transactional
-	public List<CasaEditrice> casaEditricePerNome(String nome) {
+	public CasaEditrice casaEditricePerNome(String nome) {
 		return this.casaEditriceRepository.findByNome(nome);
 	}
 	

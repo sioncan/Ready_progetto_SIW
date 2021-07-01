@@ -1,16 +1,15 @@
 package com.ready.siw.spring.model;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -21,15 +20,28 @@ public class Autore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String nome;
-	private String cognome;
+	private String nomeCognome;
 	private String dataNascita;
 	private String luogoNascita;
 	private String dataMorte;
 	private String luogoMorte;
+	private String nazionalita;
+	@Column(length = 10000)
+	private String biografia;
+	@ElementCollection
+	private List<String> generi;
+    @Column(nullable = true, length = 64)
+    private String immagine;
 	
-	@ManyToMany
+	@ManyToMany 
 	private List<Libro> libri;
+	
+    @Transient
+    public String getImmagineImagePath() {
+        if (immagine == null || id == null) return null;
+         
+        return "/images/" + immagine;
+    }
 
 	public Long getId() {
 		return id;
@@ -39,20 +51,12 @@ public class Autore {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeCognome() {
+		return nomeCognome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public void setNomeCognome(String nome) {
+		this.nomeCognome = nome;
 	}
 
 	public String getDataNascita() {
@@ -86,12 +90,20 @@ public class Autore {
 	public void setLuogoMorte(String luogoMorte) {
 		this.luogoMorte = luogoMorte;
 	}
-
-	public List<Libro> getLibri() {
-		return libri;
+	
+	public String getNazionalita() {
+		return nazionalita;
 	}
 
-	public void setLibri(List<Libro> libri) {
-		this.libri = libri;
+	public void setNazionalita(String nazionalita) {
+		this.nazionalita = nazionalita;
+	}
+	
+	public String getBiografia() {
+		return biografia;
+	}
+
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
 	}
 }

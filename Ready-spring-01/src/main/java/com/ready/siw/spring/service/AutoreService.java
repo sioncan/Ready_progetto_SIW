@@ -29,18 +29,18 @@ public class AutoreService {
 	}
 	
 	@Transactional
-	public List<Autore> autorePerNome(String nome) {
-		return this.autoreRepository.findByNome(nome);
+	public Autore autorePerNomeCognome(String nomeCognome) {
+		return this.autoreRepository.findByNomeCognome(nomeCognome);
+	}
+
+	@Transactional
+	public List<Autore> autorePerNomeOCognome(String nomeCognome) {
+		return this.autoreRepository.findByNomeOrCognome(nomeCognome);
 	}
 	
 	@Transactional
-	public List<Autore> autorePerCognome(String cognome) {
-		return this.autoreRepository.findByCognome(cognome);
-	}
-	
-	@Transactional
-	public List<Autore> autorePerNomeECognome(String nome, String cognome) {
-		return this.autoreRepository.findByNomeAndCognome(nome, cognome);
+	public List<Autore> autorePerNazionalita(String nazionalita) {
+		return this.autoreRepository.findByNazionalita(nazionalita);
 	}
 
 	@Transactional

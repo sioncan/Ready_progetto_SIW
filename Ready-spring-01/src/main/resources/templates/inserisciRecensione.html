@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div
-	th:insert="fragments/headerFooter.html :: head('inserisciRecensione')"></div>
+	th:insert="fragments/headerFooter.html :: head('Inserisci Recensione')"></div>
 <link href="/css/inserisciRecensioneStyle.css" rel="stylesheet">
 </head>
 
@@ -12,7 +11,8 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<header th:replace="fragments/headerFooter.html :: header"></header>
 
 	<!-- Form per inserire la recensione  -->
-	<form th:action="@{'/inserisciRecensione' + '/' + ${libro.isbn} + '/' + ${#authentication.getName()}}"
+	<form
+		th:action="@{'/inserisciRecensione' + '/' + ${libro.isbn} + '/' + ${#authentication.getName()}}"
 		method="POST" th:object="${recensione}" class="mt-5">
 		<div th:if="${#fields.hasGlobalErrors()}">
 			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errori</p>
@@ -33,6 +33,10 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 						star</label>
 				</div>
 			</span> <span th:if="${#fields.hasErrors('voto')}" th:errors="*{voto}"></span>
+		</div>
+		<div>
+			<span><input name="id" type="hidden" th:field="*{id}"
+				required /></span>
 		</div>
 		<div>
 			<span>Titolo:</span> <span><input type="text"

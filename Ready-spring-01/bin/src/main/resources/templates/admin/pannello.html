@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Pannello')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+	INSERISCI:
+	<div>
+		<a href="paginaInserisciLibro">Inserisci Libro</a>
+	</div>
+	<div>
+		<a href="paginaInserisciAutore">Inserisci Autore</a>
+	</div>
+	<div>
+		<a href="paginaInserisciCasaEditrice">Inserisci Casa Editrice</a>
+	</div>
+	MODIFICA:
+	<div>
+		<a href="paginaScegliLibroDaModificare">Modifica Libro</a>
+	</div>
+	<div>
+		<a href="paginaScegliAutoreDaModificare">Modifica Autore</a>
+	</div>
+	<div>
+		<a href="paginaScegliCasaEditriceDaModificare">Modifica Casa Editrice</a>
+	</div>
+	ELIMINA:
+	<div>
+		<a href="paginaEliminaLibro">Elimina Libro</a>
+	</div>
+	<div>
+		<a href="paginaEliminaAutore">Elimina Autore</a>
+	</div>
+	<div>
+		<a href="paginaEliminaCasaEditrice">Elimina Casa Editrice</a>
+	</div>
+	COLLEGA:
+	<div>
+		<a href="paginaCollegaLibroAutore">Collega un Libro ad un Autore</a>
+	</div>
+	<div>
+		<a href="paginaCollegaLibroCasaEditrice">Collega un Libro ad una
+			Casa Editrice</a>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

@@ -1,23 +1,43 @@
 package com.ready.siw.spring.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ready.siw.spring.model.Autore;
 import com.ready.siw.spring.model.CasaEditrice;
+import com.ready.siw.spring.model.Libro;
 import com.ready.siw.spring.service.CasaEditriceService;
+import com.ready.siw.spring.service.LibroService;
 
 @Controller
 public class CasaEditriceController {
 
 	@Autowired
 	private CasaEditriceService casaEditriceService;
-	
+
+	@Autowired
+	private LibroService libroService;
+
 	/* Va alla pagine della CasaEditrice selezionato dall'elenco */
 	@RequestMapping(value="/paginaCasaEditrice/{id}", method = RequestMethod.GET)
 	public String goToPageCasaEditrice(@PathVariable("id") Long id, Model model) {
@@ -36,22 +56,47 @@ public class CasaEditriceController {
 	@RequestMapping(value="/paginaInserisciCasaEditrice", method = RequestMethod.GET)
 	public String goToPageInserisciCasaEditrice(Model model) {
 		model.addAttribute("casaEditrice", new CasaEditrice());
+		model.addAttribute("libri", this.libroService.tutti());
 		return "/admin/inserisciCasaEditrice.html";
 	}
 
-	// Inserisce la CasaEditrice appena creata nel DB
-	@RequestMapping(value = "/inserisciCasaEditrice", method = RequestMethod.POST)
-	public String newCasaEditrice(@ModelAttribute("casaEditrice") CasaEditrice casaEditrice, 
-			Model model, BindingResult bindingResult) {
+	//	// Inserisce la CasaEditrice appena creata nel DB
+	//	@RequestMapping(value = "/inserisciCasaEditrice", method = RequestMethod.POST)
+	//	public String saveCasaEditrice(@ModelAttribute("casaEditrice") CasaEditrice casaEditrice, 
+	//			Model model, BindingResult bindingResult) {
+	//		this.casaEditriceService.inserisci(casaEditrice);
+	//		return "/admin/pannello.html";
+	//	}
+
+	// Inserisce il Libro appena creato nel DB
+	@PostMapping("/inserisciCasaEditrice")
+	public String saveLibro(@ModelAttribute("casaEditrice") CasaEditrice casaEditrice,
+			@Valid String isbnLibro, @RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		casaEditrice.setLogo(fileName);
+		Libro libro = this.libroService.libroPerIsbn(isbnLibro);
+		libro.setCasaEditrice(casaEditrice);
 		this.casaEditriceService.inserisci(casaEditrice);
-		return "/admin/pannello.html";
+		this.libroService.inserisci(libro);
+		String uploadDir = "./src/main/resources/static/images/";
+		Path uploadPath = Paths.get(uploadDir);
+		if(!Files.exists(uploadPath)) {
+			Files.createDirectories(uploadPath);
+		}
+		try (InputStream inputStream = multipartFile.getInputStream()) {
+			Path filePath = uploadPath.resolve(fileName);
+			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+		} catch(IOException e) {
+			throw new IOException("Could not save uploaded fileImage: " + fileName);
+		}
+		return "redirect:/ricercaLibri";
 	}
 
 	// Apre la pagina per selezionare una CasaEditrice da modificare
 	@RequestMapping(value="/paginaScegliCasaEditriceDaModificare", method = RequestMethod.GET)
-	public String goToPageScegliCasaEditriceDaModificare(Model model) {
+	public String goToPageModificaCasaEditrice(Model model) {
 		model.addAttribute("caseEditrici", this.casaEditriceService.tutti());
-		return "/admin/scegliCasaEditriceDaModificare.html";
+		return "/admin/modificaCasaEditrice.html";
 	}
 
 	// Apre la form per modificare una CasaEditrice
@@ -72,6 +117,12 @@ public class CasaEditriceController {
 	@RequestMapping(value = "/eliminaCasaEditrice/{id}", method = RequestMethod.GET)
 	public String deleteCasaEditrice(@PathVariable("id") Long id, 
 			Model model) {
+		CasaEditrice casaEditrice = this.casaEditriceService.casaEditricePerId(id);
+		for (Libro libro : casaEditrice.getLibri()) {
+			libro.setCasaEditrice(null);
+		}
+		casaEditrice.getLibri().clear();
+		this.casaEditriceService.inserisci(casaEditrice);
 		this.casaEditriceService.elimina(id);
 		return "redirect:/pannelloAmministratore";
 	}

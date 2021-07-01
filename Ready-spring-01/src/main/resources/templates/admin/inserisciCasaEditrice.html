@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:insert="fragments/headerFooter.html :: head('InserisciCasaEditrice')"></div>
+<div
+	th:insert="fragments/headerFooter.html :: head('Inserisci Casa Editrice')"></div>
 </head>
 
 <body>
@@ -12,33 +13,62 @@
 		<h1>Inserisci Casa Editrice</h1>
 	</div>
 	<form th:action="@{/inserisciCasaEditrice}" method="POST"
-		th:object="${casaEditrice}">
+		th:object="${casaEditrice}" enctype="multipart/form-data">
 		<div>
 			<div>
-				<span>ID (autogenerato):</span> <span><input name="id" type="text"
-					th:field="*{id}" /></span>
+				<span><input name="id" type="hidden" th:field="*{id}" /></span>
 			</div>
+			<div>
+				<span><input name="logo" type="hidden" th:field="*{logo}" /></span>
+			</div>
+			<div>
+				<span><input name="libri" type="hidden" th:field="*{libri}" /></span>
+			</div>
+			<br>
+
 			<div>
 				<span>Nome:</span> <span><input name="nome" type="text"
 					th:field="*{nome}" required /></span>
 			</div>
+			<br>
+
 			<div>
-				<span>Nazionalita:</span> <span><input name="nazionalita"
+				<span>Nazionalita':</span> <span><input name="nazionalita"
 					type="text" th:field="*{nazionalita}" required /></span>
 			</div>
+			<br>
+
 			<div>
 				<span>Sede:</span> <span><input name="sede" type="text"
 					th:field="*{sede}" required /></span>
 			</div>
+			<br>
+
 			<div>
 				<span>Sito web:</span> <span><input name="website"
 					type="text" th:field="*{website}" required /></span>
 			</div>
+			<br>
+
 			<div>
 				<span>Data Fondazione:</span> <span><input
 					name="dataFondazione" type="date" th:field="*{dataFondazione}"
 					required /></span>
 			</div>
+			<br>
+			<div>
+				Libro: <select name="isbnLibro">
+					<option th:each="libro : ${libri}" th:text="${libro.titolo}"
+						th:value="${libro.isbn}"></option>
+				</select>
+			</div>
+			<br>
+			<div>
+				<label>Logo: </label> <input type="file" name="fileImage"
+					id="fileImage" />
+				<!-- Ogni estensione di file image -->
+			</div>
+			<br>
 			<div>
 				<span><button type="submit">Inserisci</button></span>
 			</div>

@@ -39,7 +39,7 @@
 	padding: 20px;
 }
 
-/* Quando lo screen è largo meno di 700px, le due colonne non sono piu' side-by-side,
+/* Quando lo screen Ã¨ largo meno di 700px, le due colonne non sono piu' side-by-side,
 ma si mettono una sopra l'altra, rimanendo tutte visibili */
 @media screen and (max-width: 700px) {
 	.row {

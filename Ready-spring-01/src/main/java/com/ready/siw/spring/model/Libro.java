@@ -1,15 +1,16 @@
 package com.ready.siw.spring.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
 
 import lombok.Data;
 
@@ -20,9 +21,12 @@ public class Libro {
 	@Id
 	private String isbn;
 	private String titolo;
+	@Column(length = 500)
 	private String sinossi;
 	private String genere;
 	private String dataPubblicazione;
+    @Column(nullable = true, length = 64)
+    private String copertina;
 	
 	@ManyToOne
 	private CasaEditrice casaEditrice;
@@ -35,6 +39,13 @@ public class Libro {
 	
 	@ManyToMany (mappedBy="libri")
 	private List<Autore> autori;
+	
+    @Transient
+    public String getCopertinaImagePath() {
+        if (copertina == null || isbn == null) return null;
+         
+        return "/images/" + copertina;
+    }
 
 	public String getIsbn() {
 		return isbn;
@@ -76,6 +87,7 @@ public class Libro {
 		this.dataPubblicazione = dataPubblicazione;
 	}
 
+
 	public CasaEditrice getCasaEditrice() {
 		return casaEditrice;
 	}
@@ -90,21 +102,5 @@ public class Libro {
 
 	public void setRecensioni(List<Recensione> recensioni) {
 		this.recensioni = recensioni;
-	}
-
-	public List<Lettore> getLettori() {
-		return lettori;
-	}
-
-	public void setLettori(List<Lettore> lettori) {
-		this.lettori = lettori;
-	}
-
-	public List<Autore> getAutori() {
-		return autori;
-	}
-
-	public void setAutori(List<Autore> autori) {
-		this.autori = autori;
 	}
 }
