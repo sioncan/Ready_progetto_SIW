@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:insert="fragments/headerFooter.html :: head(title=${libro.titolo})"></div>
+<div
+	th:insert="fragments/headerFooter.html :: head(title=${libro.titolo})"></div>
 <link href="/css/libroStyle.css" rel="stylesheet">
 </head>
 
@@ -11,36 +12,48 @@
 
 	<div class="row">
 		<div class="side">
-			<img th:src="@{${libro.photosImagePath}}" alt="Copertina" style="width: 100%">
+			<img th:src="@{${libro.copertinaImagePath}}"
+				alt="Copertina del libro" />
 		</div>
-		
+
 		<div class="spazioDettagli">
-			<h1><span th:text="*{libro.titolo}">Titolo</span></h1>
+			<h1>
+				<span th:text="${libro.titolo}">Titolo</span>
+			</h1>
 			<div class="stelleRecensione">
-				<span class="fa fa-star checked"> </span>
-				<span class="fa fa-star checked"> </span>
-				<span class="fa fa-star checked"> </span>
-				<span class="fa fa-star"> </span>
-				<span class="fa fa-star"> </span>
+				<span class="fa fa-star checked"> </span> <span
+					class="fa fa-star checked"> </span> <span
+					class="fa fa-star checked"> </span> <span class="fa fa-star">
+				</span> <span class="fa fa-star"> </span>
 			</div>
-			<h2><tr th:each="autore : ${libro.autori}">
-						<td><a href="autore.html"
+			<h2>
+				<tr th:each="autore : ${libro.autori}">
+					<td><a href="autore.html"
 						th:href="@{'/autore' + '/' + ${autore.id}}"
-						th:text="${autore.nomeCognome}"> Nome e Cognome Autore </a></td>
-					</tr>
+						th:text="${autore?.nomeCognome}"> Nome e Cognome Autore </a></td>
+				</tr>
 			</h2>
-			<p><span th:text="*{libro.sinossi}">Sinossi</span></p>
-			<h3><span th:text="*{libro.casaEditrice}">Casa Editrice</span></h3>
-			<p><span th:text="*{libro.isbn}">Isbn</span></p>
+			<h2>
+				Genere: <span th:text="${libro.genere}">Genere</span>
+			</h2>
+			<p>
+				<span th:text="${libro.sinossi}">Sinossi</span>
+			</p>
+			<h3>
+				<span th:text="${libro?.casaEditrice?.nome}">Casa Editrice</span>
+			</h3>
+			<p>
+				<span th:text="${libro.isbn}">Isbn</span>
+			</p>
 		</div>
 	</div>
 
-		
-		
-		
-		
-		
-			<!--
+
+
+
+
+
+	<!--
 				La gloria di colui che tutto move / pe l'universo penetra e
 				risplende / da una parte piu' e meno altrove / nel ciel che piu' di
 				sua luce prende / fui io e vidi cose che ridire / ne' sa ne' puo'
@@ -55,18 +68,20 @@
 
 	<div class="spazioRecensioni">
 		<!-- Qua vanno inseriti i filtri -->
-		<div>
-			<button class="btn recensisci"><a href="paginaInserisciRecensione">Recensisci</a></button>
+		<div th:object="${libro}">
+			<a th:href="@{'/paginaInserisciRecensione' + '/' + ${libro.isbn}}">Inserisci
+				recensione</a>
 		</div>
 
 		<!-- Qua vanno inserire tutte le box delle recensioni -->
-		<div>
+		<div th:object="${libro}">
 			<ul>
-				<li th:each="recensione : ${recensioni}">
+				<th:block th:each="recensione : ${libro.recensioni}">
 					<div class="flex-container-singolaRecensione">
 						<div class="flex-container-immagineENomeUtente">
-							<img class="immagineUtenteRecensione" src="./imm.png"> <span
-								class="autoreRecensione"> Mario Rossi </span>
+							<img th:src="@{${recensione.recensore.immagineImagePath}}"
+								alt="Immagine profilo" height="100px" /> <span class="autoreRecensione"
+								th:text="${recensione.recensore.username}"> Mario Rossi </span>
 						</div>
 						<div class="flex-container-stelleETitoloRecensione">
 							<span class="stelleRecensione"> <th:block
@@ -85,7 +100,7 @@
 							Testo recensione</div>
 
 					</div>
-				</li>
+				</th:block>
 			</ul>
 		</div>
 	</div>

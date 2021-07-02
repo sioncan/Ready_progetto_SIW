@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div
-	th:insert="fragments/headerFooter.html :: head('ElencoCaseEditrici')"></div>
+	th:insert="fragments/headerFooter.html :: head('Ricerca Case Editrici')"></div>
 <link href="/css/ricercaCaseEditriciStyle.css" rel="stylesheet">
 <link href="/css/ricercaStyle.css" rel="stylesheet">
 </head>
@@ -48,7 +48,9 @@
 					<div>
 						<h1>
 							<div class="nomeCasaEditrice">
-							<a th:href="@{'/paginaCasaEditrice' + '/' + ${casaEditrice.id}}" th:text="${casaEditrice.nome}">Nome casa editrice</a></div>
+								<a th:href="@{'/paginaCasaEditrice' + '/' + ${casaEditrice.id}}"
+									th:text="${casaEditrice.nome}">Nome casa editrice</a>
+							</div>
 						</h1>
 						<h1>
 							<div class="nazionalitaCasaEditrice"
@@ -70,10 +72,7 @@
 						</h2>
 						<h2>
 							<tr th:each="libro : ${casaEditrice.libri}">
-								<td><span th:text="${libro.titolo}"> Titolo
-										Libro </span></td>
-								</span>
-								</td>
+								<td><div th:text="${libro.titolo}"> Titolo Libro </div></td>
 							</tr>
 						</h2>
 					</div>

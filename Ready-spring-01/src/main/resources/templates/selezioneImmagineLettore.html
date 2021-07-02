@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Seleziona immagine')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Seleziona l'immagine per il tuo profilo: </h1>
+	</div>
+	<form th:action="@{'/inserisciImmagineLettore' + '/' + ${#authentication.getName()}}" method="POST"
+		enctype="multipart/form-data">
+		<div>
+			<br>
+			<div>
+				<label>Immagine: </label> <input type="file" name="fileImage"
+					id="fileImage" />
+				<!-- Ogni estensione di file image -->
+			</div>
+			<br>
+			<div>
+				<span><button type="submit">Salva immagine</button></span>
+			</div>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

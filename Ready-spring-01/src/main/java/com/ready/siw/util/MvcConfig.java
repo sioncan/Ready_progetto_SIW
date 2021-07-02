@@ -1,5 +1,5 @@
 package com.ready.siw.util;
-
+ 
 import java.nio.file.Path;
 import java.nio.file.Paths;
  
@@ -13,15 +13,8 @@ public class MvcConfig implements WebMvcConfigurer {
  
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        exposeDirectory("copertina", registry);
-    }
-     
-    private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
-        Path uploadDir = Paths.get(dirName);
+    	Path uploadDir = Paths.get("./src/main/resources/static/images");
         String uploadPath = uploadDir.toFile().getAbsolutePath();
-         
-        if (dirName.startsWith("../")) dirName = dirName.replace("../", "");
-         
-        registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
+        registry.addResourceHandler("/src/main/resources/static/images/**").addResourceLocations("file:/"+ uploadPath + "/");
     }
 }

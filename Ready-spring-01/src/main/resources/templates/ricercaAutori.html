@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:insert="fragments/headerFooter.html :: head('ElencoAutori')"></div>
+<div th:insert="fragments/headerFooter.html :: head('Ricerca Autori')"></div>
 <link href="/css/ricercaAutoriStyle.css" rel="stylesheet">
 <link href="/css/ricercaStyle.css" rel="stylesheet">
 </head>
@@ -13,106 +13,111 @@
 	<div class="row">
 
 		<div class="side">
-				<!-- Barra di ricerca -->
-				<form th:action="@{/cercaAutorePerNome}" th:objects="${autore}" method="get">
+			<!-- Barra di ricerca -->
+			<form th:action="@{/cercaAutorePerNome}" th:objects="${autore}"
+				method="get">
 				<h2>Ricerca:</h2>
-				<input type="search" name="nomeCognome" id="nomeCognome" th:value="${nomeCognome}" placeholder="Inserisci un autore">
-				</form>
-				
-				<form>
+				<input type="search" name="nomeCognome" id="nomeCognome"
+					th:value="${nomeCognome}" placeholder="Inserisci un autore">
+			</form>
+
+			<form>
 				<!-- Checkboxes di generi -->
-				<h2><br><br>Generi:</h2>
+				<h2>
+					<br> <br>Generi:
+				</h2>
 				<ul class="checkbox">
 					<li><input type="checkbox" id="fantasy" name="genere">
-						<label for="fantasy">Fantasy</label></li>
+						<label for="fantasy" th:text="#{genere.fantasy}">Fantasy</label></li>
 					<li><input type="checkbox" id="giallo" name="genere">
-						<label for="giallo">Giallo</label></li>
+						<label for="giallo" th:text="#{genere.giallo}">Giallo</label></li>
 					<li><input type="checkbox" id="rosa" name="genere"> <label
-						for="rosa">Rosa</label></li>
+						for="rosa" th:text="#{genere.rosa}">Rosa</label></li>
 					<li><input type="checkbox" id="horror" name="genere">
-						<label for="horror">Horror</label></li>
+						<label for="horror" th:text="#{genere.horror}">Horror</label></li>
 					<li><input type="checkbox" id="saggio" name="genere">
-						<label for="saggio">Saggio</label></li>
+						<label for="saggio" th:text="#{genere.saggio}">Saggio</label></li>
 				</ul>
-				</form>
-				<!-- Checkboxes di nazionalità -->
-				<form th:action="@{/cercaAutorePerNazionalita}" th:object="${autore}" method="get">
+			</form>
+			<!-- Checkboxes di nazionalità -->
+			<form th:action="@{/cercaAutorePerNazionalita}" th:object="${autore}"
+				method="get">
 				<h2>Nazionalità:</h2>
 				<ul class="checkbox">
-					<li><input type="radio" id="Grecia" name="nazionalita" th:value="Greco">
-						<label th:for="grecia">Grecia</label></li>
-					<li><input type="radio" id="germania" name="nazionalita" th:value="Tedesco">
-						<label th:for="germania">Germania</label></li>
-					<li><input type="radio" id="inghilterra" name="nazionalita" th:value="Inglese">
-						<label th:for="inghilterra">Inghilterra</label></li>
-					<li><input type="radio" id="italia" name="nazionalita" th:value="Italiano">
-						<label th:for="italia">Italia</label></li>
+					<li><input type="radio" id="Grecia" name="nazionalita"
+						th:value="Greco"> <label th:for="grecia">Grecia</label></li>
+					<li><input type="radio" id="germania" name="nazionalita"
+						th:value="Tedesco"> <label th:for="germania">Germania</label></li>
+					<li><input type="radio" id="inghilterra" name="nazionalita"
+						th:value="Inglese"> <label th:for="inghilterra">Inghilterra</label></li>
+					<li><input type="radio" id="italia" name="nazionalita"
+						th:value="Italiano"> <label th:for="italia">Italia</label></li>
 				</ul>
 				<button type="submit">Submit</button>
-				</form>
-				</form>
-				<!-- Checkboxes di secolo -->
-				<h2><br>Secolo:</h2>
-				<ul class="checkbox">
-					<li><input type="checkbox" id="undicesimo" name="secolo">
-						<label for="undicesimo">XI</label></li>
-					<li><input type="checkbox" id="dodicesimo" name="secolo">
-						<label for="dodicesimo">XII</label></li>
-					<li><input type="checkbox" id="tredicesimo" name="secolo">
-						<label for="tredicesimo">XIII</label></li>
-					<li><input type="checkbox" id="ventesimo" name="secolo">
-						<label for="ventesimo">XX</label></li>
-				</ul>
+			</form>
+			</form>
+			<!-- Checkboxes di secolo -->
+			<h2>
+				<br>Secolo:
+			</h2>
+			<ul class="checkbox">
+				<li><input type="checkbox" id="undicesimo" name="secolo">
+					<label for="undicesimo">XI</label></li>
+				<li><input type="checkbox" id="dodicesimo" name="secolo">
+					<label for="dodicesimo">XII</label></li>
+				<li><input type="checkbox" id="tredicesimo" name="secolo">
+					<label for="tredicesimo">XIII</label></li>
+				<li><input type="checkbox" id="ventesimo" name="secolo">
+					<label for="ventesimo">XX</label></li>
+			</ul>
 
 			</form>
 		</div>
 
 		<div class="spazioRisultati">
-		<!-- Bottone di ordinamento -->
-		<div class="dropdown">
-			<button class="dropdown-ordina">Ordina per</button>
-			<div class="dropdown-content">
-				<a href="#">Pertinenza</a>
-				<a href="#">Nome</a>
-				<!--
+			<!-- Bottone di ordinamento -->
+			<div class="dropdown">
+				<button class="dropdown-ordina">Ordina per</button>
+				<div class="dropdown-content">
+					<a href="#">Pertinenza</a> <a href="#">Nome</a>
+					<!--
 				<div class="ordina" th:each="autore : ${#lists.sort(autori,autore.getNome())}">Nome</div>
 				-->
+				</div>
 			</div>
-		</div>
-		<ul>
-		<li th:each="autore : ${autori}">
+			<ul>
+				<li th:each="autore : ${autori}">
 
-			<div>
-				<h1>
-					<div class="nomeAutore">
-					<a href="autore.html"
-						th:href="@{'/autore' + '/' + ${autore.id}}"
-						th:text="${autore.nomeCognome}">Nome autore</a></div>
-				</h1>
-				<h2>
-					<span class="dataNascita" th:text="${autore.dataNascita}">Data
-						Nascita autore</span>
-					<span>,</span>
-					<span class="luogoNascita" th:text="${autore.luogoNascita}">Luogo
-						Nascita Autore</span>
-				</h2>
-				<h2>
-					<span class="dataMorte" th:text="${autore.dataMorte}">Data
-						Morte autore</span>
-					<span>,</span>
-					<span class="luogoMorte" th:text="${autore.luogoMorte}">Luogo
-						Morte Autore</span>
-				</h2>
-				<p>
-					<tr th:each="libro : ${autore.libri}">
-						<td><span class="titoliLibri" th:text="${libro.titolo}"> Titolo Libro </span><br></td>
-						</span></td>
-					</tr>
-				</p>
-			</div>
-		</li>
-		</ul>
-	</div>
+					<div>
+						<h1>
+							<div class="nomeAutore">
+								<a href="autore.html"
+									th:href="@{'/autore' + '/' + ${autore.id}}"
+									th:text="${autore.nomeCognome}">Nome autore</a>
+							</div>
+						</h1>
+						<h2>
+							<span class="dataNascita" th:text="${autore.dataNascita}">Data
+								Nascita autore</span> <span>,</span> <span class="luogoNascita"
+								th:text="${autore.luogoNascita}">Luogo Nascita Autore</span>
+						</h2>
+						<h2>
+							<span class="dataMorte" th:text="${autore.dataMorte}">Data
+								Morte autore</span> <span>,</span> <span class="luogoMorte"
+								th:text="${autore.luogoMorte}">Luogo Morte Autore</span>
+						</h2>
+						<p>
+							<tr th:each="libro : ${autore.libri}">
+								<td><span class="titoliLibri" th:text="${libro.titolo}">
+										Titolo Libro </span><br></td>
+								</span>
+								</td>
+							</tr>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"></footer>

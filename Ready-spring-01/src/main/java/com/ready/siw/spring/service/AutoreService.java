@@ -29,6 +29,11 @@ public class AutoreService {
 	}
 	
 	@Transactional
+	public Autore autorePerNomeCognome(String nomeCognome) {
+		return this.autoreRepository.findByNomeCognome(nomeCognome);
+	}
+
+	@Transactional
 	public List<Autore> autorePerNomeOCognome(String nomeCognome) {
 		return this.autoreRepository.findByNomeOrCognome(nomeCognome);
 	}

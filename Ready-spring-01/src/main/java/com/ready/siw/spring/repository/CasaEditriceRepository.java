@@ -8,7 +8,7 @@ import com.ready.siw.spring.model.CasaEditrice;
 
 public interface CasaEditriceRepository extends CrudRepository<CasaEditrice, Long>{
 	
-	public List<CasaEditrice> findByNome(String nome);
+	public CasaEditrice findByNome(String nome);
 	
 	public List<CasaEditrice> findByNazionalita(String nazionalita);
 

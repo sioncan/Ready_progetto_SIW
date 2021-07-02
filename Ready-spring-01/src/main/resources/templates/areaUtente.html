@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Area Utente')"></div>
+<link href="/css/areaUtenteStyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<br>
+	<h1>I tuoi dati:</h1>
+	<div>
+		<span>Username: </span> <span th:text="${lettore.username}"></span>
+	</div>
+	<div>
+		<span>Nome: </span> <span th:text="${lettore.nome}"></span>
+	</div>
+	<div>
+		<span>Cognome: </span> <span th:text="${lettore.cognome}"></span>
+	</div>
+	<br>
+	<div>
+		<a
+			th:href="@{'/paginaModificaDatiLettore' + '/' + ${#authentication.getName()}}">Modifica
+			dati</a>
+	</div>
+	<br>
+	<br>
+	<div>
+		<a
+			th:href="@{'/paginaSelezionaImmagineLettore' + '/' + ${#authentication.getName()}}">Cambia
+			immagine</a>
+	</div>
+	<div>
+		<img th:src="@{${lettore.immagineImagePath}}" alt="Immagine profilo" />
+	</div>
+	<br>
+	<h1>Le tue recensioni:</h1>
+	<br>
+	<div class="recensioniUtente">
+		<th:block th:each="recensione : ${lettore.recensioni}">
+			<div class="flex-container-singolaRecensione">
+				<a th:href="@{'/modificaRecensione' + '/' + ${recensione.id}}">Modifica</a>
+				<a th:href="@{'/eliminaRecensione' + '/' + ${recensione.id}}">Elimina</a>
+				<div class="flex-container-immagineENomeUtente">
+					<img th:src="@{${recensione.recensore.immagineImagePath}}"
+						alt="Immagine profilo" height="100px" /> <span
+						class="autoreRecensione" th:text="${lettore.username}">
+						Mario Rossi </span>
+				</div>
+				<div class="flex-container-stelleETitoloRecensione">
+					<span class="stelleRecensione"> <th:block
+							th:each="i: ${#numbers.sequence(1, recensione.voto )}">
+							<span class="fa fa-star checked"></span>
+						</th:block> <th:block th:if="${recensione.voto < 5}"
+							th:each="i: ${#numbers.sequence(1, 5 - recensione.voto )}">
+							<span class="fa fa-star"></span>
+						</th:block>
+
+
+					</span> <span class="titoloRecensione" th:text="${recensione.titolo}">
+						Titolo recensione</span>
+				</div>
+				<div class="testoRecensione" th:text="${recensione.testo}">
+					Testo recensione</div>
+
+			</div>
+		</th:block>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

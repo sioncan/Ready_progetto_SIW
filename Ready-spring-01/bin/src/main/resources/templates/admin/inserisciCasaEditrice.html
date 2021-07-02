@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div
+	th:insert="fragments/headerFooter.html :: head('InserisciCasaEditrice')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Inserisci Casa Editrice</h1>
+	</div>
+	<form th:action="inserisciCasaEditrice" method="POST">
+		<div>
+			<div>
+				<span>Nome:</span> <span><input name="nome" type="text"
+					required /></span>
+			</div>
+			<div>
+				<span>Nazionalità:</span> <span><input name="nazionalita"
+					type="text" required /></span>
+			</div>
+			<div>
+				<span>Sede:</span> <span><input name="sede" type="text"
+					required /></span>
+			</div>
+			<div>
+				<span>Sito web:</span> <span><input name="website"
+					type="text" required /></span>
+			</div>
+			<div>
+				<span>Data Fondazione:</span> <span><input
+					name="dataFondazione" type="date" required /></span>
+			</div>
+			<div>
+				<span>Libri Editati:</span> <span><input name="libri"
+					type="text" /></span>
+			</div>
+			<div>
+				<span><button type="submit">Inserisci</button></span>
+			</div>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

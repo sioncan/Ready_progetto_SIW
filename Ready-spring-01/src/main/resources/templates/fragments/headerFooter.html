@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:fragment="head(title)">
 <meta charset="UTF-8">
 <link th:href="@{/css/headerFooterStyle.css}" rel="stylesheet" />
@@ -25,6 +26,7 @@
 			<div class="navbar">
 				<a th:href="@{/ricercaLibri}" class="logo"><img src="/images/logo.png" alt="Ready"
 					height="50" width="50"></a>
+					<a th:href="@{'/areaUtente' + '/' + ${#authentication.getName()}}">Area utente</a>
 					<a th:href="@{/login}">Accedi</a>
 					<a th:href="@{/register}">Registrati</a>
 			</div>
@@ -67,7 +69,7 @@
 					<a href="#">Lavora con noi</a>
 				</div>
 				<div class="links">
-					<a href="pannelloAmministratore">Pannello amministratore</a>
+					<a th:href="@{/pannelloAmministratore}">Pannello amministratore</a>
 				</div>
 			</div>
 			<div class="social">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:insert="fragments/headerFooter.html :: head('InserisciLibro')"></div>
+<div th:insert="fragments/headerFooter.html :: head('Inserisci Libro')"></div>
 </head>
 
 <body>
@@ -12,10 +12,11 @@
 	<div>
 		<h1>Inserisci Libro</h1>
 	</div>
-	<form th:action="inserisciLibro" method="POST" th:object="${libro}" enctype="multipart/form-data">
+	<form th:action="@{/inserisciLibro}" method="POST" th:object="${libro}"
+		enctype="multipart/form-data">
 		<div>
 			<div>
-				<span>ISBN:</span> <span><input name="isbn" type="text"
+				<span>ISBN: </span><span><input name="isbn" type="text"
 					th:field="*{isbn}" required /></span>
 			</div>
 			<br>
@@ -35,15 +36,50 @@
 					th:field="*{dataPubblicazione}" /></span>
 			</div>
 			<br>
-			<span>Genere:</span>
-					<span><input name="genere" type="text"
-					th:field="*{genere}" /></span>
+			<div>
+				<span>Genere:</span>
+				<ul class="checkbox">
+					<li><input type="radio" id="fantasy" name="genere"
+						th:value="Fantasy" th:field="*{genere}"> <label
+						th:for="fantasy" th:text="#{genere.fantasy}">Fantasy</label></li>
+					<li><input type="radio" id="giallo" name="genere"
+						th:value="Giallo" th:field="*{genere}"> <label
+						th:for="giallo" th:text="#{genere.giallo}">Giallo</label></li>
+					<li><input type="radio" id="rosa" name="genere"
+						th:value="Rosa" th:field="*{genere}"> <label th:for="rosa"
+						th:text="#{genere.rosa}">Rosa</label></li>
+					<li><input type="radio" id="horror" name="genere"
+						th:value="Horror" th:field="*{genere}"> <label
+						th:for="horror" th:text="#{genere.horror}">Horror</label></li>
+					<li><input type="radio" id="saggio" name="genere"
+						th:value="Saggio" th:field="*{genere}"> <label
+						th:for="saggio" th:text="#{genere.saggio}">Saggio</label></li>
+				</ul>
 			</div>
 			<br>
 			<div>
-			<span>Copertina:</span>
-					<span><input type="file" th:name="image"
-					accept="image/*" /></span> <!-- Ogni estensione di file image -->
+				Casa editrice: <select name="idCasaEditrice">
+					<option th:value="*{casaEditrice?.id}" text="Please Select"></option>
+					<option th:each="casaEditrice : ${caseEditrici}"
+						th:text="${casaEditrice.nome}" th:value="${casaEditrice.id}"></option>
+				</select>
+			</div>
+			<br>
+			<div>
+				Autore: <select name="idAutore">
+					<option th:value="0" text="Please Select"></option>
+					<option th:each="autore : ${autori}"
+						th:text="${autore.nomeCognome}" th:value="${autore.id}"></option>
+				</select>
+			</div>
+			<br>
+			<div>
+				<span><input name="oldFileName" type="hidden" th:value="*{copertina}" /></span>
+			</div>
+			<div>
+				<label>Copertina: </label> <input type="file" name="fileImage"
+					id="fileImage" />
+				<!-- Ogni estensione di file image -->
 			</div>
 			<br>
 			<div>
