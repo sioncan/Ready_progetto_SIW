@@ -27,6 +27,7 @@ public class Libro {
 	private String dataPubblicazione;
     @Column(nullable = true, length = 64)
     private String copertina;
+	public Integer votoMedio;
 	
 	@ManyToOne
 	private CasaEditrice casaEditrice;
@@ -47,6 +48,19 @@ public class Libro {
         return "/images/" + copertina;
     }
 
+	@Transient
+	public int calcolaVotoMedio() {
+		votoMedio = 0;
+		if(!this.recensioni.isEmpty()) {
+			for (Recensione recensione : this.recensioni) {
+				votoMedio += recensione.getVoto();
+			}
+			return (votoMedio/(this.recensioni.size()));
+		} else {
+			return 0;
+		}
+	}
+	
 	public String getIsbn() {
 		return isbn;
 	}

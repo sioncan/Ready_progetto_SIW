@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ready.siw.spring.controller.validator.LibroValidator;
 import com.ready.siw.spring.model.Autore;
 import com.ready.siw.spring.model.CasaEditrice;
 import com.ready.siw.spring.model.Libro;
@@ -32,6 +33,9 @@ import com.ready.siw.spring.service.LibroService;
 
 @Controller
 public class LibroController {
+	
+	@Autowired
+	private LibroValidator libroValidator;
 
 	@Autowired
 	private LibroService libroService;
@@ -45,7 +49,10 @@ public class LibroController {
 	/* Va alla pagine del Libro selezionato dall'elenco */
 	@RequestMapping(value="/libro/{isbn}", method = RequestMethod.GET)
 	public String goToPageLibro(@PathVariable("isbn") String isbn, Model model) {
-		model.addAttribute("libro", this.libroService.libroPerIsbn(isbn));
+		Libro libro = this.libroService.libroPerIsbn(isbn);
+		int votoMedio = libro.calcolaVotoMedio();
+		model.addAttribute("libro", libro);
+		model.addAttribute("votoMedio", votoMedio);
 		return "libro.html";
 	}
 
@@ -65,49 +72,47 @@ public class LibroController {
 		return "/admin/inserisciLibro.html";
 	}
 
-	/*	@RequestMapping(value = "/inserisciLibro", method = RequestMethod.POST)
-	public String newLibro(@ModelAttribute("libro") Libro libro, 
-			Model model, BindingResult bindingResult) {
-		this.libroService.inserisci(libro);
-		return "/admin/pannello.html";
-	}*/
-
 	// Inserisce il Libro appena creato nel DB
 	@PostMapping("/inserisciLibro")
 	public String saveLibro(@ModelAttribute("libro") Libro libro,  @Valid Long idCasaEditrice, 
-			@Valid Long idAutore, @RequestParam(value="oldFileName", required = false) String oldFileName, @RequestParam(value="fileImage", required = false) MultipartFile multipartFile) throws IOException {
-		String fileName = null;
-		if(!multipartFile.isEmpty()) {
-			fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			libro.setCopertina(fileName);
-		} else {
-			libro.setCopertina(oldFileName);
-		}
-		if(idCasaEditrice != 0) {
-			CasaEditrice casaEditrice = this.casaEditriceService.casaEditricePerId(idCasaEditrice);
-			libro.setCasaEditrice(casaEditrice);
-			this.casaEditriceService.inserisci(casaEditrice);
-		}
-		this.libroService.inserisci(libro);
-		if(idAutore != 0) {
-			Autore autore = this.autoreService.autorePerId(idAutore);
-			autore.getLibri().add(libro);
-			this.autoreService.inserisci(autore);
-		}
-		if(!multipartFile.isEmpty()) {
-			String uploadDir = "./src/main/resources/static/images/";
-			Path uploadPath = Paths.get(uploadDir);
-			if(!Files.exists(uploadPath)) {
-				Files.createDirectories(uploadPath);
+			@Valid Long idAutore, @RequestParam(value="oldFileName", required = false) String oldFileName, 
+			@RequestParam(value="fileImage", required = false) MultipartFile multipartFile, BindingResult libroBindingResult) throws IOException {
+		this.libroValidator.validate(libro, libroBindingResult);
+		if (!libroBindingResult.hasErrors()) {
+			String fileName = null;
+			if(!multipartFile.isEmpty()) {
+				fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				libro.setCopertina(fileName);
+			} else {
+				libro.setCopertina(oldFileName);
 			}
-			try (InputStream inputStream = multipartFile.getInputStream()) {
-				Path filePath = uploadPath.resolve(fileName);
-				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-			} catch(IOException e) {
-				throw new IOException("Could not save uploaded fileImage: " + fileName);
+			if(idCasaEditrice != 0) {
+				CasaEditrice casaEditrice = this.casaEditriceService.casaEditricePerId(idCasaEditrice);
+				libro.setCasaEditrice(casaEditrice);
+				this.casaEditriceService.inserisci(casaEditrice);
 			}
-		}
-		return "redirect:/ricercaLibri";
+			this.libroService.inserisci(libro);
+			if(idAutore != 0) {
+				Autore autore = this.autoreService.autorePerId(idAutore);
+				autore.getLibri().add(libro);
+				this.autoreService.inserisci(autore);
+			}
+			if(!multipartFile.isEmpty()) {
+				String uploadDir = "./src/main/resources/static/images/";
+				Path uploadPath = Paths.get(uploadDir);
+				if(!Files.exists(uploadPath)) {
+					Files.createDirectories(uploadPath);
+				}
+				try (InputStream inputStream = multipartFile.getInputStream()) {
+					Path filePath = uploadPath.resolve(fileName);
+					Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+				} catch(IOException e) {
+					throw new IOException("Could not save uploaded fileImage: " + fileName);
+				}
+			}
+			return "redirect:/ricercaLibri";
+		} else
+			return "/admin/inserisciLibro.html";
 	}
 
 	// Apre la pagina per selezionare un Libro da modificare

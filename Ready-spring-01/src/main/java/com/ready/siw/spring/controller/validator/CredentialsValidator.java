@@ -9,9 +9,6 @@ import com.ready.siw.spring.model.Credentials;
 import com.ready.siw.spring.model.Lettore;
 import com.ready.siw.spring.service.CredentialsService;
 
-/**
- * Validator for Credentials
- */
 @Component
 public class CredentialsValidator implements Validator {
 

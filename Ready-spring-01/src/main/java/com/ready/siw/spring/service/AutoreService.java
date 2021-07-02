@@ -47,7 +47,7 @@ public class AutoreService {
 	public List<Autore> tutti() {
 		return (List<Autore>) this.autoreRepository.findAll();
 	}
-
+	
 	@Transactional
 	public Autore autorePerId(Long id) {
 		Optional<Autore> optional = this.autoreRepository.findById(id);
@@ -55,6 +55,15 @@ public class AutoreService {
 			return optional.get();
 		else 
 			return null;
+	}
+
+	@Transactional
+	public boolean alreadyExists(Autore autore) {
+		Autore a = this.autoreRepository.findByNomeCognome(autore.getNomeCognome());
+		if (a != null)
+			return true;
+		else 
+			return false;
 	}
 
 }

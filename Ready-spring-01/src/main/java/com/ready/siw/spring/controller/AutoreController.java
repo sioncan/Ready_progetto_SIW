@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ready.siw.spring.controller.validator.AutoreValidator;
 import com.ready.siw.spring.model.Autore;
 import com.ready.siw.spring.model.Libro;
 import com.ready.siw.spring.service.AutoreService;
@@ -33,11 +34,14 @@ import com.ready.siw.spring.service.LibroService;
 public class AutoreController {
 
 	@Autowired
+	private AutoreValidator autoreValidator;
+
+	@Autowired
 	private AutoreService autoreService;
-	
+
 	@Autowired
 	private LibroService libroService;
-	
+
 	/* Va alla pagine dell'Autore selezionato dall'elenco */
 	@RequestMapping(value="/autore/{id}", method = RequestMethod.GET)
 	public String goToPageAutore(@PathVariable("id") Long id, Model model) {
@@ -60,37 +64,33 @@ public class AutoreController {
 		return "/admin/inserisciAutore.html";
 	}
 
-//	// Inserisce l'Autore appena creato nel DB
-//	@RequestMapping(value = "/inserisciAutore", method = RequestMethod.POST)
-//	public String saveAutore(@ModelAttribute("autore") Autore autore, 
-//			Model model, BindingResult bindingResult) {
-//		this.autoreService.inserisci(autore);
-//		return "/admin/pannello.html";
-//	}
-	
 	// Inserisce l'Autore appena creato nel DB
 	@PostMapping("/inserisciAutore")
-	public String saveAutore(@ModelAttribute("autore") Autore autore,
-			@Valid String isbnLibro, @RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
-		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		autore.setImmagine(fileName);
-		Libro libro = this.libroService.libroPerIsbn(isbnLibro);
-		autore.setLibri(new ArrayList<Libro>());
-		autore.getLibri().add(libro);
-		this.libroService.inserisci(libro);
-		this.autoreService.inserisci(autore);
-		String uploadDir = "./src/main/resources/static/images/";
-		Path uploadPath = Paths.get(uploadDir);
-		if(!Files.exists(uploadPath)) {
-			Files.createDirectories(uploadPath);
-		}
-		try (InputStream inputStream = multipartFile.getInputStream()) {
-			Path filePath = uploadPath.resolve(fileName);
-			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-		} catch(IOException e) {
-			throw new IOException("Could not save uploaded fileImage: " + fileName);
-		}
-		return "redirect:/ricercaAutori";
+	public String saveAutore(@ModelAttribute("autore") Autore autore, @Valid String isbnLibro, 
+			@RequestParam("fileImage") MultipartFile multipartFile, BindingResult autoreBindingResult) throws IOException {
+		this.autoreValidator.validate(autore, autoreBindingResult);
+		if(!autoreBindingResult.hasErrors()) {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			autore.setImmagine(fileName);
+			Libro libro = this.libroService.libroPerIsbn(isbnLibro);
+			autore.setLibri(new ArrayList<Libro>());
+			autore.getLibri().add(libro);
+			this.libroService.inserisci(libro);
+			this.autoreService.inserisci(autore);
+			String uploadDir = "./src/main/resources/static/images/";
+			Path uploadPath = Paths.get(uploadDir);
+			if(!Files.exists(uploadPath)) {
+				Files.createDirectories(uploadPath);
+			}
+			try (InputStream inputStream = multipartFile.getInputStream()) {
+				Path filePath = uploadPath.resolve(fileName);
+				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+			} catch(IOException e) {
+				throw new IOException("Could not save uploaded fileImage: " + fileName);
+			}
+			return "redirect:/ricercaAutori";
+		} else
+			return "/admin/inserisciAutore.html";
 	}
 
 	// Apre la pagina per selezionare un Autore da modificare

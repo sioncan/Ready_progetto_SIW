@@ -42,6 +42,13 @@ public class AuthenticationController {
 		return "loginForm.html";
 	}
 	
+	// Mostra il fallimento del login per dati errati
+	@RequestMapping(value = "/loginFail", method = RequestMethod.GET) 
+	public String showLoginFormErrors (Model model) {
+		model.addAttribute("logErr", true);
+		return "loginForm.html";
+	}
+	
 	// effettua il logout
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {

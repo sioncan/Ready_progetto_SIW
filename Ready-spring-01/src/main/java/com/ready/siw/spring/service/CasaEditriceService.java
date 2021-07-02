@@ -51,4 +51,13 @@ public class CasaEditriceService {
 			return null;
 	}
 
+	@Transactional
+	public boolean alreadyExists(CasaEditrice casaEditrice) {
+		CasaEditrice c = this.casaEditriceRepository.findByNome(casaEditrice.getNome());
+		if (c != null)
+			return true;
+		else 
+			return false;
+	}
+
 }

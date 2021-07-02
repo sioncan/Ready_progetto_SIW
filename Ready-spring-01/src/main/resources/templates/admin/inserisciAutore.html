@@ -14,13 +14,19 @@
 	<form th:action="@{/inserisciAutore}" method="POST"
 		th:object="${autore}" enctype="multipart/form-data">
 		<div>
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
 			<div>
 				<span><input name="id" type="hidden" th:field="*{id}" /></span>
 			</div>
 			<br>
 			<div>
 				<span>Nome e Cognome:</span> <span><input name="nome"
-					type="text" th:field="*{nomeCognome}" required /></span>
+					type="text" th:field="*{nomeCognome}" required /></span><span
+					th:if="${#fields.hasErrors('nomeCognome')}"
+					th:errors="*{nomeCognome}" th:style="'color:red'"></span>
+
 			</div>
 			<br>
 			<div>
@@ -30,7 +36,10 @@
 			<br>
 			<div>
 				<span>Luogo Nascita:</span> <span><input name="luogoNascita"
-					th:field="*{luogoNascita}" type="text" required /></span>
+					th:field="*{luogoNascita}" type="text" required /></span><span
+					th:if="${#fields.hasErrors('luogoNascita')}"
+					th:errors="*{luogoNascita}" th:style="'color:red'"></span>
+
 			</div>
 			<br>
 			<div>
@@ -45,7 +54,10 @@
 			<br>
 			<div>
 				<span>Nazionalita':</span> <span><input name="nazionalita"
-					th:field="*{nazionalita}" type="text" /></span>
+					th:field="*{nazionalita}" type="text" /></span><span
+					th:if="${#fields.hasErrors('nazionalita')}"
+					th:errors="*{nazionalita}" th:style="'color:red'"></span>
+
 			</div>
 			<br>
 			<div>
@@ -76,8 +88,8 @@
 			<br>
 			<div>
 				Libro: <select name="isbnLibro">
-					<option th:each="libro : ${libri}"
-						th:text="${libro.titolo}" th:value="${libro.isbn}"></option>
+					<option th:each="libro : ${libri}" th:text="${libro.titolo}"
+						th:value="${libro.isbn}"></option>
 				</select>
 			</div>
 			<br>

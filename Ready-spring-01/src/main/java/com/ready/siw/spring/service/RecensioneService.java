@@ -59,8 +59,8 @@ public class RecensioneService {
 	
 	@Transactional
 	public boolean alreadyExists(Recensione recensione) {
-		List<Recensione> studenti = this.recensioneRepository.findByTesto(recensione.getTesto());
-		if (studenti.size() > 0)
+		List<Recensione> recensioni = this.recensioneRepository.findByTesto(recensione.getTesto());
+		if (recensioni.size() > 0)
 			return true;
 		else 
 			return false;

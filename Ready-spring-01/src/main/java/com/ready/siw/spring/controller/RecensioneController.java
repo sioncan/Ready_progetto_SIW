@@ -57,8 +57,10 @@ public class RecensioneController {
 			this.libroService.inserisci(l);
 			this.recensioneService.inserisci(recensione);
 			return "redirect:/libro/{isbn}";
+		} else {
+			model.addAttribute("libro", libroService.libroPerIsbn(isbn));
+			return "inserisciRecensione.html";
 		}
-		return "inserisciRecensione.html";
 	}
 	
 	// Elimina la recensione selezionata

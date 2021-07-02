@@ -16,16 +16,21 @@
 				alt="Copertina del libro" />
 		</div>
 
+
 		<div class="spazioDettagli">
 			<h1>
 				<span th:text="${libro.titolo}">Titolo</span>
 			</h1>
-			<div class="stelleRecensione">
-				<span class="fa fa-star checked"> </span> <span
-					class="fa fa-star checked"> </span> <span
-					class="fa fa-star checked"> </span> <span class="fa fa-star">
-				</span> <span class="fa fa-star"> </span>
-			</div>
+			<span class="stelleRecensione"> <th:block
+					th:if="${votoMedio > 0}"
+					th:each="i: ${#numbers.sequence(1, votoMedio)}">
+					<span class="fa fa-star checked"></span>
+				</th:block> <th:block th:if="${votoMedio < 5}"
+					th:each="i: ${#numbers.sequence(1, (5 - votoMedio))}">
+					<span class="fa fa-star"></span>
+				</th:block>
+			</span> <span th:text="'(' + ${#lists.size(libro.recensioni)} + ')'">Numero
+				recensioni</span>
 			<h2>
 				<tr th:each="autore : ${libro.autori}">
 					<td><a href="autore.html"

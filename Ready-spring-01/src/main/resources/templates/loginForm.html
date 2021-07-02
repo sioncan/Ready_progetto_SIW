@@ -13,6 +13,9 @@
 	</div>
 	<form th:action="@{/login}" method="POST">
 		<div>
+		<div>
+			<span th:if="${logErr}==true" th:text="#{error.login}" th:style="'color:red'"></span>
+		</div>
 			<div>
 				<span>Username:</span>
 				<span><input name="username" type="text" required /></span>

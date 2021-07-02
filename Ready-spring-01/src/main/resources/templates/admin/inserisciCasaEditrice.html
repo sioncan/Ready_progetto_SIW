@@ -15,6 +15,9 @@
 	<form th:action="@{/inserisciCasaEditrice}" method="POST"
 		th:object="${casaEditrice}" enctype="multipart/form-data">
 		<div>
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
 			<div>
 				<span><input name="id" type="hidden" th:field="*{id}" /></span>
 			</div>
@@ -28,25 +31,33 @@
 
 			<div>
 				<span>Nome:</span> <span><input name="nome" type="text"
-					th:field="*{nome}" required /></span>
+					th:field="*{nome}" required /></span> <span
+					th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+					th:style="'color:red'"></span>
 			</div>
 			<br>
 
 			<div>
 				<span>Nazionalita':</span> <span><input name="nazionalita"
-					type="text" th:field="*{nazionalita}" required /></span>
+					type="text" th:field="*{nazionalita}" required /></span> <span
+					th:if="${#fields.hasErrors('nazionalita')}"
+					th:errors="*{nazionalita}" th:style="'color:red'"></span>
 			</div>
 			<br>
 
 			<div>
 				<span>Sede:</span> <span><input name="sede" type="text"
-					th:field="*{sede}" required /></span>
+					th:field="*{sede}" required /></span> <span
+					th:if="${#fields.hasErrors('sede')}" th:errors="*{sede}"
+					th:style="'color:red'"></span>
 			</div>
 			<br>
 
 			<div>
 				<span>Sito web:</span> <span><input name="website"
-					type="text" th:field="*{website}" required /></span>
+					type="text" th:field="*{website}" required /></span> <span
+					th:if="${#fields.hasErrors('website')}" th:errors="*{website}"
+					th:style="'color:red'"></span>
 			</div>
 			<br>
 

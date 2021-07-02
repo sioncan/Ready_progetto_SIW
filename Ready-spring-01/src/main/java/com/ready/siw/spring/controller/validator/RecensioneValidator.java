@@ -14,10 +14,11 @@ import com.ready.siw.spring.service.RecensioneService;
 @Component
 public class RecensioneValidator implements Validator {
 	
-    final Integer MAX_TITOLO_LENGTH = 20;
     final Integer MIN_TITOLO_LENGTH = 2;
-    final Integer MAX_TESTO_LENGTH = 500;
+    final Integer MAX_TITOLO_LENGTH = 20;
     final Integer MIN_TESTO_LENGTH = 2;
+    final Integer MAX_TESTO_LENGTH = 500;
+
 
 	@Autowired
 	private RecensioneService recensioneService;
