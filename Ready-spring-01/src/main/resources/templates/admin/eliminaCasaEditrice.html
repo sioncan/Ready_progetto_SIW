@@ -9,7 +9,7 @@
 	<header th:replace="fragments/headerFooter.html :: header"> </header>
 	SCEGLI LA CASA EDITRICE DA ELIMINARE:
 	<li th:each="casaEditrice : ${caseEditrici}">
-		<a th:href="@{'/eliminaCasaEditrice' + '/' + ${casaEditrice.id}}" th:text="${casaEditrice.nome}">Nome della CasaEditrice</a>
+		<a th:href="@{'/admin/eliminaCasaEditrice' + '/' + ${casaEditrice.id}}" th:text="${casaEditrice.nome}">Nome della CasaEditrice</a>
 	</li>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"> </footer>

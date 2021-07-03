@@ -57,7 +57,7 @@ public class AutoreController {
 	}
 
 	// Apre la pagina per inserire un Autore creando un nuovo oggetto Autore
-	@RequestMapping(value="/paginaInserisciAutore", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaInserisciAutore", method = RequestMethod.GET)
 	public String goToPageInserisciAutore(Model model) {
 		model.addAttribute("autore", new Autore());
 		model.addAttribute("libri", this.libroService.tutti());
@@ -65,7 +65,7 @@ public class AutoreController {
 	}
 
 	// Inserisce l'Autore appena creato nel DB
-	@PostMapping("/inserisciAutore")
+	@PostMapping("/admin/inserisciAutore")
 	public String saveAutore(@ModelAttribute("autore") Autore autore, @Valid String isbnLibro, 
 			@RequestParam("fileImage") MultipartFile multipartFile, BindingResult autoreBindingResult) throws IOException {
 		this.autoreValidator.validate(autore, autoreBindingResult);
@@ -94,28 +94,28 @@ public class AutoreController {
 	}
 
 	// Apre la pagina per selezionare un Autore da modificare
-	@RequestMapping(value="/paginaScegliAutoreDaModificare", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaScegliAutoreDaModificare", method = RequestMethod.GET)
 	public String goToPageModificaAutore(Model model) {
 		model.addAttribute("autori", this.autoreService.tutti());
 		return "/admin/modificaAutore.html";
 	}
 
 	// Apre la form per modificare l'Autore
-	@RequestMapping(value="/formModificaAutore/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/formModificaAutore/{id}", method = RequestMethod.GET)
 	public String goToPageFormModificaAutore(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("autore", this.autoreService.autorePerId(id));
 		return "/admin/inserisciAutore.html";
 	}
 
 	// Apre la pagina per eliminare un Autore
-	@RequestMapping(value="/paginaEliminaAutore", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaEliminaAutore", method = RequestMethod.GET)
 	public String goToPageEliminaAutore(Model model) {
 		model.addAttribute("autori", this.autoreService.tutti());
 		return "/admin/eliminaAutore.html";
 	}
 
 	// Elimina l'Autore dal DB
-	@RequestMapping(value = "/eliminaAutore/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/eliminaAutore/{id}", method = RequestMethod.GET)
 	public String deleteAutore(@PathVariable("id") Long id, 
 			Model model) {
 		Autore autore = this.autoreService.autorePerId(id);
@@ -125,7 +125,7 @@ public class AutoreController {
 		autore.getLibri().clear();
 		this.autoreService.inserisci(autore);
 		this.autoreService.elimina(id);
-		return "redirect:/pannelloAmministratore";
+		return "redirect:/admin/pannelloAmministratore";
 	}
 
 }

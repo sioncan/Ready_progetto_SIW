@@ -28,7 +28,7 @@ public class PannelloController {
 	private LibroService libroService;
 	
 	// Apre la pagina per collegare un Libro ad un Autore
-	@RequestMapping(value="/paginaCollegaLibroAutore", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaCollegaLibroAutore", method = RequestMethod.GET)
 	public String goToPageCollegaLibroAutore(Model model) {
 		model.addAttribute("libri", this.libroService.tutti());
 		model.addAttribute("autori", this.autoreService.tutti());
@@ -36,7 +36,7 @@ public class PannelloController {
 	}
 	
 	// Apre la pagina per collegare un Libro ad una Casa Editrice
-	@RequestMapping(value="/paginaCollegaLibroCasaEditrice", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaCollegaLibroCasaEditrice", method = RequestMethod.GET)
 	public String goToPageCollegaLibroCasaEditrice(Model model) {
 		model.addAttribute("libri", this.libroService.tutti());
 		model.addAttribute("caseEditrici", this.casaEditriceService.tutti());
@@ -44,7 +44,7 @@ public class PannelloController {
 	}
 
 	// collega un Libro ad un Autore
-	@RequestMapping(value="/collegaLibroAutore", method = RequestMethod.POST)
+	@RequestMapping(value="/admin/collegaLibroAutore", method = RequestMethod.POST)
 	public String makeRelationLibroAutore(@Valid Long id, @Valid String isbn, Model model) {
 		Libro libro = libroService.libroPerIsbn(isbn);
 		Autore autore = autoreService.autorePerId(id);
@@ -52,11 +52,11 @@ public class PannelloController {
 		autore.getLibri().add(libro);
 		libroService.inserisci(libro);
 		autoreService.inserisci(autore);
-		return "redirect:/pannelloAmministratore";
+		return "redirect:/admin/pannelloAmministratore";
 	}
 	
 	// collega un Libro ad una Casa Editrice
-	@RequestMapping(value="/collegaLibroCasaEditrice", method = RequestMethod.POST)
+	@RequestMapping(value="/admin/collegaLibroCasaEditrice", method = RequestMethod.POST)
 	public String makeRelationLibroCasaEditrice(@Valid Long id, @Valid String isbn, Model model) {
 		Libro libro = libroService.libroPerIsbn(isbn);
 		CasaEditrice casaEditrice = casaEditriceService.casaEditricePerId(id);
@@ -64,6 +64,6 @@ public class PannelloController {
 		casaEditrice.getLibri().add(libro);
 		libroService.inserisci(libro);
 		casaEditriceService.inserisci(casaEditrice);
-		return "redirect:/pannelloAmministratore";
+		return "redirect:/admin/pannelloAmministratore";
 	}
 }

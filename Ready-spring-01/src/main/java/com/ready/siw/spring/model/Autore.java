@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 @Entity
 public class Autore {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -30,18 +30,18 @@ public class Autore {
 	private String biografia;
 	@ElementCollection
 	private List<String> generi;
-    @Column(nullable = true, length = 64)
-    private String immagine;
-	
+	@Column(nullable = true, length = 64)
+	private String immagine;
+
 	@ManyToMany 
 	private List<Libro> libri;
-	
-    @Transient
-    public String getImmagineImagePath() {
-        if (immagine == null || id == null) return null;
-         
-        return "/images/" + immagine;
-    }
+
+	@Transient
+	public String getImmagineImagePath() {
+		if (immagine == null || id == null) return null;
+
+		return "/images/" + immagine;
+	}
 
 	public Long getId() {
 		return id;
@@ -90,7 +90,7 @@ public class Autore {
 	public void setLuogoMorte(String luogoMorte) {
 		this.luogoMorte = luogoMorte;
 	}
-	
+
 	public String getNazionalita() {
 		return nazionalita;
 	}
@@ -98,7 +98,7 @@ public class Autore {
 	public void setNazionalita(String nazionalita) {
 		this.nazionalita = nazionalita;
 	}
-	
+
 	public String getBiografia() {
 		return biografia;
 	}

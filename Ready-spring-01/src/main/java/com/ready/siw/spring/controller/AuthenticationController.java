@@ -52,7 +52,8 @@ public class AuthenticationController {
 	// effettua il logout
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {
-		return "index.html";
+		SecurityContextHolder.getContext().setAuthentication(null);
+		return "redirect:/ricercaLibri";
 	}
 	
 	// controlla il ruolo dell'utente e apre la pagina di conseguenza
@@ -62,7 +63,7 @@ public class AuthenticationController {
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/pannello.html";
+    		return "admin/pannello";
         }
         return "index.html";
     }

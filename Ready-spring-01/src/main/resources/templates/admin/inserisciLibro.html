@@ -12,7 +12,7 @@
 	<div>
 		<h1>Inserisci Libro</h1>
 	</div>
-	<form th:action="@{/inserisciLibro}" method="POST" th:object="${libro}"
+	<form th:action="@{/admin/inserisciLibro}" method="POST" th:object="${libro}"
 		enctype="multipart/form-data">
 		<div th:if="${#fields.hasGlobalErrors()}">
 			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>

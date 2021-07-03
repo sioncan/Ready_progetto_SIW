@@ -12,13 +12,13 @@
 	<br>
 	<h1>I tuoi dati:</h1>
 	<div>
-		<span>Username: </span> <span th:text="${lettore.username}"></span>
+		<span>Username: </span> <span th:text="${lettore?.username}"></span>
 	</div>
 	<div>
-		<span>Nome: </span> <span th:text="${lettore.nome}"></span>
+		<span>Nome: </span> <span th:text="${lettore?.nome}"></span>
 	</div>
 	<div>
-		<span>Cognome: </span> <span th:text="${lettore.cognome}"></span>
+		<span>Cognome: </span> <span th:text="${lettore?.cognome}"></span>
 	</div>
 	<br>
 	<div>
@@ -27,6 +27,9 @@
 			dati</a>
 	</div>
 	<br>
+	<div>
+		<a th:href="@{/logout}">Logout</a>
+	</div>
 	<br>
 	<div>
 		<a
@@ -34,13 +37,13 @@
 			immagine</a>
 	</div>
 	<div>
-		<img th:src="@{${lettore.immagineImagePath}}" alt="Immagine profilo" />
+		<img th:src="@{${lettore?.immagineImagePath}}" alt="Immagine profilo" />
 	</div>
 	<br>
 	<h1>Le tue recensioni:</h1>
 	<br>
 	<div class="recensioniUtente">
-		<th:block th:each="recensione : ${lettore.recensioni}">
+		<th:block th:each="recensione : ${lettore?.recensioni}">
 			<div class="flex-container-singolaRecensione">
 				<a th:href="@{'/modificaRecensione' + '/' + ${recensione.id}}">Modifica</a>
 				<a th:href="@{'/eliminaRecensione' + '/' + ${recensione.id}}">Elimina</a>

@@ -64,7 +64,7 @@ public class LibroController {
 	}
 
 	// Apre la pagina per inserire un Libro creando un nuovo oggetto Libro
-	@RequestMapping(value="/paginaInserisciLibro", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaInserisciLibro", method = RequestMethod.GET)
 	public String goToPageInserisciLibro(Model model) {
 		model.addAttribute("libro", new Libro());
 		model.addAttribute("caseEditrici", this.casaEditriceService.tutti());
@@ -73,7 +73,7 @@ public class LibroController {
 	}
 
 	// Inserisce il Libro appena creato nel DB
-	@PostMapping("/inserisciLibro")
+	@PostMapping("/admin/inserisciLibro")
 	public String saveLibro(@ModelAttribute("libro") Libro libro,  @Valid Long idCasaEditrice, 
 			@Valid Long idAutore, @RequestParam(value="oldFileName", required = false) String oldFileName, 
 			@RequestParam(value="fileImage", required = false) MultipartFile multipartFile, BindingResult libroBindingResult) throws IOException {
@@ -116,14 +116,14 @@ public class LibroController {
 	}
 
 	// Apre la pagina per selezionare un Libro da modificare
-	@RequestMapping(value="/paginaScegliLibroDaModificare", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaScegliLibroDaModificare", method = RequestMethod.GET)
 	public String goToPageModificaLibro(Model model) {
 		model.addAttribute("libri", this.libroService.tutti());
 		return "/admin/modificaLibro.html";
 	}
 
 	// Apre la form per modificare il Libro
-	@RequestMapping(value="/formModificaLibro/{isbn}", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/formModificaLibro/{isbn}", method = RequestMethod.GET)
 	public String goToPageFormModificaLibro(@PathVariable("isbn") String isbn, Model model) {
 		model.addAttribute("libro", this.libroService.libroPerIsbn(isbn));
 		model.addAttribute("caseEditrici", this.casaEditriceService.tutti());
@@ -132,14 +132,14 @@ public class LibroController {
 	}
 
 	// Apre la pagina per eliminare un Libro
-	@RequestMapping(value="/paginaEliminaLibro", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaEliminaLibro", method = RequestMethod.GET)
 	public String goToPageEliminaLibro(Model model) {
 		model.addAttribute("libri", this.libroService.tutti());
 		return "/admin/eliminaLibro.html";
 	}
 
 	// Elimina il Libro dal DB
-	@RequestMapping(value = "/eliminaLibro/{isbn}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/eliminaLibro/{isbn}", method = RequestMethod.GET)
 	public String deleteLibro(@PathVariable("isbn") String isbn, 
 			Model model) {
 		Libro libro = this.libroService.libroPerIsbn(isbn);
@@ -149,6 +149,6 @@ public class LibroController {
 		libro.getAutori().clear();
 		this.libroService.inserisci(libro);
 		this.libroService.elimina(isbn);
-		return "redirect:/pannelloAmministratore";
+		return "redirect:/admin/pannelloAmministratore";
 	}
 }

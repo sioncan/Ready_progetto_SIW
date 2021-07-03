@@ -11,7 +11,7 @@
 	<div>
 		<h1>Inserisci Autore</h1>
 	</div>
-	<form th:action="@{/inserisciAutore}" method="POST"
+	<form th:action="@{/admin/inserisciAutore}" method="POST"
 		th:object="${autore}" enctype="multipart/form-data">
 		<div>
 			<div th:if="${#fields.hasGlobalErrors()}">

@@ -57,7 +57,7 @@ public class CasaEditriceController {
 	}
 
 	// Apre la pagina per inserire una CasaEditrice creando un nuovo oggetto CasaEditrice
-	@RequestMapping(value="/paginaInserisciCasaEditrice", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaInserisciCasaEditrice", method = RequestMethod.GET)
 	public String goToPageInserisciCasaEditrice(Model model) {
 		model.addAttribute("casaEditrice", new CasaEditrice());
 		model.addAttribute("libri", this.libroService.tutti());
@@ -65,7 +65,7 @@ public class CasaEditriceController {
 	}
 
 	// Inserisce il Libro appena creato nel DB
-	@PostMapping("/inserisciCasaEditrice")
+	@PostMapping("/admin/inserisciCasaEditrice")
 	public String saveLibro(@ModelAttribute("casaEditrice") CasaEditrice casaEditrice, @Valid String isbnLibro, 
 			@RequestParam("fileImage") MultipartFile multipartFile, BindingResult casaEditriceBindingResult) throws IOException {
 		this.casaEditriceValidator.validate(casaEditrice, casaEditriceBindingResult);
@@ -93,28 +93,28 @@ public class CasaEditriceController {
 	}
 
 	// Apre la pagina per selezionare una CasaEditrice da modificare
-	@RequestMapping(value="/paginaScegliCasaEditriceDaModificare", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaScegliCasaEditriceDaModificare", method = RequestMethod.GET)
 	public String goToPageModificaCasaEditrice(Model model) {
 		model.addAttribute("caseEditrici", this.casaEditriceService.tutti());
 		return "/admin/modificaCasaEditrice.html";
 	}
 
 	// Apre la form per modificare una CasaEditrice
-	@RequestMapping(value="/formModificaCasaEditrice/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/formModificaCasaEditrice/{id}", method = RequestMethod.GET)
 	public String goToPageFormModificaCasaEditrice(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("casaEditrice", this.casaEditriceService.casaEditricePerId(id));
 		return "/admin/inserisciCasaEditrice.html";
 	}
 
 	// Apre la pagina per eliminare una CasaEditrice
-	@RequestMapping(value="/paginaEliminaCasaEditrice", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/paginaEliminaCasaEditrice", method = RequestMethod.GET)
 	public String goToPageEliminaCasaEditrice(Model model) {
 		model.addAttribute("caseEditrici", this.casaEditriceService.tutti());
 		return "/admin/eliminaCasaEditrice.html";
 	}
 
 	// Elimina la CasaEditrice dal DB
-	@RequestMapping(value = "/eliminaCasaEditrice/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/eliminaCasaEditrice/{id}", method = RequestMethod.GET)
 	public String deleteCasaEditrice(@PathVariable("id") Long id, 
 			Model model) {
 		CasaEditrice casaEditrice = this.casaEditriceService.casaEditricePerId(id);
@@ -124,7 +124,7 @@ public class CasaEditriceController {
 		casaEditrice.getLibri().clear();
 		this.casaEditriceService.inserisci(casaEditrice);
 		this.casaEditriceService.elimina(id);
-		return "redirect:/pannelloAmministratore";
+		return "redirect:/admin/pannelloAmministratore";
 	}
 
 }

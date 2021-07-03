@@ -9,7 +9,7 @@ public class HeaderFooterController {
 	/* tasti del footer = Pannello Amministratore */
 
 	/* Va al Pannello amministratore */
-	@RequestMapping(value="/pannelloAmministratore")
+	@RequestMapping(value="/admin/pannelloAmministratore")
 	public String goToPagePannelloAmministratore() {
 		return "/admin/pannello.html";
 	}
