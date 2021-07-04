@@ -9,7 +9,7 @@
 	<header th:replace="fragments/headerFooter.html :: header"> </header>
 	SCEGLI L'AUTORE DA ELIMINARE:
 	<li th:each="autore : ${autori}">
-		<a th:href="@{'/eliminaAutore' + '/' + ${autore.id}}" th:text="${autore.nomeCognome}">Nome dell'autore</a>
+		<a th:href="@{'/admin/eliminaAutore' + '/' + ${autore.id}}" th:text="${autore.nomeCognome}">Nome dell'autore</a>
 	</li>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"> </footer>

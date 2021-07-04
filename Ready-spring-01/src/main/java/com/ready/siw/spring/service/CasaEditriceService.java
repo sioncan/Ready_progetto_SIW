@@ -28,7 +28,7 @@ public class CasaEditriceService {
 	}
 	
 	@Transactional
-	public CasaEditrice casaEditricePerNome(String nome) {
+	public List<CasaEditrice> casaEditricePerNome(String nome) {
 		return this.casaEditriceRepository.findByNome(nome);
 	}
 	
@@ -49,6 +49,15 @@ public class CasaEditriceService {
 			return optional.get();
 		else 
 			return null;
+	}
+
+	@Transactional
+	public boolean alreadyExists(CasaEditrice casaEditrice) {
+		List<CasaEditrice> c = this.casaEditriceRepository.findByNome(casaEditrice.getNome());
+		if (c != null)
+			return true;
+		else 
+			return false;
 	}
 
 }

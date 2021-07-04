@@ -16,23 +16,68 @@
 	clear : both;
 }
 
+/* ======================================== link generali ======================================== */
+
+a {
+	color: #3300ff;
+}
+a:hover {
+	text-decoration: none;
+}
+
 /* Le due colonne side e main sono una diversa dall'altra, ma stanno vicine */
 
-/* Stile della colonna di sinistra (side) */
+/* ===================================================================================================== */
+/* ===================================== Stile della colonna di sinistra =============================== */
+/* ===================================================================================================== */
 .side {
-	width: 30%;
-	background-color: #f1f1f1;
+	width: 35%;
+	background-color: #f2f1f8;
 	padding: 20px;
 }
 
-/* Stile della colonna di destra (spazioDettagli) */
+.side img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width:70%;
+	max-height:100%;
+}
+
+/* ===================================================================================================== */
+/* ===================================== Stile della colonna dei dettagli ============================== */
+/* ===================================================================================================== */
 .spazioDettagli {
-	width: 70%;
+	width: 65%;
 	background-color: white;
 	padding: 20px;
 }
 
-/* Stile dello spazio per le recensioni */
+/* ===================================== spazioDettagli ===================================== */
+
+/* Titolo libro */
+h1 {
+	font-size: 2.5em;
+}
+
+/* Autore libro */
+h2 {
+	font-size: 1.5em;
+}
+
+/* Casa Editrice libro */
+h3 {
+	font-size: 0.9375em;
+}
+
+/* Sinossi libro */
+p {
+	font-size: 0.9375em;
+}
+
+/* ===================================================================================================== */
+/* ================================== Stile dello spazio delle recensioni ============================== */
+/* ===================================================================================================== */
 .spazioRecensioni {
 	flex: 90%;
 	background-color: white;
@@ -47,12 +92,13 @@ ma si mettono una sopra l'altra, rimanendo tutte visibili */
 	}
 }
 
-/* Stile di tutti i bottoni */
+/* ===================================== bottoni ===================================== */
+
 .btn {
 	border: none;
 	background-color: inherit;
 	padding: 14px 28px;
-	font-size: 16px;
+	font-size: 1em;
 	cursor: pointer;
 	display: inline-block;
 }
@@ -65,72 +111,4 @@ ma si mettono una sopra l'altra, rimanendo tutte visibili */
 /* Particolare del bottone per recensire */
 .recensisci {
 	color: black;
-}
-
-/* ===================================== spazioDettagli ===================================== */
-
-/* Titolo libro */
-h1 {
-	font-size: 40px;
-}
-
-/* Autore libro */
-h2 {
-	font-size: 20px;
-}
-
-/* Casa Editrice libro */
-h3 {
-	font-size: 15px;
-}
-
-/* Sinossi libro */
-p {
-	font-size: 15px;
-}
-
-/* Per i read more */
-#more {
-	display: none;
-}
-
-/* ===================================== recensioni ===================================== */
-.flex-container-singolaRecensione {
-	flex-direction: column;
-	margin: 50px 200px;
-	border: 5px solid red;
-	border-radius: 10px;
-	padding: 10px;
-}
-
-/* per mettere l'immagine e il nome inline */
-.flex-container-immagineENomeUtente{
-	flex-direction: row;
-}
-
-/* per mettere le stelle e il titolo inline */
-flex-container-stelleETitoloRecensione{
-	flex-direction: row;
-}
- /* colore delle stelle piene */
-.checked {
-  color: orange;
-}
-
-.immagineUtenteRecensione {
-	margin: 2%;
-    max-width:64px;
-    max-height:64px;
-    width:auto;
-    height:auto;
-}
-
-.titoloRecensione{
-	margin: 2%;
-	font-size: 1.5em;
-	font-weight: bold;
-}
-
-.testoRecensione{
-	margin: 2%;
 }

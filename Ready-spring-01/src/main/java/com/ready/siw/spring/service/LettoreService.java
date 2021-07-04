@@ -69,5 +69,4 @@ public class LettoreService {
 		else 
 			return false;
 	}
-
 }

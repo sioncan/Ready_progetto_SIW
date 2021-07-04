@@ -2,12 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div th:insert="fragments/headerFooter.html :: head('Seleziona immagine')"></div>
+<link href="/css/modificaDatiLettoreStyle.css" rel="stylesheet">
 </head>
 
 <body>
 
 	<header th:replace="fragments/headerFooter.html :: header"></header>
 
+	<div class="container">
 	<div>
 		<h1>Seleziona l'immagine per il tuo profilo: </h1>
 	</div>
@@ -26,6 +28,7 @@
 			</div>
 		</div>
 	</form>
+	</div>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
 

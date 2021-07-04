@@ -16,21 +16,63 @@
 	clear : both;
 }
 
+/* ======================================== link generali ======================================== */
+
+a {
+	color: #3300ff;
+}
+a:hover {
+	text-decoration: none;
+}
+
 /* Le due colonne side e main sono una diversa dall'altra, ma stanno vicine */
 
-/* Stile della colonna di sinistra (side) */
+/* ===================================================================================================== */
+/* ===================================== Stile della colonna di sinistra =============================== */
+/* ===================================================================================================== */
 .side {
-	width: 30%;
-	background-color: #f1f1f1;
+	width: 35%;
+	background-color: #f2f1f8;
 	padding: 20px;
 }
 
-/* Stile della colonna di destra (spazioDettagli) */
+.side img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width:70%;
+	max-height:100%;
+}
+
+/* ===================================================================================================== */
+/* ===================================== Stile della colonna dei dettagli ============================== */
+/* ===================================================================================================== */
 .spazioDettagli {
-	width: 70%;
+	width: 65%;
 	background-color: white;
 	padding: 20px;
 }
+
+/* ===================================== spazioDettagli ===================================== */
+
+/*  Nome Autore */
+h1 {
+	font-size: 2.5em;
+}
+
+/* Data e luogo di nascita e di morte */
+h2 {
+	font-size: 1em;
+}
+
+/* Biografia dell'autore */
+p {
+	font-size: 0.9375em;
+}
+
+/* ===================================================================================================== */
+/* ============================= Stile dello spazio dei libri dell'autore ============================== */
+/* ===================================================================================================== */
 
 /* Stile dello spazio per l'elenco dei libri per ogni autore */
 .spazioLibri {
@@ -39,46 +81,15 @@
 	padding: 20px;
 }
 
+/* I libri dell'autore */
+h3 {
+	font-size: 0.9375em;
+}
+
 /* Quando lo screen è largo meno di 700px, le due colonne non sono piu' side-by-side,
 ma si mettono una sopra l'altra, rimanendo tutte visibili */
 @media screen and (max-width: 700px) {
 	.row {
 		flex-direction: column;
 	}
-}
-
-/* Stile di tutti i bottoni */
-.btn {
-	border: none;
-	background-color: inherit;
-	padding: 14px 28px;
-	font-size: 16px;
-	cursor: pointer;
-	display: inline-block;
-}
-
-/* Come cambia lo stile dei bottoni quando ci passi sopra col cursore */
-.btn:hover {
-	background: #E0FFFF;
-}
-
-h1 {
-	font-size: 40px;
-}
-
-h2 {
-	font-size: 20px;
-}
-
-h3 {
-	font-size: 15px;
-}
-
-p {
-	font-size: 15px;
-}
-
-/* Per i read more */
-#more {
-	display: none;
 }

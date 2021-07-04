@@ -42,10 +42,18 @@ public class AuthenticationController {
 		return "loginForm.html";
 	}
 	
+	// Mostra il fallimento del login per dati errati
+	@RequestMapping(value = "/loginFail", method = RequestMethod.GET) 
+	public String showLoginFormErrors (Model model) {
+		model.addAttribute("logErr", true);
+		return "loginForm.html";
+	}
+	
 	// effettua il logout
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {
-		return "index.html";
+		SecurityContextHolder.getContext().setAuthentication(null);
+		return "redirect:/ricercaLibri";
 	}
 	
 	// controlla il ruolo dell'utente e apre la pagina di conseguenza
@@ -55,7 +63,7 @@ public class AuthenticationController {
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/pannello.html";
+    		return "admin/pannello";
         }
         return "index.html";
     }

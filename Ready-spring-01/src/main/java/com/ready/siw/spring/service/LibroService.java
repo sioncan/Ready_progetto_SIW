@@ -70,7 +70,7 @@ public class LibroService {
 
 	@Transactional
 	public boolean alreadyExists(Libro libro) {
-		List<Libro> libri = this.libroRepository.findByTitoloOrIsbn(libro.getTitolo());
+		List<Libro> libri = this.libroRepository.findByIsbn(libro.getIsbn());
 		if (libri.size() > 0)
 			return true;
 		else 

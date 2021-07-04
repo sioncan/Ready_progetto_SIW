@@ -9,7 +9,7 @@
 	<header th:replace="fragments/headerFooter.html :: header"></header>
 	SCEGLI L'AUTORE DA MODIFICARE:
 	<li th:each="autore : ${autori}">
-		<a href="formModificaAutore.html" th:href="@{'/formModificaAutore' + '/' + ${autore.id}}" th:text="${autore.nomeCognome}">Nome dell'autore</a>
+		<a href="formModificaAutore.html" th:href="@{'/admin/formModificaAutore' + '/' + ${autore.id}}" th:text="${autore.nomeCognome}">Nome dell'autore</a>
 	</li>
 
 	<footer th:replace="fragments/headerFooter.html :: footer"></footer>

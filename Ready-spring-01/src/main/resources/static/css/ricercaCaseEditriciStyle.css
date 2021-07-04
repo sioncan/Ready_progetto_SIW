@@ -1,19 +1,21 @@
-.spazioRisultati h1 {
-	font-size: 20px;
+.spazioRisultati .logoCasaEditrice{
+	float: left;
+	margin: 1em;
 }
 
-.spazioRisultati h2 {
-	font-size: 20px;
+.spazioRisultati h1 .nomeCasaEditrice {
+	font-size: 0.625em;
+	font-style: italic;
 }
 
-.spazioRisultati h3 {
-	font-size: 20px;
+.spazioRisultati h2 .sedeCasaEditrice {
+	font-size: 0.625em;
 }
 
-.spazioRisultati h4 {
-	font-size: 20px;
+.spazioRisultati h2 .websiteCasaEditrice {
+	font-size: 0.625em;
 }
 
-.spazioRisultati p {
-	font-size: 20px;
+.spazioRisultati h2 .dataFondazioneCasaEditrice {
+	font-size: 0.625em;
 }

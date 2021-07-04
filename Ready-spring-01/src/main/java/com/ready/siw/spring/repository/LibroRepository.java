@@ -2,18 +2,16 @@ package com.ready.siw.spring.repository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.ready.siw.spring.model.Libro;
 
-public interface LibroRepository extends JpaRepository<Libro, String> {
+public interface LibroRepository extends CrudRepository<Libro, String> {
 	
-	//@Query(value="SELECT * FROM Libro l WHERE l.isbn LIKE %:isbn%", nativeQuery=true)
-	public Optional<Libro> findById(@Param("isbn") String isbn);
+	public List<Libro> findByIsbn(String isbn);
 
 	@Query(value="SELECT * FROM Libro l WHERE l.titolo LIKE %:titolo%", nativeQuery=true)
 	public List<Libro> findByTitolo(@Param("titolo") String titolo);

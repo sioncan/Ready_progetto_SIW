@@ -12,17 +12,26 @@
 	<div>
 		<h1>Inserisci Libro</h1>
 	</div>
-	<form th:action="@{/inserisciLibro}" method="POST" th:object="${libro}"
+	<form th:action="@{/admin/inserisciLibro}" method="POST" th:object="${libro}"
 		enctype="multipart/form-data">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
 		<div>
 			<div>
 				<span>ISBN: </span><span><input name="isbn" type="text"
-					th:field="*{isbn}" required /></span>
+					th:field="*{isbn}" required /></span> <span
+					th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
+					th:style="'color:red'"></span>
+
 			</div>
 			<br>
 			<div>
 				<span>Titolo:</span> <span><input name="titolo" type="text"
-					th:field="*{titolo}" required /></span>
+					th:field="*{titolo}" required /></span> <span
+					th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"
+					th:style="'color:red'"></span>
+
 			</div>
 			<br>
 			<div>
@@ -74,7 +83,8 @@
 			</div>
 			<br>
 			<div>
-				<span><input name="oldFileName" type="hidden" th:value="*{copertina}" /></span>
+				<span><input name="oldFileName" type="hidden"
+					th:value="*{copertina}" /></span>
 			</div>
 			<div>
 				<label>Copertina: </label> <input type="file" name="fileImage"

@@ -12,7 +12,7 @@ import com.ready.siw.spring.model.Lettore;
 @Component
 public class LettoreValidator implements Validator {
 
-    final Integer MAX_NAME_LENGTH = 100;
+    final Integer MAX_NAME_LENGTH = 20;
     final Integer MIN_NAME_LENGTH = 2;
 
     // controlla che i campi nome e cognome non siano vuoti e che siano della giusta lunghezza (MAX_NAME_LENGTH, MIN_NAME_LENGTH)

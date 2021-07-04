@@ -26,7 +26,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			<div class="navbar">
 				<a th:href="@{/ricercaLibri}" class="logo"><img src="/images/logo.png" alt="Ready"
 					height="50" width="50"></a>
-					<a th:href="@{'/areaUtente' + '/' + ${#authentication.getName()}}">Area utente</a>
+					<a sec:authorize="hasAuthority('DEFAULT')" th:href="@{'/areaUtente' + '/' + ${#authentication.getName()}}">Area utente</a>
 					<a th:href="@{/login}">Accedi</a>
 					<a th:href="@{/register}">Registrati</a>
 			</div>
@@ -68,8 +68,8 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 				<div class="links">
 					<a href="#">Lavora con noi</a>
 				</div>
-				<div class="links">
-					<a th:href="@{/pannelloAmministratore}">Pannello amministratore</a>
+				<div class="links" sec:authorize="hasAuthority('ADMIN')">
+					<a th:href="@{/admin/pannelloAmministratore}">Pannello amministratore</a>
 				</div>
 			</div>
 			<div class="social">

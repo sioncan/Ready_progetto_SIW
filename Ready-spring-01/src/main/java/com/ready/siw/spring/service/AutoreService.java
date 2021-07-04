@@ -27,11 +27,6 @@ public class AutoreService {
 	public void elimina(Long id) {
 		this.autoreRepository.deleteById(id);
 	}
-	
-	@Transactional
-	public Autore autorePerNomeCognome(String nomeCognome) {
-		return this.autoreRepository.findByNomeCognome(nomeCognome);
-	}
 
 	@Transactional
 	public List<Autore> autorePerNomeOCognome(String nomeCognome) {
@@ -41,6 +36,11 @@ public class AutoreService {
 	@Transactional
 	public List<Autore> autorePerNazionalita(String nazionalita) {
 		return this.autoreRepository.findByNazionalita(nazionalita);
+	}
+	
+	@Transactional
+	public List<Autore> autorePerGeneri(String genere) {
+		return this.autoreRepository.findByGeneri(genere);
 	}
 
 	@Transactional

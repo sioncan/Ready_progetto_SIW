@@ -11,51 +11,30 @@
 
 	<div class="row">
 		<div class="side">
-			<!-- Qua va lo slideshow delle foto dell'autore -->
 			<img th:src="@{${autore.immagineImagePath}}" alt="Immagine dell'autore"/>
 		</div>
 		<div class="spazioDettagli">
 
 			<h1>
-				<span th:text="*{autore.nomeCognome}">Nome e Cognome</span>
+				<span th:text="${autore.nomeCognome}">Nome e Cognome</span>
 			</h1>
 			<h2>
-				<span th:text="*{autore.dataNascita}">Data di Nascita</span> <span>,</span>
-				<span th:text="*{autore.luogoNascita}">Luogo di Nascita</span>
+				<span th:text="${autore.dataNascita}">Data di Nascita</span> <span>,</span>
+				<span th:text="${autore.luogoNascita}">Luogo di Nascita</span>
 			</h2>
 			<h2>
-				<span th:text="*{autore.dataMorte}">Data di Morte</span> <span>,</span>
-				<span th:text="*{autore.luogoMorte}">Luogo di Morte</span>
-			</h2>
-			<h2>
-				<div th:if="${autore.generi != null}">
-					<h1>Generi:</h1>
-					<ul>
-						<li th:each="genere : ${autore.generi}" th:text="${genere}">Genere</li>
-					</ul>
-				</div>
+				<span th:text="${autore.dataMorte}">Data di Morte</span> <span>,</span>
+				<span th:text="${autore.luogoMorte}">Luogo di Morte</span>
 			</h2>
 			<p>
-				<span th:text="*{autore.biografia}">Biografia</span>
+				<span th:text="${autore.biografia}">Biografia</span>
 			</p>
-
-
-
-			<!--<h1>Nome Cognome</h1>
-			<p>
-				Livia Coppola nacque in un lontano 1996 da una famiglia molto povera
-				in una notte buia e tempestosa. <span id="dots">...</span><span
-					id="more"> Fin da subito dimostro' straordinari talenti e
-					una brillante intelligenza, oltre che spiccate doti di modestia e
-					umilta'.</span>
-			</p>
-			<button onclick="myFunction()" id="myBtn">Read more</button>-->
 		</div>
 	</div>
 	<div class="spazioLibri">
 		<!-- Qua vanno inseriti i filtri -->
 		<h2>
-			I libri di <span th:text="*{autore.nomeCognome}">Nome e
+			Le edizioni di libri di <span th:text="${autore.nomeCognome}">Nome e
 				Cognome</span> presenti in Ready
 		</h2>
 		<ul>
@@ -68,6 +47,7 @@
 								th:text="${libro?.titolo}">Titolo libro</a></span> <span>-</span> <span
 								th:text="${libro?.dataPubblicazione}">Data Pubblicazione
 								libro</span>
+								<span>; Edizione: </span> <span th:text="${libro.isbn}">Isbn</span>
 					</h3>
 				</div>
 			</li>

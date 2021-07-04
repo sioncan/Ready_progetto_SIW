@@ -1,40 +1,92 @@
-/* ===================================== recensioni ===================================== */
-.flex-container-singolaRecensione {
-	flex-direction: column;
-	margin: 50px 200px;
-	border: 5px solid red;
-	border-radius: 10px;
-	padding: 10px;
+/* ===================================== area dei dati ===================================== */
+
+.container{
+	padding: 20px;
+	margin-top: 2.5em;
+	margin-bottom: 2.5em;
+	margin-left: 2.5em;
+	margin-right: 2.5em;
+    border-radius: 0.5em;
+	border: 3px solid #3300ff;
+    background: #f2f1f8;
+    height: 26em;
 }
 
-/* per mettere l'immagine e il nome inline */
-.flex-container-immagineENomeUtente{
-	flex-direction: row;
+/* Spazio dell'avatar */
+.avatar {
+	width: 30%;
+	height: 30%;
+	background-color: transparent;
+	align-items: center;
+	float: left;
 }
 
-/* per mettere le stelle e il titolo inline */
-flex-container-stelleETitoloRecensione{
-	flex-direction: row;
-}
- /* colore delle stelle piene */
-.checked {
-  color: orange;
+/* Reale immagine dell'avatar */
+.avatar img {
+	width: 80%;
+	border-radius: 50%;
 }
 
-.immagineUtenteRecensione {
-	margin: 2%;
-    max-width:64px;
-    max-height:64px;
-    width:auto;
-    height:auto;
+.area-dati h1 {
+	font-size: 2em;
 }
 
-.titoloRecensione{
-	margin: 2%;
+.dati ul {
+	float: left;
+	list-style: none;
+}
+
+.dati li {
 	font-size: 1.5em;
+}
+
+.dati li span {
 	font-weight: bold;
 }
 
-.testoRecensione{
-	margin: 2%;
+a, a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+/* ======================================== stile del bottone ======================================== */
+
+button, .fa-pencil, .fa-trash, .libroRecensito {
+	background: #000066;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	border-radius: 0.5em;
+	font-size: 0.8em;
+}
+
+button:hover, .fa-pencil:hover, .fa-trash:hover, .libroRecensito:hover, #logout:hover {
+	background: #3300ff;
+}
+
+.fa-pencil, .fa-trash {
+	width: 10%;
+	font-size: 1em;
+	text-align: center;
+}
+
+.libroRecensito {
+	width: 40%;
+	font-size: 1em;
+	text-align: center;
+}
+
+#logout {
+	background: linear-gradient(to right, #3300ff, #000066);
+}
+
+/* ===================================== recensioni ===================================== */
+.area-recensioni {
+	margin-top: 2.5em;
+	margin-bottom: 2.5em;
+	margin-left: 2.5em;
+	margin-right: 2.5em;
 }

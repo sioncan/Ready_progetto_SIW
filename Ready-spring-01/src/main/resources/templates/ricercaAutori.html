@@ -14,80 +14,65 @@
 
 		<div class="side">
 			<!-- Barra di ricerca -->
-			<form th:action="@{/cercaAutorePerNome}" th:objects="${autore}"
-				method="get">
+			<form th:action="@{/cercaAutorePerNomeOCognome}" th:objects="${autore}" method="get">
 				<h2>Ricerca:</h2>
-				<input type="search" name="nomeCognome" id="nomeCognome"
-					th:value="${nomeCognome}" placeholder="Inserisci un autore">
+				<input type="search" name="nomeCognome" id="nomeCognome" th:value="${nomeCognome}" placeholder="Inserisci un autore">
+				<button type="submit" class="fa fa-search"> </button>
 			</form>
 
-			<form>
-				<!-- Checkboxes di generi -->
-				<h2>
-					<br> <br>Generi:
-				</h2>
+			<!-- Checkboxes di generi -->
+			<form th:action="@{/cercaAutorePerGenere}" th:object="${autore}" method="get">
+				<h2>Generi:</h2>
 				<ul class="checkbox">
-					<li><input type="checkbox" id="fantasy" name="genere">
-						<label for="fantasy" th:text="#{genere.fantasy}">Fantasy</label></li>
-					<li><input type="checkbox" id="giallo" name="genere">
-						<label for="giallo" th:text="#{genere.giallo}">Giallo</label></li>
-					<li><input type="checkbox" id="rosa" name="genere"> <label
-						for="rosa" th:text="#{genere.rosa}">Rosa</label></li>
-					<li><input type="checkbox" id="horror" name="genere">
-						<label for="horror" th:text="#{genere.horror}">Horror</label></li>
-					<li><input type="checkbox" id="saggio" name="genere">
-						<label for="saggio" th:text="#{genere.saggio}">Saggio</label></li>
+					<li><input type="radio" id="fantasy" name="genere" th:value="Fantasy">
+						<label th:for="fantasy" th:text="#{genere.fantasy}">Fantasy</label>
+					</li>
+					<li><input type="radio" id="giallo" name="genere" th:value="Giallo">
+						<label th:for="giallo" th:text="#{genere.giallo}">Giallo</label>
+					</li>
+					<li><input type="radio" id="rosa" name="genere" th:value="Rosa">
+						<label th:for="rosa" th:text="#{genere.rosa}">Rosa</label>
+					</li>
+					<li><input type="radio" id="horror" name="genere" th:value="Horror">
+						<label th:for="horror" th:text="#{genere.horror}">Horror</label>
+					</li>
+					<li><input type="radio" id="saggio" name="genere" th:value="Saggio">
+						<label th:for="saggio" th:text="#{genere.saggio}">Saggio</label>
+					</li>
 				</ul>
+				<button type="submit" class="fa fa-search"> </button>
 			</form>
+			
 			<!-- Checkboxes di nazionalità -->
-			<form th:action="@{/cercaAutorePerNazionalita}" th:object="${autore}"
-				method="get">
+			<form th:action="@{/cercaAutorePerNazionalita}" th:object="${autore}" method="get">
 				<h2>Nazionalità:</h2>
 				<ul class="checkbox">
-					<li><input type="radio" id="Grecia" name="nazionalita"
-						th:value="Greco"> <label th:for="grecia">Grecia</label></li>
-					<li><input type="radio" id="germania" name="nazionalita"
-						th:value="Tedesco"> <label th:for="germania">Germania</label></li>
-					<li><input type="radio" id="inghilterra" name="nazionalita"
-						th:value="Inglese"> <label th:for="inghilterra">Inghilterra</label></li>
-					<li><input type="radio" id="italia" name="nazionalita"
-						th:value="Italiano"> <label th:for="italia">Italia</label></li>
+					<li><input type="radio" id="Grecia" name="nazionalita" th:value="Greco">
+						<label th:for="grecia">Grecia</label>
+					</li>
+					<li><input type="radio" id="germania" name="nazionalita" th:value="Tedesco">
+						<label th:for="germania">Germania</label>
+					</li>
+					<li><input type="radio" id="inghilterra" name="nazionalita" th:value="Inglese">
+						<label th:for="inghilterra">Inghilterra</label>
+					</li>
+					<li><input type="radio" id="italia" name="nazionalita" th:value="Italiano">
+						<label th:for="italia">Italia</label>
+					</li>
 				</ul>
-				<button type="submit">Submit</button>
-			</form>
-			</form>
-			<!-- Checkboxes di secolo -->
-			<h2>
-				<br>Secolo:
-			</h2>
-			<ul class="checkbox">
-				<li><input type="checkbox" id="undicesimo" name="secolo">
-					<label for="undicesimo">XI</label></li>
-				<li><input type="checkbox" id="dodicesimo" name="secolo">
-					<label for="dodicesimo">XII</label></li>
-				<li><input type="checkbox" id="tredicesimo" name="secolo">
-					<label for="tredicesimo">XIII</label></li>
-				<li><input type="checkbox" id="ventesimo" name="secolo">
-					<label for="ventesimo">XX</label></li>
-			</ul>
-
+				<button type="submit" class="fa fa-search"> </button>
 			</form>
 		</div>
 
 		<div class="spazioRisultati">
-			<!-- Bottone di ordinamento -->
-			<div class="dropdown">
-				<button class="dropdown-ordina">Ordina per</button>
-				<div class="dropdown-content">
-					<a href="#">Pertinenza</a> <a href="#">Nome</a>
-					<!--
-				<div class="ordina" th:each="autore : ${#lists.sort(autori,autore.getNome())}">Nome</div>
-				-->
-				</div>
-			</div>
 			<ul>
 				<li th:each="autore : ${autori}">
-
+				
+				
+					<div class="immagineAutore">
+							<img th:src="@{${autore.immagineImagePath}}"
+								alt="Foto dell'autore" height="150px"/>
+					</div>
 					<div>
 						<h1>
 							<div class="nomeAutore">

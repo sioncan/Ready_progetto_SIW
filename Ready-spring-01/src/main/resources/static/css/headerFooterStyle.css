@@ -66,14 +66,12 @@ header #secondo .navbar a:hover {
 
 /* Quando lo screen è largo meno di 400px, i link di navigazione non sono piu' side-by-side,
 ma si mettono uno sopra l'altro, rimanendo tutti visibili */
-/* DA CORREGGERE */
 @media screen and (max-width: 400px) {
-    .navbar a {
+    header #primo .navbar a, header #secondo .navbar a {
         float: none;
         width: 100%;
     }
 }
-
 
 /* ===================================================================================================== */
 /* ======================================== Stile del footer =========================================== */

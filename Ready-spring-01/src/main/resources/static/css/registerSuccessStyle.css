@@ -1,0 +1,9 @@
+body{
+	background-color: #f2f1f8;
+}
+
+h1 .message{
+	margin-top: -.5em;
+	color: #000066;
+	letter-spacing: 1px;
+}

@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ready.siw.spring.model.Lettore;
+import com.ready.siw.spring.model.Libro;
 import com.ready.siw.spring.model.Recensione;
 import com.ready.siw.spring.repository.RecensioneRepository;
 
@@ -55,14 +57,5 @@ public class RecensioneService {
 			return optional.get();
 		else 
 			return null;
-	}
-	
-	@Transactional
-	public boolean alreadyExists(Recensione recensione) {
-		List<Recensione> studenti = this.recensioneRepository.findByTesto(recensione.getTesto());
-		if (studenti.size() > 0)
-			return true;
-		else 
-			return false;
 	}
 }
