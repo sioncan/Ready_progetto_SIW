@@ -65,7 +65,7 @@ public class AuthenticationController {
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
     		return "admin/pannello";
         }
-        return "index.html";
+        return "redirect:/ricercaLibri";
     }
 	
     // conferma la registrazione salvando nel DB il Lettore e le sue Credentials

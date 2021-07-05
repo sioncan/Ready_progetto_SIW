@@ -1,0 +1,45 @@
+/* ===================================== recensioni ===================================== */
+
+.flex-container-singolaRecensione {
+	flex-direction: column;
+	margin: 50px 200px;
+	border: 3px solid #3300ff;
+	border-radius: 0.5em;
+	padding: 10px;
+}
+
+/* per mettere l'immagine e il nome inline */
+.flex-container-immagineENomeUtente{
+	flex-direction: row;
+}
+
+/* per mettere le stelle e il titolo inline */
+.flex-container-stelleETitoloRecensione{
+	flex-direction: row;
+}
+ /* colore delle stelle piene */
+.checked {
+	color: orange;
+}
+
+.immagineUtenteRecensione {
+	margin: 2%;
+    max-width:64px;
+    max-height:64px;
+    width:auto;
+    height:auto;
+}
+
+.titoloRecensione {
+	margin: 2%;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.testoRecensione {
+	margin: 2%;
+}
+
+.autoreRecensione {
+	font-size: 1.5em;
+}

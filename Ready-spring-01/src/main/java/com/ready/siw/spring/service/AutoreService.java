@@ -27,11 +27,6 @@ public class AutoreService {
 	public void elimina(Long id) {
 		this.autoreRepository.deleteById(id);
 	}
-	
-	@Transactional
-	public Autore autorePerNomeCognome(String nomeCognome) {
-		return this.autoreRepository.findByNomeCognome(nomeCognome);
-	}
 
 	@Transactional
 	public List<Autore> autorePerNomeOCognome(String nomeCognome) {
@@ -42,12 +37,17 @@ public class AutoreService {
 	public List<Autore> autorePerNazionalita(String nazionalita) {
 		return this.autoreRepository.findByNazionalita(nazionalita);
 	}
+	
+	@Transactional
+	public List<Autore> autorePerGeneri(String genere) {
+		return this.autoreRepository.findByGeneri(genere);
+	}
 
 	@Transactional
 	public List<Autore> tutti() {
 		return (List<Autore>) this.autoreRepository.findAll();
 	}
-	
+
 	@Transactional
 	public Autore autorePerId(Long id) {
 		Optional<Autore> optional = this.autoreRepository.findById(id);
@@ -55,15 +55,6 @@ public class AutoreService {
 			return optional.get();
 		else 
 			return null;
-	}
-
-	@Transactional
-	public boolean alreadyExists(Autore autore) {
-		Autore a = this.autoreRepository.findByNomeCognome(autore.getNomeCognome());
-		if (a != null)
-			return true;
-		else 
-			return false;
 	}
 
 }

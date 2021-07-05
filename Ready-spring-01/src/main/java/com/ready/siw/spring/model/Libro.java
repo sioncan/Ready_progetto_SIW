@@ -2,7 +2,6 @@ package com.ready.siw.spring.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -59,62 +58,5 @@ public class Libro {
 		} else {
 			return 0;
 		}
-	}
-	
-	public String getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
-
-	public String getTitolo() {
-		return titolo;
-	}
-
-	public void setTitolo(String titolo) {
-		this.titolo = titolo;
-	}
-
-	public String getSinossi() {
-		return sinossi;
-	}
-
-	public void setSinossi(String sinossi) {
-		this.sinossi = sinossi;
-	}
-
-	public String getGenere() {
-		return genere;
-	}
-
-	public void setGenere(String genere) {
-		this.genere = genere;
-	}
-
-	public String getDataPubblicazione() {
-		return dataPubblicazione;
-	}
-
-	public void setDataPubblicazione(String dataPubblicazione) {
-		this.dataPubblicazione = dataPubblicazione;
-	}
-
-
-	public CasaEditrice getCasaEditrice() {
-		return casaEditrice;
-	}
-
-	public void setCasaEditrice(CasaEditrice casaEditrice) {
-		this.casaEditrice = casaEditrice;
-	}
-
-	public List<Recensione> getRecensioni() {
-		return recensioni;
-	}
-
-	public void setRecensioni(List<Recensione> recensioni) {
-		this.recensioni = recensioni;
 	}
 }

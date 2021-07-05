@@ -56,13 +56,4 @@ public class RecensioneService {
 		else 
 			return null;
 	}
-	
-	@Transactional
-	public boolean alreadyExists(Recensione recensione) {
-		List<Recensione> recensioni = this.recensioneRepository.findByTesto(recensione.getTesto());
-		if (recensioni.size() > 0)
-			return true;
-		else 
-			return false;
-	}
 }

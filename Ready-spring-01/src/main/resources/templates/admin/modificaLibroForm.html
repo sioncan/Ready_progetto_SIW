@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:insert="fragments/headerFooter.html :: head('Inserisci Libro')"></div>
+<div th:insert="fragments/headerFooter.html :: head('Modifica Libro')"></div>
 </head>
 
 <body>
@@ -10,19 +10,19 @@
 
 
 	<div>
-		<h1>Inserisci Libro</h1>
+		<h1>Modifica Libro</h1>
 	</div>
-	<form th:action="@{/admin/inserisciLibro}" method="POST"
+	<form th:action="@{/admin/inserisciLibroModificato}" method="POST"
 		th:object="${libro}" enctype="multipart/form-data">
 		<div>
 			<div>
-				<span>ISBN: </span><span><input name="isbn" type="text"
-					th:field="*{isbn}" required /></span> <span
-					th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
-					th:style="'color:red'"></span>
-
+				<span><input name="isbnLibroEsistente" type="hidden"
+					th:field="*{isbn}" th:value="*{isbn}" /></span>
 			</div>
-			<br>
+			<div>
+				<span><input name="oldFileName" type="hidden"
+					th:value="*{copertina}" /></span>
+			</div>
 			<div>
 				<span>Titolo:</span> <span><input name="titolo" type="text"
 					th:field="*{titolo}" required /></span> <span
@@ -64,8 +64,7 @@
 			</div>
 			<br>
 			<div>
-				<label>Casa editrice: </label> <select name="idCasaEditrice"
-					th:field="${libro.casaEditrice}">
+				<label>Casa editrice: </label> <select name="idCasaEditrice">
 					<option th:value="0" text="Please Select"></option>
 					<option th:each="casaEditrice : ${caseEditrici}"
 						th:text="${casaEditrice.nome}" th:value="${casaEditrice.id}"></option>
@@ -73,8 +72,7 @@
 			</div>
 			<br>
 			<div>
-				<label>Autore: </label> <select name="idAutore"
-					th:field="${libro.autori}">
+				<label>Autore: </label> <select name="idAutore">
 					<option th:value="0" text="Please Select"></option>
 					<option th:each="autore : ${autori}"
 						th:text="${autore.nomeCognome}" th:value="${autore.id}"></option>
@@ -84,10 +82,11 @@
 			<div>
 				<label>Copertina: </label> <input type="file" name="fileImage"
 					id="fileImage" />
+				<!-- Ogni estensione di file image -->
 			</div>
 			<br>
 			<div>
-				<span><button type="submit">Inserisci</button></span>
+				<span><button type="submit">Modifica</button></span>
 			</div>
 			<br>
 		</div>

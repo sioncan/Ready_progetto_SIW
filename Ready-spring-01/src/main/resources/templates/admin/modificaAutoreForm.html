@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:insert="fragments/headerFooter.html :: head('Inserisci Autore')"></div>
+<div th:insert="fragments/headerFooter.html :: head('Modifica Autore')"></div>
 </head>
 
 <body>
@@ -9,10 +9,18 @@
 	<header th:replace="fragments/headerFooter.html :: header"></header>
 
 	<div>
-		<h1>Inserisci Autore</h1>
+		<h1>Modifica Autore</h1>
 	</div>
-	<form th:action="@{/admin/inserisciAutore}" method="POST"
+	<form th:action="@{/admin/inserisciAutoreModificato}" method="POST"
 		th:object="${autore}" enctype="multipart/form-data">
+		<div>
+			<span><input name="idAutoreEsistente" type="hidden"
+				th:field="*{id}" th:value="*{id}" /></span>
+		</div>
+		<div>
+			<span><input name="oldFileName" type="hidden"
+				th:value="*{immagine}" /></span>
+		</div>
 		<br>
 		<div>
 			<span>Nome e Cognome:</span> <span><input name="nome"
@@ -80,8 +88,7 @@
 		</div>
 		<br>
 		<div>
-			<label>Libro: </label> <select name="isbnLibro"
-				th:field="${autore.libri}">
+			<label>Libro: </label> <select name="isbnLibro">
 				<option th:value="0" text="Please Select"></option>
 				<option th:each="libro : ${libri}" th:text="${libro.titolo}"
 					th:value="${libro.isbn}"></option>
@@ -94,7 +101,7 @@
 		</div>
 		<br>
 		<div>
-			<span><button type="submit">Inserisci</button></span>
+			<span><button type="submit">Modifica</button></span>
 		</div>
 	</form>
 

@@ -17,14 +17,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ready.siw.spring.controller.validator.CasaEditriceValidator;
-import com.ready.siw.spring.model.Autore;
 import com.ready.siw.spring.model.CasaEditrice;
 import com.ready.siw.spring.model.Libro;
 import com.ready.siw.spring.service.CasaEditriceService;
@@ -32,7 +30,7 @@ import com.ready.siw.spring.service.LibroService;
 
 @Controller
 public class CasaEditriceController {
-	
+
 	@Autowired
 	private CasaEditriceValidator casaEditriceValidator;
 
@@ -65,31 +63,81 @@ public class CasaEditriceController {
 	}
 
 	// Inserisce il Libro appena creato nel DB
-	@PostMapping("/admin/inserisciCasaEditrice")
-	public String saveLibro(@ModelAttribute("casaEditrice") CasaEditrice casaEditrice, @Valid String isbnLibro, 
-			@RequestParam("fileImage") MultipartFile multipartFile, BindingResult casaEditriceBindingResult) throws IOException {
+	@RequestMapping(value="/admin/inserisciCasaEditrice", method = RequestMethod.POST)
+	public String saveCasaEditrice(@ModelAttribute("casaEditrice") CasaEditrice casaEditrice,
+			 @RequestParam("fileImage") MultipartFile multipartFile, BindingResult casaEditriceBindingResult) throws IOException {
 		this.casaEditriceValidator.validate(casaEditrice, casaEditriceBindingResult);
 		if(!casaEditriceBindingResult.hasErrors()) {
-			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			casaEditrice.setLogo(fileName);
-			Libro libro = this.libroService.libroPerIsbn(isbnLibro);
-			libro.setCasaEditrice(casaEditrice);
+			String fileName = null;
+			if(!multipartFile.isEmpty()) {
+				fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				casaEditrice.setLogo(fileName);
+			}
 			this.casaEditriceService.inserisci(casaEditrice);
-			this.libroService.inserisci(libro);
-			String uploadDir = "./src/main/resources/static/images/";
-			Path uploadPath = Paths.get(uploadDir);
-			if(!Files.exists(uploadPath)) {
-				Files.createDirectories(uploadPath);
+			if(!multipartFile.isEmpty()) {
+				String uploadDir = "./src/main/resources/static/images/";
+				Path uploadPath = Paths.get(uploadDir);
+				if(!Files.exists(uploadPath)) {
+					Files.createDirectories(uploadPath);
+				}
+				try (InputStream inputStream = multipartFile.getInputStream()) {
+					Path filePath = uploadPath.resolve(fileName);
+					Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+				} catch(IOException e) {
+					throw new IOException("Could not save uploaded fileImage: " + fileName);
+				}
 			}
-			try (InputStream inputStream = multipartFile.getInputStream()) {
-				Path filePath = uploadPath.resolve(fileName);
-				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-			} catch(IOException e) {
-				throw new IOException("Could not save uploaded fileImage: " + fileName);
-			}
-			return "redirect:/ricercaLibri";
+			return "redirect:/ricercaCaseEditrici";
 		} else
 			return "/admin/inserisciCasaEditrice.html";
+	}
+	
+	// Inserisce il Libro appena creato nel DB
+	@RequestMapping(value="/admin/inserisciCasaEditriceModificata", method = RequestMethod.POST)
+	public String saveCasaEditriceModificata(@ModelAttribute("casaEditrice") CasaEditrice casaEditrice, @Valid String isbnLibro,
+			@RequestParam(value="oldFileName", required = false) String oldFileName, @RequestParam("fileImage") MultipartFile multipartFile, BindingResult casaEditriceBindingResult) throws IOException {
+		this.casaEditriceValidator.validate(casaEditrice, casaEditriceBindingResult);
+		if(!casaEditriceBindingResult.hasErrors()) {
+			String fileName = null;
+			if(!multipartFile.isEmpty()) {
+				fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				casaEditrice.setLogo(fileName);
+			} else {
+				casaEditrice.setLogo(oldFileName);
+			}
+			if(isbnLibro != null && !isbnLibro.equals("0")) {
+				if(casaEditrice.getLibri() == null) {
+					casaEditrice.setLibri(new ArrayList<Libro>());
+				}
+				Libro libro = this.libroService.libroPerIsbn(isbnLibro);
+				for(Libro l : this.casaEditriceService.casaEditricePerId(casaEditrice.getId()).getLibri()) {
+					l.setCasaEditrice(null);
+				}
+				libro.setCasaEditrice(casaEditrice);
+				this.libroService.inserisci(libro);
+			} else {
+				casaEditrice.setLibri(new ArrayList<Libro>());
+				for(Libro l : this.casaEditriceService.casaEditricePerId(casaEditrice.getId()).getLibri()) {
+					casaEditrice.getLibri().add(l);
+				}
+			}
+			this.casaEditriceService.inserisci(casaEditrice);
+			if(!multipartFile.isEmpty()) {
+				String uploadDir = "./src/main/resources/static/images/";
+				Path uploadPath = Paths.get(uploadDir);
+				if(!Files.exists(uploadPath)) {
+					Files.createDirectories(uploadPath);
+				}
+				try (InputStream inputStream = multipartFile.getInputStream()) {
+					Path filePath = uploadPath.resolve(fileName);
+					Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+				} catch(IOException e) {
+					throw new IOException("Could not save uploaded fileImage: " + fileName);
+				}
+			}
+			return "redirect:/ricercaCaseEditrici";
+		} else
+			return "/admin/modificaCasaEditriceForm.html";
 	}
 
 	// Apre la pagina per selezionare una CasaEditrice da modificare
@@ -103,7 +151,8 @@ public class CasaEditriceController {
 	@RequestMapping(value="/admin/formModificaCasaEditrice/{id}", method = RequestMethod.GET)
 	public String goToPageFormModificaCasaEditrice(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("casaEditrice", this.casaEditriceService.casaEditricePerId(id));
-		return "/admin/inserisciCasaEditrice.html";
+		model.addAttribute("libri", this.libroService.tutti());
+		return "/admin/modificaCasaEditriceForm.html";
 	}
 
 	// Apre la pagina per eliminare una CasaEditrice

@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -18,7 +17,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,32 +63,79 @@ public class AutoreController {
 	}
 
 	// Inserisce l'Autore appena creato nel DB
-	@PostMapping("/admin/inserisciAutore")
-	public String saveAutore(@ModelAttribute("autore") Autore autore, @Valid String isbnLibro, 
+	@RequestMapping(value="/admin/inserisciAutore", method = RequestMethod.POST)
+	public String saveAutore(@ModelAttribute("autore") Autore autore, 
 			@RequestParam("fileImage") MultipartFile multipartFile, BindingResult autoreBindingResult) throws IOException {
 		this.autoreValidator.validate(autore, autoreBindingResult);
 		if(!autoreBindingResult.hasErrors()) {
-			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			autore.setImmagine(fileName);
-			Libro libro = this.libroService.libroPerIsbn(isbnLibro);
-			autore.setLibri(new ArrayList<Libro>());
-			autore.getLibri().add(libro);
-			this.libroService.inserisci(libro);
+			String fileName = null;
+			if(!multipartFile.isEmpty()) {
+				fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				autore.setImmagine(fileName);
+			} 
 			this.autoreService.inserisci(autore);
-			String uploadDir = "./src/main/resources/static/images/";
-			Path uploadPath = Paths.get(uploadDir);
-			if(!Files.exists(uploadPath)) {
-				Files.createDirectories(uploadPath);
-			}
-			try (InputStream inputStream = multipartFile.getInputStream()) {
-				Path filePath = uploadPath.resolve(fileName);
-				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-			} catch(IOException e) {
-				throw new IOException("Could not save uploaded fileImage: " + fileName);
+			if(!multipartFile.isEmpty()) {
+				String uploadDir = "./src/main/resources/static/images/";
+				Path uploadPath = Paths.get(uploadDir);
+				if(!Files.exists(uploadPath)) {
+					Files.createDirectories(uploadPath);
+				}
+				try (InputStream inputStream = multipartFile.getInputStream()) {
+					Path filePath = uploadPath.resolve(fileName);
+					Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+				} catch(IOException e) {
+					throw new IOException("Could not save uploaded fileImage: " + fileName);
+				}
 			}
 			return "redirect:/ricercaAutori";
 		} else
 			return "/admin/inserisciAutore.html";
+	}
+
+	// Inserisce l'Autore appena modificato nel DB
+	@RequestMapping(value="/admin/inserisciAutoreModificato", method = RequestMethod.POST)
+	public String saveAutoreModificato(@ModelAttribute("autore") Autore autore,  
+			@Valid String isbnLibro, @RequestParam(value="oldFileName", required = false) String oldFileName,
+			@RequestParam("fileImage") MultipartFile multipartFile, BindingResult autoreBindingResult) throws IOException {
+		this.autoreValidator.validate(autore, autoreBindingResult);
+		if(!autoreBindingResult.hasErrors()) {
+			String fileName = null;
+			if(!multipartFile.isEmpty()) {
+				fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				autore.setImmagine(fileName);
+			} else {
+				autore.setImmagine(oldFileName);
+			}
+			if(isbnLibro != null && !isbnLibro.equals("0")) {
+				if(autore.getLibri() == null) {
+					autore.setLibri(new ArrayList<Libro>());
+				}
+				Libro libro = this.libroService.libroPerIsbn(isbnLibro);
+				autore.getLibri().add(libro);
+				this.libroService.inserisci(libro);
+			} else {
+				autore.setLibri(new ArrayList<Libro>());
+				for(Libro l : this.autoreService.autorePerId(autore.getId()).getLibri()) {
+					autore.getLibri().add(l);
+				}
+			}
+			this.autoreService.inserisci(autore);
+			if(!multipartFile.isEmpty()) {
+				String uploadDir = "./src/main/resources/static/images/";
+				Path uploadPath = Paths.get(uploadDir);
+				if(!Files.exists(uploadPath)) {
+					Files.createDirectories(uploadPath);
+				}
+				try (InputStream inputStream = multipartFile.getInputStream()) {
+					Path filePath = uploadPath.resolve(fileName);
+					Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+				} catch(IOException e) {
+					throw new IOException("Could not save uploaded fileImage: " + fileName);
+				}
+			}
+			return "redirect:/ricercaAutori";
+		} else
+			return "/admin/modificaAutoreForm.html";
 	}
 
 	// Apre la pagina per selezionare un Autore da modificare
@@ -104,7 +149,8 @@ public class AutoreController {
 	@RequestMapping(value="/admin/formModificaAutore/{id}", method = RequestMethod.GET)
 	public String goToPageFormModificaAutore(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("autore", this.autoreService.autorePerId(id));
-		return "/admin/inserisciAutore.html";
+		model.addAttribute("libri", this.libroService.tutti());
+		return "/admin/modificaAutoreForm.html";
 	}
 
 	// Apre la pagina per eliminare un Autore

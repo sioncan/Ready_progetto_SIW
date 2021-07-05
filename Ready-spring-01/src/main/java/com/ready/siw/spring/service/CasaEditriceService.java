@@ -28,8 +28,8 @@ public class CasaEditriceService {
 	}
 	
 	@Transactional
-	public CasaEditrice casaEditricePerNome(String nome) {
-		return this.casaEditriceRepository.findByNome(nome);
+	public List<CasaEditrice> casaEditricePerNome(String nomeCasaEditrice) {
+		return this.casaEditriceRepository.findByNome(nomeCasaEditrice);
 	}
 	
 	@Transactional
@@ -51,13 +51,13 @@ public class CasaEditriceService {
 			return null;
 	}
 
-	@Transactional
+	/*@Transactional
 	public boolean alreadyExists(CasaEditrice casaEditrice) {
-		CasaEditrice c = this.casaEditriceRepository.findByNome(casaEditrice.getNome());
+		List<CasaEditrice> c = this.casaEditriceRepository.findByNome(casaEditrice.getNome());
 		if (c != null)
 			return true;
 		else 
 			return false;
-	}
+	}*/
 
 }

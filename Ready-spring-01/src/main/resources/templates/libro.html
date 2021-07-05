@@ -4,6 +4,7 @@
 <div
 	th:insert="fragments/headerFooter.html :: head(title=${libro.titolo})"></div>
 <link href="/css/libroStyle.css" rel="stylesheet">
+<link href="/css/recensioniStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -53,26 +54,7 @@
 		</div>
 	</div>
 
-
-
-
-
-
-	<!--
-				La gloria di colui che tutto move / pe l'universo penetra e
-				risplende / da una parte piu' e meno altrove / nel ciel che piu' di
-				sua luce prende / fui io e vidi cose che ridire / ne' sa ne' puo'
-				chi di lassu' discende / <span id="dots">...</span><span id="more">
-					poiche' appressando se' a suo disiare / nostro intelletto si
-					profonda tanto / che dietro la memoria non puo' ire.</span>
-			</p>
-			<button onclick="myFunction()" id="myBtn">Read more</button>
-			<h3>Casa Editrice</h3>
-		</div>
-	</div>-->
-
 	<div class="spazioRecensioni">
-		<!-- Qua vanno inseriti i filtri -->
 		<div th:object="${libro}">
 			<a th:href="@{'/paginaInserisciRecensione' + '/' + ${libro.isbn}}">Inserisci
 				recensione</a>
@@ -89,6 +71,8 @@
 								th:text="${recensione.recensore.username}"> Mario Rossi </span>
 						</div>
 						<div class="flex-container-stelleETitoloRecensione">
+						</span> <span class="titoloRecensione" th:text="${recensione.titolo}">
+								Titolo recensione</span>
 							<span class="stelleRecensione"> <th:block
 									th:each="i: ${#numbers.sequence(1, recensione.voto )}">
 									<span class="fa fa-star checked"></span>
@@ -96,10 +80,6 @@
 									th:each="i: ${#numbers.sequence(1, 5 - recensione.voto )}">
 									<span class="fa fa-star"></span>
 								</th:block>
-
-
-							</span> <span class="titoloRecensione" th:text="${recensione.titolo}">
-								Titolo recensione</span>
 						</div>
 						<div class="testoRecensione" th:text="${recensione.testo}">
 							Testo recensione</div>

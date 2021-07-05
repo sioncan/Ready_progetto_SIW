@@ -1,21 +1,13 @@
 package com.ready.siw.spring.controller.validator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.ready.siw.spring.model.Autore;
-import com.ready.siw.spring.service.AutoreService;
 
 @Component
 public class AutoreValidator implements Validator {
-	
-	@Autowired
-	private AutoreService autoreService;
 	
     final Integer MIN_NOMECOMPLETO_LENGTH = 2;
     final Integer MAX_NOMECOMPLETO_LENGTH = 40;
@@ -23,7 +15,6 @@ public class AutoreValidator implements Validator {
     final Integer MAX_LUOGONASCITA_LENGTH = 20;
     final Integer MIN_NAZIONALITA_LENGTH = 2;
     final Integer MAX_NAZIONALITA_LENGTH = 20;
-    private static final Logger logger = LoggerFactory.getLogger(AutoreValidator.class);
 
 	@Override
 	public void validate(Object o, Errors errors) {
@@ -47,13 +38,6 @@ public class AutoreValidator implements Validator {
         else if (nazionalita.length() < MIN_NAZIONALITA_LENGTH || nazionalita.length() > MAX_NAZIONALITA_LENGTH)
             errors.rejectValue("nazionalita", "size");
 		
-		if (!errors.hasErrors()) {
-			logger.debug("confermato: valori non nulli");
-			if (this.autoreService.alreadyExists((Autore)o)) {
-				logger.debug("e' un duplicato");
-				errors.reject("duplicato");
-			}
-		}
 	}
 
 	@Override
