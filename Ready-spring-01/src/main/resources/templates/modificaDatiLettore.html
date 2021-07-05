@@ -23,6 +23,10 @@
 					<span><input name="username" type="hidden" th:field="*{username}" /></span>
 				</div>
 				<div>
+                	<span><input name="oldFileName" type="hidden"
+                    	th:value="*{immagine}" /></span>
+            	</div>
+				<div>
 					<span>Nome:</span>
 						<span><input type="text" name="nome"
 						required th:field="*{nome}" /></span> <span

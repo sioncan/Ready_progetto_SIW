@@ -25,6 +25,11 @@ public interface LibroRepository extends CrudRepository<Libro, String> {
 	public List<Libro> findByGenere(@Param("genere") String genere);
 	
 	@Query(value="SELECT *\n"
+			+ "FROM Libro JOIN casa_editrice ON casa_editrice.id=casa_editrice_id\n"
+			+ "WHERE casa_editrice.nome LIKE %:casaEditrice%", nativeQuery=true)
+	public List<Libro> findByCasaEditrice(@Param("casaEditrice") String casaEditrice);
+	
+	@Query(value="SELECT *\n"
 			+ "FROM Libro JOIN (Autore JOIN autore_libri ON autore.id=autori_id) ON\n"
 			+ "libro.isbn=libri_isbn WHERE Autore.nome_cognome LIKE %:autore%", nativeQuery=true)
 	public List<Libro> findByAutore(@Param("autore") String autore);

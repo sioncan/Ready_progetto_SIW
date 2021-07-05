@@ -27,17 +27,18 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 				<a th:href="@{/ricercaLibri}" class="logo"><img src="/images/logo.png" alt="Ready"
 					height="50" width="50"></a>
 					<a sec:authorize="hasAuthority('DEFAULT')" th:href="@{'/areaUtente' + '/' + ${#authentication.getName()}}">Area utente</a>
-					<a th:href="@{/login}">Accedi</a>
-					<a th:href="@{/register}">Registrati</a>
+					<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Accedi</a>
+					<a sec:authorize="!isAuthenticated()" th:href="@{/register}">Registrati</a>
+					<a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
 			</div>
-			</div>
-			<div id="secondo">
+		</div>
+		<div id="secondo">
 				<div class="navbar">
 					<a th:href="@{/ricercaLibri}">Libri</a>
 					<a th:href="@{/ricercaAutori}">Autori</a>
 					<a th:href="@{/ricercaCaseEditrici}">Case editrici</a>
 				</div>
-			</div>
+		</div>
 	</header>
 
 	<footer th:fragment="footer">

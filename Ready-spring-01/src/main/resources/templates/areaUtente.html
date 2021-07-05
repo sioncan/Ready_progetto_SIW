@@ -44,7 +44,7 @@
 			<div class="flex-container-singolaRecensione">
 				<a role="button" class="fa fa-pencil" th:href="@{'/modificaRecensione' + '/' + ${recensione.id}}"> </a>
 				<a role="button" class="fa fa-trash" th:href="@{'/eliminaRecensione' + '/' + ${recensione.id}}"> </a>
-				<a role="button" class="libroRecensito" th:href="@{'/libro' + '/' + ${recensione.libro.isbn}}" th:text=${recensione.libro.titolo}> Titolo libro recensito </a>
+				<a role="button" class="libroRecensito" th:href="@{'/libro' + '/' + ${recensione.libro.isbn}}" th:text="${recensione.libro.titolo} + ' (' + ${recensione.libro.isbn} + ')'"> Titolo libro recensito </a>
 				<div class="flex-container-immagineENomeUtente">
 					<img th:src="@{${recensione.recensore.immagineImagePath}}"
 						alt="Immagine profilo" height="100px" /> <span

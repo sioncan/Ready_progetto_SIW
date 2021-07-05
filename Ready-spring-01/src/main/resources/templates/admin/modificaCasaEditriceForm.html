@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div
+	th:insert="fragments/headerFooter.html :: head('Modifica Casa Editrice')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>modifica Casa Editrice</h1>
+	</div>
+	<form th:action="@{/admin/inserisciCasaEditriceModificata}"
+		method="POST" th:object="${casaEditrice}"
+		enctype="multipart/form-data">
+		<div>
+			<div>
+				<span><input name="idCasaEditriceEsistente" type="hidden"
+					th:field="*{id}" th:value="*{id}" /></span>
+			</div>
+			<div>
+				<span><input name="oldFileName" type="hidden"
+					th:value="*{logo}" /></span>
+			</div>
+			<br>
+			<div>
+				<span>Nome:</span> <span><input name="nome" type="text"
+					th:field="*{nome}" required /></span> <span
+					th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+
+			<div>
+				<span>Nazionalita':</span> <span><input name="nazionalita"
+					type="text" th:field="*{nazionalita}" required /></span> <span
+					th:if="${#fields.hasErrors('nazionalita')}"
+					th:errors="*{nazionalita}" th:style="'color:red'"></span>
+			</div>
+			<br>
+
+			<div>
+				<span>Sede:</span> <span><input name="sede" type="text"
+					th:field="*{sede}" required /></span> <span
+					th:if="${#fields.hasErrors('sede')}" th:errors="*{sede}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+
+			<div>
+				<span>Sito web:</span> <span><input name="website"
+					type="text" th:field="*{website}" required /></span> <span
+					th:if="${#fields.hasErrors('website')}" th:errors="*{website}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+
+			<div>
+				<span>Data Fondazione:</span> <span><input
+					name="dataFondazione" type="date" th:field="*{dataFondazione}"
+					required /></span>
+			</div>
+			<br>
+			<div>
+				<label>Libro: </label> <select name="isbnLibro">
+					<option th:value="0" text="Please Select"></option>
+					<option th:each="libro : ${libri}" th:text="${libro.titolo}"
+						th:value="${libro.isbn}"></option>
+				</select>
+			</div>
+			<br>
+			<div>
+				<label>Logo: </label> <input type="file" name="fileImage"
+					id="fileImage" />
+			</div>
+			<br>
+			<div>
+				<span><button type="submit">Modifica</button></span>
+			</div>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

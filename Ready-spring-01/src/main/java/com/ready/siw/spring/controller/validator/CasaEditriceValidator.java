@@ -54,13 +54,13 @@ public class CasaEditriceValidator implements Validator {
         else if (website.length() < MIN_WEBSITE_LENGTH || website.length() > MAX_WEBSITE_LENGTH)
             errors.rejectValue("website", "size");
 		
-		if (!errors.hasErrors()) {
+		/*if (!errors.hasErrors()) {
 			logger.debug("confermato: valori non nulli");
 			if (this.casaEditriceService.alreadyExists((CasaEditrice)o)) {
 				logger.debug("e' un duplicato");
 				errors.reject("duplicato");
 			}
-		}
+		}*/
 	}
 
 	@Override

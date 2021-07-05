@@ -39,13 +39,13 @@ public class LibroValidator implements Validator {
             errors.rejectValue("isbn", "size");
     
 		
-		if (!errors.hasErrors()) {
+		/*if (!errors.hasErrors()) {
 			logger.debug("confermato: valori non nulli");
 			if (this.libroService.alreadyExists((Libro)o)) {
 				logger.debug("e' un duplicato");
 				errors.reject("duplicato");
 			}
-		}
+		}*/
 	}
 
 	@Override

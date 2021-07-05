@@ -45,7 +45,9 @@
 				</div>
 		</div>
 		<div class="spazio-recensione">
-			<div><span><input name="id" type="hidden" th:field="*{id}" required /></span></div>
+			<div>
+				<span><input name="idRecensioneEsistente" type="hidden" th:value="*{id}" required /></span>
+			</div>
 			<div>
 				<span>Titolo:</span>
 					<input type="text" th:field="*{titolo}" /> <span

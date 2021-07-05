@@ -57,6 +57,7 @@
 		</div>
 
 		<div class="spazioRisultati">
+		<h4 th:if="${#lists.isEmpty(libri)}" th:text="#{ricerca.vuota}">No</h4>
 		<ul>
 			<li th:each="libro : ${libri}">
 				<div>

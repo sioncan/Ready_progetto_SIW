@@ -53,6 +53,11 @@ public class LibroService {
 	public List<Libro> libroPerAutore(String autore) {
 		return this.libroRepository.findByAutore(autore);
 	}
+	
+	@Transactional
+	public List<Libro> libroPerCasaEditrice(String casaEditrice) {
+		return this.libroRepository.findByCasaEditrice(casaEditrice);
+	}
 
 	@Transactional
 	public List<Libro> tutti() {
@@ -68,13 +73,13 @@ public class LibroService {
 			return null;
 	}
 
-	@Transactional
+	/*@Transactional
 	public boolean alreadyExists(Libro libro) {
 		List<Libro> libri = this.libroRepository.findByIsbn(libro.getIsbn());
 		if (libri.size() > 0)
 			return true;
 		else 
 			return false;
-	}
+	}*/
 	
 }

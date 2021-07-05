@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Modifica Autore')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Modifica Autore</h1>
+	</div>
+	<form th:action="@{/admin/inserisciAutoreModificato}" method="POST"
+		th:object="${autore}" enctype="multipart/form-data">
+		<div>
+			<span><input name="idAutoreEsistente" type="hidden"
+				th:field="*{id}" th:value="*{id}" /></span>
+		</div>
+		<div>
+			<span><input name="oldFileName" type="hidden"
+				th:value="*{immagine}" /></span>
+		</div>
+		<br>
+		<div>
+			<span>Nome e Cognome:</span> <span><input name="nome"
+				type="text" th:field="*{nomeCognome}" required /></span><span
+				th:if="${#fields.hasErrors('nomeCognome')}"
+				th:errors="*{nomeCognome}" th:style="'color:red'"></span>
+
+		</div>
+		<br>
+		<div>
+			<span>Data Nascita:</span> <span><input name="dataNascita"
+				th:field="*{dataNascita}" type="date" required /></span>
+		</div>
+		<br>
+		<div>
+			<span>Luogo Nascita:</span> <span><input name="luogoNascita"
+				th:field="*{luogoNascita}" type="text" required /></span><span
+				th:if="${#fields.hasErrors('luogoNascita')}"
+				th:errors="*{luogoNascita}" th:style="'color:red'"></span>
+
+		</div>
+		<br>
+		<div>
+			<span>Data Morte:</span> <span><input name="dataMorte"
+				th:field="*{dataMorte}" type="date" /></span>
+		</div>
+		<br>
+		<div>
+			<span>Luogo Morte:</span> <span><input name="luogoMorte"
+				th:field="*{luogoMorte}" type="text" /></span>
+		</div>
+		<br>
+		<div>
+			<span>Nazionalita':</span> <span><input name="nazionalita"
+				th:field="*{nazionalita}" type="text" /></span><span
+				th:if="${#fields.hasErrors('nazionalita')}"
+				th:errors="*{nazionalita}" th:style="'color:red'"></span>
+
+		</div>
+		<br>
+		<div>
+			<span>Biografia:</span> <span><input name="biografia"
+				th:field="*{biografia}" type="text" /></span>
+		</div>
+		<br>
+		<div>
+			<span>Generi:</span>
+			<ul class="checkbox">
+				<li><input type="checkbox" id="fantasy" name="genere"
+					th:value="Fantasy" th:field="*{generi}"> <label
+					th:for="fantasy" th:text="#{genere.fantasy}">Fantasy</label></li>
+				<li><input type="checkbox" id="giallo" name="genere"
+					th:value="Giallo" th:field="*{generi}"> <label
+					th:for="giallo" th:text="#{genere.giallo}">Giallo</label></li>
+				<li><input type="checkbox" id="rosa" name="genere"
+					th:value="Rosa" th:field="*{generi}"> <label th:for="rosa"
+					th:text="#{genere.rosa}">Rosa</label></li>
+				<li><input type="checkbox" id="horror" name="genere"
+					th:value="Horror" th:field="*{generi}"> <label
+					th:for="horror" th:text="#{genere.horror}">Horror</label></li>
+				<li><input type="checkbox" id="saggio" name="genere"
+					th:value="Saggio" th:field="*{generi}"> <label
+					th:for="saggio" th:text="#{genere.saggio}">Saggio</label></li>
+			</ul>
+		</div>
+		<br>
+		<div>
+			<label>Libro: </label> <select name="isbnLibro">
+				<option th:value="0" text="Please Select"></option>
+				<option th:each="libro : ${libri}" th:text="${libro.titolo}"
+					th:value="${libro.isbn}"></option>
+			</select>
+		</div>
+		<br>
+		<div>
+			<label>Immagine: </label> <input type="file" name="fileImage"
+				id="fileImage" />
+		</div>
+		<br>
+		<div>
+			<span><button type="submit">Modifica</button></span>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

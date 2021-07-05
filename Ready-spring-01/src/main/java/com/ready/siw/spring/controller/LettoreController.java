@@ -16,7 +16,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,16 +67,18 @@ public class LettoreController {
 	}
 	
 	/* Salva il Lettore con i dati modificati nel DB */
-	@RequestMapping(value="/modificaDatiLettore", method = RequestMethod.POST)
-	public String saveModifiedLettore(@ModelAttribute("lettore") Lettore lettore, 
-			BindingResult lettoreBindingResult, Model model) {
-		this.lettoreValidator.validate(lettore, lettoreBindingResult);
-		if(!lettoreBindingResult.hasErrors()) {
-			this.lettoreService.inserisci(lettore);
-			return "redirect:/ricercaLibri";
-		} else
-			return "modificaDatiLettore.html";
-	}
+    @RequestMapping(value="/modificaDatiLettore", method = RequestMethod.POST)
+    public String saveModifiedLettore(@ModelAttribute("lettore") Lettore lettore, 
+            @RequestParam(value="oldFileName", required = false) String oldFileName, BindingResult lettoreBindingResult, Model model) {
+        this.lettoreValidator.validate(lettore, lettoreBindingResult);
+        if(!lettoreBindingResult.hasErrors()) {
+            if(!oldFileName.isEmpty())
+                lettore.setImmagine(oldFileName);
+            this.lettoreService.inserisci(lettore);
+            return "redirect:/areaUtente/"+ this.getLettoreLoggato();
+        } else
+            return "modificaDatiLettore.html";
+    }
 	
 	/* Va al alla form per selezionare l'immagine del utente/lettore */
 	@RequestMapping(value="/paginaSelezionaImmagineLettore/{username}", method = RequestMethod.GET)
@@ -92,7 +93,7 @@ public class LettoreController {
 	}
 	
 	// Inserisce l'immagine del Lettore nel DB
-	@PostMapping("/inserisciImmagineLettore/{username}")
+	@RequestMapping(value="/inserisciImmagineLettore/{username}", method = RequestMethod.POST)
 	public String saveImmagineLettore(@PathVariable(value="username") String username,
 			@RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -112,6 +113,6 @@ public class LettoreController {
 		} catch(IOException e) {
 			throw new IOException("Could not save uploaded fileImage: " + fileName);
 		}
-		return "redirect:/ricercaLibri";
+		return "redirect:/areaUtente/"+username;
 	}
 }

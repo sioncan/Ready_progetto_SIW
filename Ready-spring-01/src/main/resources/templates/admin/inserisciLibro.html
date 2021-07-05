@@ -12,11 +12,8 @@
 	<div>
 		<h1>Inserisci Libro</h1>
 	</div>
-	<form th:action="@{/admin/inserisciLibro}" method="POST" th:object="${libro}"
-		enctype="multipart/form-data">
-		<div th:if="${#fields.hasGlobalErrors()}">
-			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-		</div>
+	<form th:action="@{/admin/inserisciLibro}" method="POST"
+		th:object="${libro}" enctype="multipart/form-data">
 		<div>
 			<div>
 				<span>ISBN: </span><span><input name="isbn" type="text"
@@ -67,15 +64,17 @@
 			</div>
 			<br>
 			<div>
-				Casa editrice: <select name="idCasaEditrice">
-					<option th:value="*{casaEditrice?.id}" text="Please Select"></option>
+				<label>Casa editrice: </label> <select name="idCasaEditrice"
+					th:field="${libro.casaEditrice}">
+					<option th:value="0" text="Please Select"></option>
 					<option th:each="casaEditrice : ${caseEditrici}"
 						th:text="${casaEditrice.nome}" th:value="${casaEditrice.id}"></option>
 				</select>
 			</div>
 			<br>
 			<div>
-				Autore: <select name="idAutore">
+				<label>Autore: </label> <select name="idAutore"
+					th:field="${libro.autori}">
 					<option th:value="0" text="Please Select"></option>
 					<option th:each="autore : ${autori}"
 						th:text="${autore.nomeCognome}" th:value="${autore.id}"></option>
@@ -83,13 +82,8 @@
 			</div>
 			<br>
 			<div>
-				<span><input name="oldFileName" type="hidden"
-					th:value="*{copertina}" /></span>
-			</div>
-			<div>
 				<label>Copertina: </label> <input type="file" name="fileImage"
 					id="fileImage" />
-				<!-- Ogni estensione di file image -->
 			</div>
 			<br>
 			<div>

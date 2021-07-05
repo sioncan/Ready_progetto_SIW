@@ -13,9 +13,8 @@
 	<div class="row">
 
 		<div class="side">
-			<form>
 				<!-- Barra di ricerca -->
-				<form th:action="@{/cercaCasaEditricePerNome}" th:object="${libro}" method="get">
+				<form th:action="@{/cercaCasaEditricePerNome}" th:object="${casaEditrice}" method="get">
 					<h2>Ricerca:</h2>
 					<input type="search" name="nomeCasaEditrice" id="nomeCasaEditrice" th:value="${nomeCasaEditrice}"
 					placeholder="Inserisci il nome di una casa editrice">
@@ -25,16 +24,16 @@
 				<form th:action="@{/cercaCasaEditricePerNazionalita}" th:object="${casaEditrice}" method="get">
 				<h2>Nazionalità:</h2>
 				<ul class="checkbox">
-					<li><input type="radio" id="Grecia" name="nazionalita" th:value="Greco">
+					<li><input type="radio" id="Grecia" name="nazionalita" th:value="Greca">
 						<label th:for="grecia">Grecia</label>
 					</li>
-					<li><input type="radio" id="germania" name="nazionalita" th:value="Tedesco">
+					<li><input type="radio" id="germania" name="nazionalita" th:value="Tedesca">
 						<label th:for="germania">Germania</label>
 					</li>
 					<li><input type="radio" id="inghilterra" name="nazionalita" th:value="Inglese">
 						<label th:for="inghilterra">Inghilterra</label>
 					</li>
-					<li><input type="radio" id="italia" name="nazionalita" th:value="Italiano">
+					<li><input type="radio" id="italia" name="nazionalita" th:value="Italiana">
 						<label th:for="italia">Italia</label>
 					</li>
 				</ul>
@@ -43,6 +42,7 @@
 		</div>
 
 		<div class="spazioRisultati">
+		<h4 th:if="${#lists.isEmpty(caseEditrici)}" th:text="#{ricerca.vuota}">No</h4>
 			<ul>
 				<li th:each="casaEditrice : ${caseEditrici}">
 

@@ -30,12 +30,16 @@
     height:auto;
 }
 
-.titoloRecensione{
+.titoloRecensione {
 	margin: 2%;
 	font-size: 1.5em;
 	font-weight: bold;
 }
 
-.testoRecensione{
+.testoRecensione {
 	margin: 2%;
+}
+
+.autoreRecensione {
+	font-size: 1.5em;
 }

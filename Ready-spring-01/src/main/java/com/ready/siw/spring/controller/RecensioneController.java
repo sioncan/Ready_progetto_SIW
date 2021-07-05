@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ready.siw.spring.controller.validator.RecensioneValidator;
 import com.ready.siw.spring.model.Lettore;
@@ -50,35 +51,39 @@ public class RecensioneController {
 	}
 
 	// Inserisce la recensione nel DB e ritorna alla pagina del libro mostrando tutte le recensioni
-	@RequestMapping(value = "/inserisciRecensione/{isbn}/{username}", method = RequestMethod.POST)
-	public String newRecensione(@PathVariable(value="username") String username, @PathVariable("isbn") String isbn, @ModelAttribute("recensione") Recensione recensione, 
-			Model model, BindingResult bindingResult) {
-		this.recensioneValidator.validate(recensione, bindingResult);
-		if (!bindingResult.hasErrors()) {
-			Libro libro = this.libroService.libroPerIsbn(isbn);
-			model.addAttribute("libro", libro);
-			Lettore lett = this.lettoreService.lettorePerUsername(username);
-			List<Recensione> recensioniDelLibro = libro.getRecensioni();
-			for(Recensione r : recensioniDelLibro) {
-                if((r.getRecensore().getUsername()).equals(username)) {
-                    model.addAttribute("logErr", true);
-                    model.addAttribute("libro", libro);
-                    return "inserisciRecensione.html";
+    @RequestMapping(value = "/inserisciRecensione/{isbn}/{username}", method = RequestMethod.POST)
+    public String newRecensione(@PathVariable(value="username") String username, @RequestParam(value="idRecensioneEsistente", required=false) Long idRecensioneEsistente, @PathVariable("isbn") String isbn, @ModelAttribute("recensione") Recensione recensione, 
+            Model model, BindingResult bindingResult) {
+        this.recensioneValidator.validate(recensione, bindingResult);
+        if (!bindingResult.hasErrors()) {
+            Libro libro = this.libroService.libroPerIsbn(isbn);
+            model.addAttribute("libro", libro);
+            Lettore lett = this.lettoreService.lettorePerUsername(username);
+            List<Recensione> recensioniDelLibro = libro.getRecensioni();
+            if(idRecensioneEsistente != null)
+                this.recensioneService.elimina(idRecensioneEsistente);
+            for(Recensione r : recensioniDelLibro) {
+                if(r.getRecensore().getUsername() != null) {
+                    if((r.getRecensore().getUsername()).equals(username)) {
+                        model.addAttribute("logErr", true);
+                        model.addAttribute("libro", libro);
+                        return "inserisciRecensione.html";
+                    }
                 }
             }
-			lett.getRecensioni().add(recensione);
-			recensioniDelLibro.add(recensione);
-			recensione.setRecensore(lett);
-			recensione.setLibro(libro);
-			this.lettoreService.inserisci(lett);
-			this.libroService.inserisci(libro);
-			this.recensioneService.inserisci(recensione);
-			return "redirect:/libro/{isbn}";
-		} else {
-			model.addAttribute("libro", libroService.libroPerIsbn(isbn));
-			return "inserisciRecensione.html";
-		}
-	}
+            lett.getRecensioni().add(recensione);
+            recensioniDelLibro.add(recensione);
+            recensione.setRecensore(lett);
+            recensione.setLibro(libro);
+            this.lettoreService.inserisci(lett);
+            this.libroService.inserisci(libro);
+            this.recensioneService.inserisci(recensione);
+            return "redirect:/libro/{isbn}";
+        } else {
+            model.addAttribute("libro", libroService.libroPerIsbn(isbn));
+            return "inserisciRecensione.html";
+        }
+    }
 	
 	// Elimina la recensione selezionata
 	@RequestMapping(value="/modificaRecensione/{id}", method = RequestMethod.GET)
