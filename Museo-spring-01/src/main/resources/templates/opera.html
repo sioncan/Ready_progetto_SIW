@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Opera')"></div>
+<link href="@{/css/operaStyle.css}" rel="stylesheet">
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div class="immagine">
+		<img th:src="@{${opera.immagineImagePath}}" alt="Immagine dell'opera" />
+	</div>
+	<div class="spazioDettagli" >
+		<h1 th:text="${opera.titolo}">Titolo opera</h1>
+		<h2 th:text="${opera.annoRealizzazione}">Anno realizzazionea</h2>
+		<h1 th:text="${opera.descrizione}">Descrizione</h1>
+
+		<h2>
+			<td><a th:href="@{'/paginaArtista' + '/' + ${opera.artista?.id}}"
+				th:text="|${opera.artista?.nome} ${opera.artista?.cognome}|"> Nome e
+					cognome artista </a></td>
+		</h2>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

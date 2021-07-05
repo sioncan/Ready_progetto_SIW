@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div
+	th:insert="fragments/headerFooter.html :: head('Pannello Amministratore')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<br> INSERISCI:
+	<div>
+		<a th:href="@{/admin/paginaInserisciCollezione}">Inserisci
+			Collezione</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaInserisciOpera}">Inserisci Opera</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaInserisciArtista}">Inserisci Artista</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaInserisciCuratore}">Inserisci Curatore</a>
+	</div>
+	<br> MODIFICA:
+	<div>
+		<a th:href="@{/admin/paginaScegliCollezioneDaModificare}">Modifica
+			Collezione</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaScegliOperaDaModificare}">Modifica
+			Opera</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaScegliArtistaDaModificare}">Modifica
+			Artista</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaScegliCuratoreDaModificare}">Modifica
+			Curatore</a>
+	</div>
+	<br> ELIMINA:
+	<div>
+		<a th:href="@{/admin/paginaEliminaCollezione}">Elimina Collezione</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaEliminaOpera}">Elimina Opera</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaEliminaArtista}">Elimina Artista</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaEliminaCuratore}">Elimina Curatore</a>
+	</div>
+	<br> COLLEGA:
+	<div>
+		<a th:href="@{/admin/paginaCollegaOperaCollezione}">Inserisci
+			un'Opera in una Collezione</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/paginaCollegaArtistaOpera}">Collega un
+			Artista ad un'Opera</a>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

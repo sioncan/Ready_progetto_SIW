@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Artista')"></div>
+<link th:href="@{/css/artistaStyle.css}" rel="stylesheet">
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div id="flex-container">
+		<div class="immagine">
+			<img th:src="@{${artista.immagineImagePath}}"
+				alt="Immagine dell'artista" />
+		</div>
+		<div class="spazioDettagli">
+			<h1 th:text="|${artista.nome} ${artista.cognome}|">Nome e
+				cognome Artista</h1>
+			<h2 th:text="${artista.nazionalita}">Nazionalita</h2>
+			<h2 th:text="|${artista.dataNascita}  ${artista.luogoNascita}|">Data
+				e luogo di nascita</h2>
+			<h2 th:text="|${artista.dataMorte}  ${artista.luogoMorte}|">Data
+				e luogo di morte</h2>
+			<h2 th:text="${artista.biografia}">Biografia</h2>
+		</div>
+	</div>
+	<h2>
+		<div th:each="opera : ${artista.opere}">
+			<span class="immagine"> <img
+				th:src="@{${opera.immagineImagePath}}" alt="Immagine dell'opera" />
+			</span> <span><a th:href="@{'/paginaOpera' + '/' + ${opera.id}}"
+				th:text="${opera.titolo}"> Titolo opera </a></span>
+		</div>
+	</h2>
+
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

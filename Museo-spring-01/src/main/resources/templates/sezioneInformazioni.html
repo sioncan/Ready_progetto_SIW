@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Informazioni')"></div>
+<link th:href="@{/css/sezioneInformazioniStyle.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+<div class="about-section">
+  <h1>Chi siamo</h1>
+  <p>Per ulteriori informazioni consulta i link a fondo pagina.</p>
+</div>
+
+<h2 style="text-align:center">Il nostro team</h2>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="http://source.unsplash.com/random" width="480" height="480">
+      <div class="container">
+        <h2>Jane Doe</h2>
+        <p class="title">CEO & Founder</p>
+        <p>Sono il miglior CEO.</p>
+        <p>jane@example.com</p>
+        <p><button class="button">Contact</button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="http://source.unsplash.com/random" width="480" height="480">
+      <div class="container">
+        <h2>Mike Ross</h2>
+        <p class="title">Art Director</p>
+        <p>Sono abbastanza bravo come direttore artistico.</p>
+        <p>mike@example.com</p>
+        <p><button class="button">Contact</button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="http://source.unsplash.com/random" width="480" height="480">
+      <div class="container">
+        <h2>John Doe</h2>
+        <p class="title">Designer</p>
+        <p>Perche sono qui?</p>
+        <p>john@example.com</p>
+        <p><button class="button">Contact</button></p>
+      </div>
+    </div>
+  </div>
+</div>
+  
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

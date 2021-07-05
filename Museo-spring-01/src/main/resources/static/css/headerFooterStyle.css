@@ -1,0 +1,127 @@
+/* ===================================================================================================== */
+/* ============================================ Stile dell'header ====================================== */
+/* ===================================================================================================== */
+
+/* Stile della barra di navigazione */
+header {
+	background-color: white;
+}
+
+header #navbar {
+	overflow: hidden;
+}
+
+/* Stile dei link nella barra di navigazione */
+header #navbar a {
+	margin: 20px 25px;
+	font-size: 1em;
+	color: #262626; /* colore testo links */
+	text-decoration: none; /* Rimuove l'underline */
+}
+
+/* Stile del link Musa*/
+header #navbar #home {
+	font-size: 1.8em;
+	font-weight: bold;
+	margin: 50px 10px;
+}
+
+/* sposta i primi links a sinistra */
+header #sinistra {
+	float: left;
+	display: flex;
+	align-items: center;
+}
+
+/* sposta Accedi/Registrati/Esci a destra */
+header #destra {
+	float: right;
+}
+
+/* Cambia lo stile dei link quando ci si passa con il cursore */
+header #navbar a:hover {
+	text-decoration: underline;
+}
+
+/* ===================================================================================================== */
+/* ======================================== Stile del footer =========================================== */
+/* ===================================================================================================== */
+footer {
+	padding: 20px;
+	text-align: center;
+	background: #f2f2f2;
+}
+
+/* Contenitore per Musa, About us e Social */
+#flex-container-footer {
+	display: flex;
+	justify-content: space-around;
+}
+
+/* titoli Ready, About us e Social */
+footer h1 {
+	color: #616161;
+	font-size: 1.5em;
+}
+
+/* links */
+.links a {
+	color: #616161;
+	text-decoration: none;
+}
+
+/* Scritta in fondo del copyright */
+.copyright {
+	color: grey;
+	margin: 50px;
+}
+
+/* Le 3 icone dei social */
+.social>a {
+	font-size: 20px;
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
+	margin: 8px;
+	color: #fff;
+	opacity: 0.75;
+}
+
+/* Cambia lo stile dei link quando ci si passa con il cursore */
+footer a:hover {
+	text-decoration: underline;
+}
+
+/* Stile delle icone social */
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #0000FF;
+  color: white;
+}
+
+.fa-twitter {
+  background: #00D1FF;
+  color: white;
+}
+
+.fa-instagram {
+  background: #F61E1E;
+  color: white;
+}

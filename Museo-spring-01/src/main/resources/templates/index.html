@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Home')"></div>
+<link th:href="@{/css/indexStyle.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<th:block th:each="opera : ${opere}">
+		<div id="flex-container-opera">
+			<div id="flex-container-img-tasti-opera">
+				<div class="immagine">
+					<img th:src="@{${opera.immagineImagePath}}"
+						alt="Immagine dell'opera" />
+				</div>
+				<div id="flex-container-tasti-opera">
+					<a th:href="@{'/paginaOpera' + '/' + ${opera.id}}">Vedi Opera</a> <a
+						href="#">Vedi Collezione</a>
+				</div>
+			</div>
+			<div id="descrizioneCollezione" th:text="${opera.descrizione}">Descrizione
+				Opera</div>
+		</div>
+	</th:block>
+
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

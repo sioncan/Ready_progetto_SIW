@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div
+	th:insert="fragments/headerFooter.html :: head('Inserisci Collezione')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Inserisci Collezione</h1>
+	</div>
+	<form th:action="@{/admin/inserisciCollezione}" method="POST"
+		th:object="${collezione}" enctype="multipart/form-data">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<br>
+		<div>
+			<span>Nome:</span> <span><input name="nome" type="text"
+				th:field="*{nome}" required /></span><span
+				th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+				th:style="'color:red'"></span>
+		</div>
+		<br>
+		<div>
+			<span>Descrizione: </span> <span><input name="descrizione"
+				type="text" th:field="*{descrizione}" required /></span> <span
+				th:if="${#fields.hasErrors('descrizione')}"
+				th:errors="*{descrizione}" th:style="'color:red'"></span>
+		</div>
+		<br>
+		<div>
+			<label>Opera: </label> <select name="idOpera"
+				th:field="${collezione.opere}">
+				<option th:value="0" text="Please Select"></option>
+				<option th:each="opera : ${opere}" th:text="${opera.titolo}"
+					th:value="${opera.id}"></option>
+			</select>
+		</div>
+		<br>
+		<div>
+			<label>Curatore: </label> <select name="idCuratore"
+				th:field="${collezione.curatore}">
+				<option th:value="0" text="Please Select"></option>
+				<option th:each="curatore : ${curatori}" th:text="|${curatore.nome} ${curatore.cognome}|"
+					th:value="${curatore.id}"></option>
+			</select>
+		</div>
+		<br>
+		<div>
+			<label>Immagine: </label> <input type="file" name="fileImage"
+				id="fileImage" />
+		</div>
+		<br>
+		<div>
+			<span><button type="submit">Inserisci</button></span>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+
+</body>
+</html>

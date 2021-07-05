@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Collezione')"></div>
+<link th:href="@{/css/collezioneStyle.css}" rel="stylesheet">
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<br>
+	<div class="immagine">
+		<img th:src="@{${collezione.immagineImagePath}}"
+			alt="Immagine della collezione" />
+	</div>
+	<div class="spazioDettagli">
+		<h1 th:text="${collezione.nome}">Nome collezione</h1>
+		<h1 th:text="${collezione.descrizione}">Descrizione</h1>
+		<h1
+			th:text="|${collezione.curatore?.nome} ${collezione.curatore?.cognome}|">Curatore</h1>
+
+		<div th:each="opera : ${collezione.opere}">
+			<span><a th:href="@{'/paginaOpera' + '/' + ${opera.id}}"
+				th:text="${opera.titolo}"> Titolo opera </a></span> <span><a
+				th:href="@{'/paginaArtista' + '/' + ${opera.artista.id}}"
+				th:text="|${opera.artista.nome} ${opera.artista.cognome}|"> Nome
+					e cognome autore </a></span>
+		</div>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

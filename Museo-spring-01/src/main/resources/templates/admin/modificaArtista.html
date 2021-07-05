@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Scegli Artista da Modificare')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+	
+	SCEGLI L'ARTISTA DA MODIFICARE:
+	<li th:each="artista : ${artisti}">
+		<a th:href="@{'/admin/formModificaArtista' + '/' + ${artista.id}}" th:text="|${artista.nome} ${artista.cognome}|">Nome dell'artista</a>
+	</li>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

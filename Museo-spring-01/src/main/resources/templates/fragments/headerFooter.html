@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+<meta charset="UTF-8" />
+<link th:href="@{/css/headerFooterStyle.css}" rel="stylesheet">
+<title th:text="${title}"></title>
+<!-- Libreria per le icone social -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+	<header th:fragment="header">
+		<div id="navbar">
+			<span id="sinistra"><img src="images/icon_museum.jpg"
+				width="200" height="100" /><a id="home" th:href="@{/home}">Musa</a><a
+				th:href="@{/sezioneCollezioni}">Collezioni</a><a
+				th:href="@{/sezioneArtisti}">Artisti</a> <a
+				th:href="@{/sezioneInformazioni}">Informazioni</a></span> <span id="destra"><a
+				th:href="@{/login}">Accedi</a><a th:href="@{/register}">Registrati</a>
+				<a th:href="@{/logout}">Esci</a></span>
+		</div>
+	</header>
+
+	<footer th:fragment="footer">
+		<div id="flex-container-footer">
+			<div>
+				<h1>Musa</h1>
+				<div class="links">
+					<a href="#">Giorni e orari</a>
+				</div>
+				<div class="links">
+					<a href="#">Contattaci</a>
+				</div>
+				<div class="links">
+					<a href="#">Organizza una gita</a>
+				</div>
+				<div class="links">
+					<a href="#">Dove siamo</a>
+				</div>
+			</div>
+			<div>
+				<h1>About us</h1>
+				<div class="links">
+					<a href="#">La nostra storia</a>
+				</div>
+				<div class="links">
+					<a href="#">Dicono su di noi</a>
+				</div>
+				<div class="links">
+					<a href="#">Privacy</a>
+				</div>
+				<div class="links">
+					<a href="#">Termini e condizioni</a>
+				</div>
+				<div class="links">
+					<a th:href="@{/admin/pannelloAmministratore}">Pannello amministratore</a>
+				</div>
+			</div>
+			<div class="social">
+				<h1>Social</h1>
+				<a href="#" class="fa fa-facebook"></a> <a href="#"
+					class="fa fa-twitter"></a> <a href="#" class="fa fa-instagram"></a>
+			</div>
+		</div>
+		<div>
+			<p class="copyright">Musa © 2021</p>
+		</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Scegli Opera da Eliminare')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+	
+	SCEGLI L'OPERA DA ELIMINARE:
+	<li th:each="opera : ${opere}">
+		<a th:href="@{'/admin/eliminaOpera' + '/' + ${opera.id}}" th:text="${opera.titolo}">Titolo dell'opera</a>
+	</li>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

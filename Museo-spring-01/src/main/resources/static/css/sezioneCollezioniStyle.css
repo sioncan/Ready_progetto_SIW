@@ -1,0 +1,25 @@
+body{
+	background-image: url('/images/sfondo_2.jpg');;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#collezione{
+	padding: 10px 1px 15px 25px;
+	margin: 50px 50px;
+	background: #b3d3e4;
+	border-radius: 25px;
+	background: white;
+}
+
+.nomeCollezione a{
+	color: #000000;
+	text-decoration: none;
+}
+
+.nomeCollezione a:hover {
+	text-decoration: underline;
+}

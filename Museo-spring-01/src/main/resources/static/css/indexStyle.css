@@ -1,0 +1,22 @@
+#flex-container-opera {
+	display: flex;
+	background: #f2f2f2;
+}
+
+#flex-container-tasti-opera{
+	display: flex;
+    justify-content: center;
+}
+
+#flex-container-img-tasti-opera{
+	background: ;
+}
+
+#flex-container-tasti-opera a{
+    color: white;
+    font-size: 2em;
+    text-decoration: none;
+    padding: 15px 15px;
+    margin: 30px 100px;
+    background: #00AAAC;
+}

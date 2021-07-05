@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Inserisci Opera')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Inserisci Opera</h1>
+	</div>
+	<form th:action="@{/admin/inserisciOpera}" method="POST"
+		th:object="${opera}" enctype="multipart/form-data">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div>
+			<br>
+			<div>
+				<span>Titolo:</span> <span><input name="titolo" type="text"
+					th:field="*{titolo}" required /></span> <span
+					th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+			<div>
+				<span>Descrizione:</span> <span><input name="descrizione"
+					type="text" th:field="*{descrizione}" required /></span> <span
+					th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+			<div>
+				<span>Anno realizzazione:</span> <span><input
+					name="annoRealizzazione" type="date"
+					th:field="*{annoRealizzazione}" required /></span>
+			</div>
+			<br>
+			<div>
+				<label>Autore: </label> <select name="idArtista"
+					th:field="${opera.artista}">
+					<option th:value="0" text="Please Select"></option>
+					<option th:each="artista : ${artisti}"
+						th:text="|${artista.nome} ${artista.cognome}|"
+						th:value="${artista.id}"></option>
+				</select>
+			</div>
+			<br>
+			<div>
+				<label>Collezione: </label> <select name="idCollezione"
+					th:field="${opera.collezione}">
+					<option th:value="0" text="Please Select"></option>
+					<option th:each="collezione : ${collezioni}"
+						th:text="${collezione.nome}" th:value="${collezione.id}"></option>
+				</select>
+			</div>
+			<br>
+			<div>
+				<label>Immagine: </label> <input type="file" name="fileImage"
+					id="fileImage" />
+			</div>
+			<br>
+			<div>
+				<span><button type="submit">Inserisci</button></span>
+			</div>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+
+</body>
+</html>

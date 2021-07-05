@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Scegli Collezione da Eliminare')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+	
+	SCEGLI LA COLLEZIONE DA ELIMINARE:
+	<li th:each="collezione : ${collezioni}">
+		<a th:href="@{'/admin/eliminaCollezione' + '/' + ${collezione.id}}" th:text="${collezione.nome}">Nome della collezione</a>
+	</li>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

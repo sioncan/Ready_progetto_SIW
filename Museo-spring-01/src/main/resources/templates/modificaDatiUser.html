@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div
+	th:insert="fragments/headerFooter.html :: head('Modifica Dati Utente')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h4>Modifica i tuoi dati:</h4>
+		<form th:action="@{/modificaDatiLettore}" method="POST"
+			th:object="${lettore}">
+			<div>
+				<div th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+				</div>
+				<br>
+				<div>
+					<span><input name="id" type="hidden" th:field="*{id}" /></span>
+				</div>
+				<div>
+					<span><input name="username" type="hidden"
+						th:field="*{username}" /></span>
+				</div>
+				<br>
+				<div>
+					<span>Nome</span> <span><input type="text" name="nome"
+						required th:field="*{nome}" /></span> <span
+						th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+						th:style="'color:red'"></span>
+				</div>
+				<br>
+				<div>
+					<span>Cognome</span> <span><input type="text" name="cognome"
+						required th:field="*{cognome}" /></span> <span
+						th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"
+						th:style="'color:red'"></span>
+				</div>
+				<br>
+				<div>
+					<button type="submit">Modifica</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

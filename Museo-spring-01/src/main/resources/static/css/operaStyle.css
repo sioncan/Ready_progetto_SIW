@@ -1,0 +1,19 @@
+header{
+  font-size : 4em;
+  background-color : yellow;
+  text-align : center;
+  padding : 1%;
+}
+
+section{
+  font-size : 2em;
+  background-color : orange;
+  text-align : center;
+  padding : 2%;
+}
+
+footer{
+  color : white;
+  background-color : black;
+  padding : 5%;
+}

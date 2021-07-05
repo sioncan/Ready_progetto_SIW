@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:insert="fragments/headerFooter.html :: head('Scegli Curatore da Modificare')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+	
+	SCEGLI IL CURATORE DA MODIFICARE:
+	<li th:each="curatore : ${curatori}">
+		<a th:href="@{'/admin/formModificaCuratore' + '/' + ${curatore.id}}" th:text="|${curatore.nome} ${curatore.cognome}|">Nome del curatore</a>
+	</li>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

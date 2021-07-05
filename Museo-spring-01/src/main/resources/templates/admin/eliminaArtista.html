@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div
+	th:insert="fragments/headerFooter.html :: head('Scegli Artista da Eliminare')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	SCEGLI L'ARTISTA DA ELIMINARE:
+	<li th:each="artista : ${artisti}"><a
+		th:href="@{'/admin/eliminaArtista' + '/' + ${artista.id}}"
+		th:text="|${artista.nome} ${artista.cognome}|">Nome dell'artista</a></li>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

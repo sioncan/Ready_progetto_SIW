@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div
+	th:insert="fragments/headerFooter.html :: head('Collega Opera ad Artista')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Seleziona Artista e Opera da collegare</h1>
+	</div>
+	<form th:action="collegaOperaArtista" method="POST">
+		<div>
+			Seleziona l'opera: <select name="idOpera">
+				<option th:each="opera : ${opere}" th:text="${opera.titolo}"
+					th:value="${opera.id}"></option>
+			</select> Seleziona l'artista: <select name="idArtista">
+				<option th:each="artista : ${artisti}"
+					th:text="|${artista.nome} ${artista.cognome}|"
+					th:value="${artista.id}"></option>
+			</select>
+			<div>
+				<span><button type="submit">Collega</button></span>
+			</div>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>

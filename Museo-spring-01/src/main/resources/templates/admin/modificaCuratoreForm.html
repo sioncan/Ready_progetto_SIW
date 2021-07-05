@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div
+	th:insert="fragments/headerFooter.html :: head('Modifica Curatore')"></div>
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div>
+		<h1>Modifica Curatore</h1>
+	</div>
+	<form th:action="@{/admin/inserisciCuratoreModificato}" method="POST"
+		th:object="${curatore}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div>
+			<div>
+				<span></span> <span><input name="idCuratoreEsistente" type="hidden"
+					th:field="*{id}" th:value="*{id}"/></span>
+			</div>
+			<br>
+			<div>
+				<span>Nome:</span> <span><input name="nome" type="text"
+					th:field="*{nome}" required /></span> <span
+					th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+			<div>
+				<span>Cognome:</span> <span><input name="cognome" type="text"
+					th:field="*{cognome}" required /></span> <span
+					th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+			<div>
+				<span>Data Nascita:</span> <span><input name="dataNascita"
+					th:field="*{dataNascita}" type="date" required /></span>
+			</div>
+			<br>
+			<div>
+				<span>Luogo Nascita:</span> <span><input name="luogoNascita"
+					th:field="*{luogoNascita}" type="text" required /></span> <span
+					th:if="${#fields.hasErrors('luogoNascita')}"
+					th:errors="*{luogoNascita}" th:style="'color:red'"></span>
+			</div>
+			<br>
+			<div>
+				<span>Email:</span> <span><input name="email"
+					th:field="*{email}" type="text" /></span> <span
+					th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+			<div>
+				<span>Telefono:</span> <span><input name="telefono"
+					th:field="*{telefono}" type="number" /></span> <span
+					th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+			<div>
+				<span>Matricola:</span> <span><input name="matricola"
+					th:field="*{matricola}" type="number" /></span> <span
+					th:if="${#fields.hasErrors('matricola')}" th:errors="*{matricola}"
+					th:style="'color:red'"></span>
+			</div>
+			<br>
+			<div>
+				<label>Collezione: </label> <select name="idCollezione">
+					<option th:value="0" text="Please Select"></option>
+					<option th:each="collezione : ${collezioni}"
+						th:text="${collezione.nome}" th:value="${collezione.id}"></option>
+				</select>
+			</div>
+			<br>
+			<div>
+				<span><button type="submit">Modifica</button></span>
+			</div>
+		</div>
+	</form>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+
+</body>
+</html>

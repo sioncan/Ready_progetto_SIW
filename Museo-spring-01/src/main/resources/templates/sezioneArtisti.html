@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:insert="fragments/headerFooter.html :: head('SezioneArtisti')"></div>
+<link th:href="@{/css/sezioneArtistiStyle.css}" rel="stylesheet">
+</head>
+
+<body>
+
+	<header th:replace="fragments/headerFooter.html :: header"></header>
+
+	<div class="wrapper">
+		<th:block th:each="artista : ${artisti}">
+			<div id="artista">
+				<h1>
+					<div class="immagine">
+						<img th:src="@{${artista.immagineImagePath}}"
+							alt="Immagine dell'artista" width="480"/>
+					</div>
+					<div class="nomeArtista">
+						<a th:href="@{'/paginaArtista' + '/' + ${artista.id}}"
+							th:text="|${artista.nome} ${artista.cognome}|">Nome artista</a>
+					</div>
+				</h1>
+				<h2>
+					<div class="nazionalitaArtista" th:text="${artista.nazionalita}">Nazionalita
+					</div>
+				</h2>
+			</div>
+		</th:block>
+	</div>
+
+	<footer th:replace="fragments/headerFooter.html :: footer"></footer>
+
+</body>
+</html>
